@@ -22,6 +22,7 @@ public:
 	int* CheckBoardState();
 	void SetPiece(int color, int x, int y);
 	Rules* CopyRules(Board* game_board);
+	int bestScore(int player);
 private:
 	int CheckSpot(int color, int x, int y);
 	int InBoard(int x, int y);

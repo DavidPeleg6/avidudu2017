@@ -259,3 +259,15 @@ void Rules::Crawl(int color, int x, int y, int direction, int amount) {
 		board->set(cx, cy, color);
 	}
 }
+
+int Rules::bestScore(int playerColor) {
+	int countColor = 0;
+	for(int rows = 1; rows <= board->getHeight(); rows++) {
+		for(int cols = 1; cols <= board->getWidth(); cols++) {
+			if(board->get(rows, cols) == playerColor) {
+				countColor++;
+			}
+		}
+	}
+	return countColor;
+}

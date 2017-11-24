@@ -74,6 +74,7 @@ int PlayerAI::BestMoveScore(int* moves, Board* board, Rules* rules, int player) 
 		if (max_score < score) {
 			max_score = score;
 		}
+		delete sim_board;
 	}
 	return score;
 }

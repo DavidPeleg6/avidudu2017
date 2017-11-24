@@ -1,18 +1,23 @@
 /*
  * PlayerAI.cpp
  *
- *  Created on: Nov 24, 2017
- *      Author: xu
+ *  Author: Avihai Didi
+ *  ID: 313137846
  */
 
 #include "PlayerAI.h"
-
-PlayerAI::PlayerAI() {
-	// TODO Auto-generated constructor stub
-
+#include "Rules.h"
+/*
+ * Constructor, just gives it the rules-et it'll need to make decisions.
+ */
+PlayerAI::PlayerAI(Rules* rules) {
+	r = rules;
 }
+/**
+ * Destructor, does nothing.
+ */
+PlayerAI::~PlayerAI() { }
 
-PlayerAI::~PlayerAI() {
-	// TODO Auto-generated destructor stub
+int PlayerAI::GetMove(int* moves) {
+	return 0;
 }
-

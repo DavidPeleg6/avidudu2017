@@ -20,8 +20,8 @@ int main() {
 	b->SetUpGame();
 	ConsoleDisplay* d = new ConsoleDisplay();
 	Rules* r = new Rules(b);
-	PlayerHumanLocal* p2 = new PlayerHumanLocal();
-	PlayerAI* p1 = new PlayerAI(r, b, 2);
+	PlayerAI* p1 = new PlayerAI(r, b, 1);
+	PlayerAI* p2 = new PlayerAI(r, b, 2);
 	Game* g = new Game(b, r, p1, p2);
 	g->RunGame(d);
 	delete b;

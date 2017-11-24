@@ -18,6 +18,7 @@ public:
 	PlayerHumanLocal();
 	virtual ~PlayerHumanLocal();
 	int GetMove(int* moves);
+	int PrintActions();
 };
 
 #endif /* PLAYERHUMANLOCAL_H_ */

@@ -24,6 +24,7 @@ public:
 	void InvalidMove();
 	void InvalidFormat();
 	void DeclareWinner(int* state);
+	void StatePlay(int x, int y, int player);
 private:
 	void PrintDashLine(Board* b);
 	void PrintTurn(int turn);

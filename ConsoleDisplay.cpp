@@ -154,3 +154,16 @@ void ConsoleDisplay::DeclareWinner(int* state) {
 	}
 	delete state;
 }
+/*
+ * States what action the player in question took.
+ */
+void ConsoleDisplay::StatePlay(int x, int y, int player) {
+	if (player == 1) {
+		cout << "O";
+	} else if (player == 2) {
+		cout << "X";
+	} else {
+		cout << "ERROR";
+	}
+	cout << " played (" << x << "," << y << ")" << endl;
+}

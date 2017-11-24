@@ -17,6 +17,12 @@ PlayerHumanLocal::PlayerHumanLocal() { }
  */
 PlayerHumanLocal::~PlayerHumanLocal() { }
 /*
+ * Returns 1, because this type of player requires visual output.
+ */
+int PlayerHumanLocal::PrintActions() {
+	return 1;
+}
+/*
  * Returns the index of the desired move in the movelist.
  * @param moves - the move list
  * @return the desired index. -1 if the choice made was not in the list.

@@ -22,6 +22,12 @@ PlayerAI::PlayerAI(Rules* rules, Board* board, int player_color) {
  */
 PlayerAI::~PlayerAI() { }
 /*
+ * Returns 0, because this type of player doesn't require visual output.
+ */
+int PlayerAI::PrintActions() {
+	return 0;
+}
+/*
  * Returns the move that the AI player should choose.
  * @param moves - the list of possible moves to choose from.
  * @return the chosen move.

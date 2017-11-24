@@ -102,7 +102,7 @@ Board* Board::SimBoard() {
 	Board *copiedBoard = new Board(this->width, this->height);
 	for(int rows = 1; rows <= this->height; rows++) {
 		for(int cols = 1; cols <= this->width; cols++) {
-			copiedBoard->set(rows, cols, b[rows][cols]);
+			copiedBoard->set(rows, cols, b[rows - 1][cols - 1]);
 		}
 	}
 	return copiedBoard;

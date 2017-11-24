@@ -9,6 +9,7 @@ CPP_SRCS += \
 ../Display.cpp \
 ../Game.cpp \
 ../Player.cpp \
+../PlayerAI.cpp \
 ../PlayerHumanLocal.cpp \
 ../Rules.cpp \
 ../main.cpp 
@@ -19,6 +20,7 @@ OBJS += \
 ./Display.o \
 ./Game.o \
 ./Player.o \
+./PlayerAI.o \
 ./PlayerHumanLocal.o \
 ./Rules.o \
 ./main.o 
@@ -29,6 +31,7 @@ CPP_DEPS += \
 ./Display.d \
 ./Game.d \
 ./Player.d \
+./PlayerAI.d \
 ./PlayerHumanLocal.d \
 ./Rules.d \
 ./main.d 

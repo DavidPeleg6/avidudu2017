@@ -30,7 +30,7 @@ int PlayerAI::GetMove(int* moves) {
 	int score;
 	int min_enemy_score = INT_MIN;
 	int min_enemy_score_move = 1;
-	if (moves[0] == 1) {
+	if (moves[0] == 2) {
 		return min_enemy_score_move;
 	}
 	for (int i = 1; i < moves[0] ; i+= 2) {

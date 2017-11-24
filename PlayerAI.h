@@ -20,6 +20,7 @@ public:
 	PlayerAI(Rules* rules, Board* board, int player_color);
 	virtual ~PlayerAI();
 	int GetMove(int* moves);
+	int PrintActions();
 private:
 	Board* b;
 	Rules* r;

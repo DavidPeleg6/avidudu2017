@@ -17,9 +17,11 @@ using namespace std;
  *  @param b - the board the game will be played on.
  *  @param r - the rules that judge the behavior of the game.
  */
-Game::Game(Board* b, Rules* r) {
+Game::Game(Board* b, Rules* r, Player* player1, Player* player2) {
 	board = b;
 	rules = r;
+	p1 = player1;
+	p2 = player2;
 }
 /**
  * Destructor, doesn't do anything as the
@@ -32,7 +34,7 @@ Game::~Game() { }
  * @param p2 - Class that controls the white pieces.
  * @param d - Outputs the state of the game visually.
  */
-void Game::RunGame(Player* p1, Player* p2, Display* d) {
+void Game::RunGame(Display* d) {
 	int move, turn = 1;
 	int no_move_flag = 0;
 	int* moves;
@@ -41,7 +43,9 @@ void Game::RunGame(Player* p1, Player* p2, Display* d) {
 		turn = 3 - turn;
 		move = -1;
 		moves = rules->PossibleMoves(turn);
-		d->Print(board, turn, moves);
+		if (GetPlayer(turn)->PrintActions()) {
+			d->Print(board, turn, moves);
+		}
 		if (moves[0] == 0) {
 			//no possible moves, switch to other player.
 			if (no_move_flag == 0) {
@@ -54,21 +58,30 @@ void Game::RunGame(Player* p1, Player* p2, Display* d) {
 		} else {
 			no_move_flag = 0;
 			while (move == -1) {
-				d->AskForMove();
+				if (GetPlayer(turn)->PrintActions()) {
+					d->AskForMove();
+				}
 				if (turn == 1) {
 					move = p1->GetMove(moves);
 				} else {
 					move = p2->GetMove(moves);
 				}
 				if (move == -1) {
-					d->InvalidMove();
+					if (GetPlayer(turn)->PrintActions()) {
+						d->InvalidMove();
+					}
 				}
 				if (move == -2) {
-					d->InvalidFormat();
+					if (GetPlayer(turn)->PrintActions()) {
+						d->InvalidFormat();
+					}
 					move = -1;
 				}
 			}
 			rules->SetPiece(turn, moves[move], moves[move + 1]);
+		}
+		if (!GetPlayer(turn)->PrintActions()) {
+			d->StatePlay(moves[move], moves[move + 1], turn);
 		}
 		delete moves;
 		delete state;
@@ -79,4 +92,13 @@ void Game::RunGame(Player* p1, Player* p2, Display* d) {
 	}
 	d->DeclareWinner(state);
 }
-
+Player* Game::GetPlayer(int player) {
+	if (player == 1) {
+		return p1;
+	}
+	if (player == 2) {
+		return p2;
+	}
+	//error.
+	return 0;
+}

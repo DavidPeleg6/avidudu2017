@@ -21,10 +21,13 @@ using namespace std;
 class Game {
 	Board* board;
 	Rules* rules;
+	Player* p1;
+	Player* p2;
 public:
-	Game(Board* b, Rules* r);
+	Game(Board* b, Rules* r, Player* p1, Player* p2);
 	virtual ~Game();
-	void RunGame(Player* p1, Player* p2, Display* d);
+	void RunGame(Display* d);
+	Player* GetPlayer(int player);
 };
 
 #endif /* GAME_H_ */

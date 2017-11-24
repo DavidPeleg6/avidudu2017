@@ -25,9 +25,6 @@ public:
 	Game(Board* b, Rules* r);
 	virtual ~Game();
 	void RunGame(Player* p1, Player* p2, Display* d);
-private:
-	void SetPiece(int color, int x, int y);
-	void Crawl(int color, int x, int y, int direction, int amount);
 };
 
 #endif /* GAME_H_ */

@@ -20,11 +20,14 @@ public:
 	virtual ~Rules();
 	int* PossibleMoves(int turn);
 	int* CheckBoardState();
-	int CrawlCheck(int color, int x, int y, int direction);
+	void SetPiece(int color, int x, int y);
+	Rules* CopyRules(Board* game_board);
 private:
 	int CheckSpot(int color, int x, int y);
 	int InBoard(int x, int y);
 	int NotOverlap(int x, int y);
+	void Crawl(int color, int x, int y, int direction, int amount);
+	int CrawlCheck(int color, int x, int y, int direction);
 };
 
 #endif /* RULES_H_ */

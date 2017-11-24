@@ -9,6 +9,7 @@
 #define PLAYERAI_H_
 #include <iostream>
 #include "Player.h"
+#include "Board.h"
 #include "Rules.h"
 using namespace std;
 /*
@@ -16,11 +17,13 @@ using namespace std;
  */
 class PlayerAI : public Player {
 public:
-	PlayerAI(Rules* r);
+	PlayerAI(Rules* rules, Board* board);
 	virtual ~PlayerAI();
 	int GetMove(int* moves);
 private:
+	Board* b;
 	Rules* r;
+	int BestMove(int* moves, Board* board);
 };
 
 #endif /* PLAYERAI_H_ */

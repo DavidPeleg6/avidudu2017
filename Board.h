@@ -16,7 +16,7 @@ using namespace std;
  */
 class Board {
 	public:
-		Board* simBoard();
+		Board* SimBoard();
 		Board();
 		Board(int width, int height);
 		virtual ~Board();

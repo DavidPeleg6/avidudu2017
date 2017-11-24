@@ -22,6 +22,14 @@ Rules::Rules(Board* game_board) {
  */
 Rules::~Rules() { }
 /*
+ * Returns a copy of this ruleset, but applied to the new board.
+ * Currently does nothing, will require modification as new game rules are
+ * added later in development.
+ */
+Rules* Rules::CopyRules(Board* game_board) {
+	return new Rules(game_board);
+}
+/*
  * Returns a list of possible moves.
  * @param turn - The player whose turn it is.
  * @return a list of moves,
@@ -180,4 +188,74 @@ int Rules::CrawlCheck(int color, int x, int y, int direction) {
 		}
 	}
 	return 0;
+}
+/*
+ * Places a piece and flips adj pieces according to the rules.
+ * It is assumes the place the piece is set in is valid.
+ * @param color - the color of the piece being placed.
+ * @param x - x cord to be placed at.
+ * @param y - y cord to be placed at.
+ * @return 0 if the piece couldn't be placed, 1 otherwise.
+ */
+void Rules::SetPiece(int color, int x, int y) {
+	board->set(x, y, color);
+	//Check all adjacent spaces
+	Crawl(color, x, y, 1, CrawlCheck(color, x, y, 1));
+	Crawl(color, x, y, 2, CrawlCheck(color, x, y, 2));
+	Crawl(color, x, y, 3, CrawlCheck(color, x, y, 3));
+	Crawl(color, x, y, 4, CrawlCheck(color, x, y, 4));
+	Crawl(color, x, y, 6, CrawlCheck(color, x, y, 6));
+	Crawl(color, x, y, 7, CrawlCheck(color, x, y, 7));
+	Crawl(color, x, y, 8, CrawlCheck(color, x, y, 8));
+	Crawl(color, x, y, 9, CrawlCheck(color, x, y, 9));
+}
+/*
+ * Places a specified amount of pieces in a given direction starting from (x,y).
+ * Ignores starting point.
+ * Directions are based on the numpad.
+ * @param color - the color of the piece being placed.
+ * @param x - x cord to be placed at.
+ * @param y - y cord to be placed at.
+ * @param direction - the direction go travel in.
+ * @param amount - the ammout of nodes to flip.
+ */
+void Rules::Crawl(int color, int x, int y, int direction, int amount) {
+	int cx = x;
+	int cy = y;
+	for (int i = 0; i < amount; i++) {
+		switch (direction) {
+			case 1:
+				cx--;
+				cy++;
+				break;
+			case 2:
+				cy++;
+				break;
+			case 3:
+				cx++;
+				cy++;
+				break;
+			case 4:
+				cx--;
+				break;
+			case 6:
+				cx++;
+				break;
+			case 7:
+				cx--;
+				cy--;
+				break;
+			case 8:
+				cy--;
+				break;
+			case 9:
+				cx++;
+				cy--;
+				break;
+			default:
+				//do nothing
+				break;
+		}
+		board->set(cx, cy, color);
+	}
 }

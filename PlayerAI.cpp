@@ -21,7 +21,11 @@ PlayerAI::PlayerAI(Rules* rules, Board* board, int player_color) {
  * Destructor, does nothing.
  */
 PlayerAI::~PlayerAI() { }
-
+/*
+ * Returns the move that the AI player should choose.
+ * @param moves - the list of possible moves to choose from.
+ * @return the chosen move.
+ */
 int PlayerAI::GetMove(int* moves) {
 	int score;
 	int min_enemy_score = INT_MIN;
@@ -49,6 +53,7 @@ int PlayerAI::GetMove(int* moves) {
  * @board - the board the moves will be used on.
  * @rules - the rules of the game.
  * @player - the color of the player performing the moves.
+ * @return - the highest possible score.
  */
 int PlayerAI::BestMoveScore(int* moves, Board* board, Rules* rules, int player) {
 	if (moves[0] == 0) {
@@ -58,7 +63,8 @@ int PlayerAI::BestMoveScore(int* moves, Board* board, Rules* rules, int player) 
 	for (int i = 1; i < moves[0] ; i+= 2) {
 		Board* sim_board = board->SimBoard();
 		Rules* sim_rules = rules->CopyRules(sim_board);
-		score = 0; //TODO dudu function
+		sim_rules->SetPiece(player, moves[i], moves[i + 1]);
+		score = sim_rules->bestScore(player);
 		if (max_score < score) {
 			max_score = score;
 		}

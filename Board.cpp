@@ -85,7 +85,7 @@ void Board::set(int x, int y, int value) {
 		b[y - 1][x - 1] = value;
 	}
 }
-/**
+/*
  * This function places the initial 4 pieces on a 8x8 game.
  */
 void Board::SetUpGame() {
@@ -94,7 +94,10 @@ void Board::SetUpGame() {
 	set(4, 5, 2);
 	set(5, 4, 2);
 }
-
+/*
+ * Returns a copy of this board.
+ * @return board - a pointer to a copy of this board.
+ */
 Board* Board::SimBoard() {
 	Board *copiedBoard = new Board(this->width, this->height);
 	for(int rows = 1; rows <= this->height; rows++) {

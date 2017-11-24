@@ -17,13 +17,14 @@ using namespace std;
  */
 class PlayerAI : public Player {
 public:
-	PlayerAI(Rules* rules, Board* board);
+	PlayerAI(Rules* rules, Board* board, int player_color);
 	virtual ~PlayerAI();
 	int GetMove(int* moves);
 private:
 	Board* b;
 	Rules* r;
-	int BestMove(int* moves, Board* board);
+	int color;
+	int BestMoveScore(int* moves, Board* board, Rules* rules, int player);
 };
 
 #endif /* PLAYERAI_H_ */

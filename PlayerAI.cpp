@@ -12,9 +12,10 @@
 /*
  * Constructor, just gives it the rules-et it'll need to make decisions.
  */
-PlayerAI::PlayerAI(Rules* rules, Board* board) {
+PlayerAI::PlayerAI(Rules* rules, Board* board, int player_color) {
 	r = rules;
 	b = board;
+	color = player_color;
 }
 /*
  * Destructor, does nothing.
@@ -31,7 +32,8 @@ int PlayerAI::GetMove(int* moves) {
 	for (int i = 1; i < moves[0] ; i+= 2) {
 		Board* sim_board = b->SimBoard();
 		Rules* sim_rules = r->CopyRules(sim_board);
-		score = 0; //TODO get board score, and simulate it.
+		sim_rules->SetPiece(color, moves[i], moves[i + 1]);
+		score = BestMoveScore(sim_rules->PossibleMoves(3 - color), sim_board, sim_rules, 3 - color);
 		if (score < min_enemy_score) {
 			min_enemy_score = score;
 			min_enemy_score_move = i;
@@ -41,6 +43,25 @@ int PlayerAI::GetMove(int* moves) {
 	}
 	return min_enemy_score_move;
 }
-int PlayerAI::BestMove(int* moves, Board* board) {
-
+/*
+ * Gets a board and a set of possible moves and returns the one that would net the most points.
+ * @moves - a list of possible moves.
+ * @board - the board the moves will be used on.
+ * @rules - the rules of the game.
+ * @player - the color of the player performing the moves.
+ */
+int PlayerAI::BestMoveScore(int* moves, Board* board, Rules* rules, int player) {
+	if (moves[0] == 0) {
+		return INT_MIN;
+	}
+	int score, max_score = INT_MAX;
+	for (int i = 1; i < moves[0] ; i+= 2) {
+		Board* sim_board = board->SimBoard();
+		Rules* sim_rules = rules->CopyRules(sim_board);
+		score = 0; //TODO dudu function
+		if (max_score < score) {
+			max_score = score;
+		}
+	}
+	return score;
 }

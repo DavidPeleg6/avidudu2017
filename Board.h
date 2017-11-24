@@ -7,6 +7,7 @@
 
 #ifndef BOARD_H_
 #define BOARD_H_
+#include <iostream>
 using namespace std;
 /*
  *The board the game will be played on.

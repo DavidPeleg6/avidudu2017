@@ -4,7 +4,7 @@
  *  Author: Avihai Didi
  *  ID: 313137846
  */
-
+#include <iostream>
 #include "Game.h"
 #include "Player.h"
 #include "Display.h"

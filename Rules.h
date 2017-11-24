@@ -7,6 +7,7 @@
 
 #ifndef RULES_H_
 #define RULES_H_
+#include <iostream>
 #include "Board.h"
 using namespace std;
 /*

@@ -7,6 +7,7 @@
 
 #ifndef CONSOLEDISPLAY_H_
 #define CONSOLEDISPLAY_H_
+#include <iostream>
 #include "Board.h"
 #include "Display.h"
 using namespace std;

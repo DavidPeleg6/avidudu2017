@@ -7,6 +7,7 @@
 
 #ifndef PLAYERHUMANLOCAL_H_
 #define PLAYERHUMANLOCAL_H_
+#include <iostream>
 #include "Player.h"
 using namespace std;
 /**

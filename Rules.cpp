@@ -7,6 +7,7 @@
 
 #include "Rules.h"
 #include "Board.h"
+#include <iostream>
 #include <stdlib.h>
 using namespace std;
 /*

@@ -4,7 +4,7 @@
  *  Author: Avihai Didi
  *  ID: 313137846
  */
-
+#include <iostream>
 #include "Board.h"
 #include "ConsoleDisplay.h"
 #include "PlayerHumanLocal.h"

@@ -7,6 +7,7 @@
 
 #ifndef PLAYER_H_
 #define PLAYER_H_
+#include <iostream>
 using namespace std;
 /**
  * Abstract class, an object that chooses moves to perform.

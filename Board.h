@@ -9,11 +9,14 @@
 #define BOARD_H_
 #include <iostream>
 using namespace std;
+#define BLACK 2
+#define WHITE 1
 /*
  *The board the game will be played on.
  */
 class Board {
 	public:
+		Board* simBoard();
 		Board();
 		Board(int width, int height);
 		virtual ~Board();

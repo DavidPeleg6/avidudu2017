@@ -39,6 +39,7 @@ Board::Board(int board_width, int board_height) {
 		}
 	}
 }
+
 /**
  * Destructor: Deletes the board and all its contents.
  */
@@ -92,5 +93,15 @@ void Board::SetUpGame() {
 	set(5, 5, 1);
 	set(4, 5, 2);
 	set(5, 4, 2);
+}
+
+Board* Board::simBoard() {
+	Board *copiedBoard = new Board(this->width, this->height);
+	for(int rows = 1; rows <= this->height; rows++) {
+		for(int cols = 1; cols <= this->width; cols++) {
+			copiedBoard->set(rows, cols, b[rows][cols]);
+		}
+	}
+	return copiedBoard;
 }
 

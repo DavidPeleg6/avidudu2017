@@ -1,3 +1,15 @@
+commit 559f5f4ebcd7a8e1a52dbf36020fe90753200a56
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Nov 25 13:01:27 2017 +0200
+
+    added some comments to some functions
+
+commit 4dc46ab2583235a938b304869e3054e76aa26e3c
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Nov 25 12:56:49 2017 +0200
+
+    added final log
+
 commit c446a9add5d1082d6073b141736b55c440a66445
 Author: Avihai Didi <avihai.didi@gmail.com>
 Date:   Sat Nov 25 12:51:27 2017 +0200

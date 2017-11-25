@@ -1,0 +1,214 @@
+commit 3033be9c62f20bd438ff6170b230cc019d76f45d
+Merge: b0ab37b 424b21a
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Sat Nov 25 12:02:21 2017 +0200
+
+    Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
+
+commit b0ab37b6afd107031739a2ddd1432796085f5a27
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Sat Nov 25 12:01:32 2017 +0200
+
+    a document stating why we chose your avihais project
+
+commit 424b21ab8489e9606df3c5b4b48f0e8e6db16940
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Nov 25 11:55:20 2017 +0200
+
+    removed debug folders which I wasn't supposed to push in the first place.
+
+commit 5afcc3ff6fe34c1f197194cb0faf3b2e0e2da4e8
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Nov 25 11:52:45 2017 +0200
+
+    FIXED LAST MEM LEAK YEAAAAAHHHHH
+
+commit f84a2d82b6d8421f25f14991f98b7a2e0db49bd8
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Nov 25 11:34:49 2017 +0200
+
+    working on finding last mem error
+
+commit 61d5d0e1da2f0885b8481dd9d64e78e82ccb0684
+Merge: 3c69a7d 258a143
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Sat Nov 25 11:32:26 2017 +0200
+
+    Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
+
+commit 3c69a7d97a3eef45531fc85415da18ddd19632f6
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Sat Nov 25 11:31:29 2017 +0200
+
+    new main function asking for AI or human
+
+commit 258a143706ff4162203c801233a8be2f94c48ea5
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Nov 25 11:08:32 2017 +0200
+
+    additional minor mem fixes
+
+commit 7b977243deedf14c545cec5fa883daef6abf2b46
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Sat Nov 25 11:04:52 2017 +0200
+
+    a new method to ask for player
+
+commit 07fbec030add95fe83e611bf731ab72700224bed
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Nov 25 10:47:29 2017 +0200
+
+    playerai memleak fixed
+
+commit 22d60230b785187cfa7ed1865b1d78223a602ce9
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 23:04:08 2017 +0200
+
+    AI DUAL
+
+commit bcb31d9a6facc4d89aa98a50f200e2a576870493
+Merge: f627464 8e9fc8a
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Fri Nov 24 22:58:21 2017 +0200
+
+    Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
+    just because
+
+commit f627464b592917534c4d458c36eafe555a3f5946
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Fri Nov 24 22:57:51 2017 +0200
+
+    a new makefile including PlayerAI
+
+commit 8e9fc8ab411b9012e7bcbf1e3e2c175fbe4b696a
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 22:56:28 2017 +0200
+
+    freed some memory
+
+commit ce7c03269153360fa177aa49950815317070b225
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 22:54:45 2017 +0200
+
+    Console diaplay changes to print ai player diffrently.
+
+commit ce5b0b00e2c361ac48b642d3b430c8fb0584a82f
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 22:31:33 2017 +0200
+
+    minor modifications to player AI
+
+commit 188f0db7e33670f40c52ffad5d17f7ff33ac686c
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Fri Nov 24 22:28:26 2017 +0200
+
+    debugged the Board method copying itself
+
+commit 0e3cc9aa7fd58f3fc3beea644ec6111c95b53d77
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 22:20:29 2017 +0200
+
+    modified main and added dudufunc to playerAI
+
+commit dbaed28482afa56569209c230ae088b91c7f78f5
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Fri Nov 24 22:14:07 2017 +0200
+
+    Rules with a function to get the score of a current move
+
+commit 86a2035c2b3a5defd32c5a1cac8d5ad9fa0ae500
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 21:53:49 2017 +0200
+
+    ai player mostly done, also some other stuff.
+
+commit 28808ca32a404d07f96b818e26cf292eb56e3a3a
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 20:46:20 2017 +0200
+
+    Moved some functions from Game to Rules, minor fixes to Board, buncha code in playerAI
+
+commit c23745b83e06a519469fea4e1f7614c80316f2dc
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Fri Nov 24 20:15:25 2017 +0200
+
+    Board with a copy method
+
+commit 8633a093b6737fbb5a813e4a03ede699c3ca5e54
+Merge: 6e20eda 47b59ea
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Fri Nov 24 19:58:27 2017 +0200
+
+    Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
+    nothing
+
+commit 6e20eda2195dd4b9b71fe5a572184beae7bd70dd
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Fri Nov 24 19:58:01 2017 +0200
+
+    no changes
+
+commit 47b59ead1cbc1613de8c1ba1f8818d5bfb386c2d
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 19:56:36 2017 +0200
+
+    started working on playerAI
+
+commit 3e50ebc228c58b2cb4633cfe96f64c6566d754b2
+Merge: 8d2535c fba901e
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 19:53:57 2017 +0200
+
+    Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
+
+commit 8d2535cc5483995b3a30a5961e9670714060d6a5
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 19:52:42 2017 +0200
+
+    added a makefile
+
+commit fba901ed40c7f48593526750af5036be9716cc5e
+Merge: e55a28d 8250aea
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Fri Nov 24 19:37:44 2017 +0200
+
+    Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
+    just because
+
+commit 8250aea7759c49677a19aa0ecac55c57bb9092c5
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 19:31:23 2017 +0200
+
+    ai player placeholder addition
+
+commit e55a28d27fbe699e07621975e2d52c7b8e20fc1f
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Fri Nov 24 19:30:44 2017 +0200
+
+    generic README message...
+
+commit a2852ba7efce1341a0d532b0b564c16a1f16c92b
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 19:14:10 2017 +0200
+
+    test4
+
+commit 1105e1932ca833435708bf6997ac75ff73481a6a
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 19:04:46 2017 +0200
+
+    test3
+
+commit f8716a2a60554db780ef31219a4153db4d3a974d
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 18:42:00 2017 +0200
+
+    test commit 2
+
+commit 8b4f681fd1d5f69f6a1fa745da61e3b751704f7e
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Nov 24 18:40:36 2017 +0200
+
+    test commit
+(END)
+

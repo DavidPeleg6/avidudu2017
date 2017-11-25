@@ -9,6 +9,7 @@
 #include "Rules.h"
 #include "Board.h"
 #include <climits>
+#include <stdlib.h>
 /*
  * Constructor, just gives it the rules-et it'll need to make decisions.
  */
@@ -45,7 +46,7 @@ int PlayerAI::GetMove(int* moves) {
 		sim_rules->SetPiece(color, moves[i], moves[i + 1]);
 		int* sim_moves = sim_rules->PossibleMoves(3 - color);
 		score = BestMoveScore(sim_moves, sim_board, sim_rules, 3 - color);
-		delete sim_moves;
+		free (sim_moves);
 		if (score < min_enemy_score) {
 			min_enemy_score = score;
 			min_enemy_score_move = i;

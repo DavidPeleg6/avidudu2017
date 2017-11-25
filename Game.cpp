@@ -5,6 +5,7 @@
  *  ID: 313137846
  */
 #include <iostream>
+#include <stdlib.h>
 #include "Game.h"
 #include "Player.h"
 #include "Display.h"
@@ -83,8 +84,8 @@ void Game::RunGame(Display* d) {
 		if (!GetPlayer(turn)->PrintActions()) {
 			d->StatePlay(moves[move], moves[move + 1], turn);
 		}
-		delete moves;
-		delete state;
+		free(moves);
+		free(state);
 		state = rules->CheckBoardState();
 	}
 	if (no_move_flag == 0) {

@@ -68,7 +68,7 @@ int PlayerAI::BestMoveScore(int* moves, Board* board, Rules* rules, int player) 
 	if (moves[0] == 0) {
 		return INT_MIN;
 	}
-	int score, max_score = INT_MAX;
+	int score, max_score = INT_MIN;
 	for (int i = 1; i < moves[0] ; i+= 2) {
 		Board* sim_board = board->SimBoard();
 		Rules* sim_rules = rules->CopyRules(sim_board);
@@ -80,5 +80,5 @@ int PlayerAI::BestMoveScore(int* moves, Board* board, Rules* rules, int player) 
 		delete sim_board;
 		delete sim_rules;
 	}
-	return score;
+	return max_score;
 }

@@ -170,5 +170,13 @@ void ConsoleDisplay::StatePlay(int x, int y, int player) {
 }
 
 void ConsoleDisplay::AskForPlayer(int playerNum) {
-	cout << "Please choose player " << playerNum << " (AI = 1 , player = 2)" << endl;
+	cout << "Please choose player ";
+	if (playerNum == 1) {
+		cout << "O";
+	} else if (playerNum == 2) {
+		cout << "X";
+	} else {
+		cout << "ERROR";
+	}
+	cout << " (AI = 1 , player = 2)" << endl;
 }

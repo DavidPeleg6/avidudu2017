@@ -47,7 +47,7 @@ Board::~Board() {
 	for (int i = 0;i < height; i++) {
 		delete[] b[i];
 	}
-	delete b;
+	delete[] b;
 }
 /*
  * This function returns the value of the board at location (x,y).

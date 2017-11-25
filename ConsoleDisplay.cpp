@@ -7,6 +7,7 @@
 
 #include "ConsoleDisplay.h"
 #include <iostream>
+#include <stdlib.h>
 #include "Board.h"
 using namespace std;
 /*
@@ -152,7 +153,7 @@ void ConsoleDisplay::DeclareWinner(int* state) {
 			cout <<	" a winner cannot be determined." << endl;
 		break;
 	}
-	delete state;
+	free(state);
 }
 /*
  * States what action the player in question took.

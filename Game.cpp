@@ -52,8 +52,8 @@ void Game::RunGame(Display* d) {
 			if (no_move_flag == 0) {
 				no_move_flag = 1;
 			} else {
-				delete moves;
-				delete state;
+				free(moves);
+				free(state);
 				break;
 			}
 		} else {

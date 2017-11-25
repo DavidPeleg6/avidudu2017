@@ -73,7 +73,7 @@ int PlayerAI::BestMoveScore(int* moves, Board* board, Rules* rules, int player) 
 		Board* sim_board = board->SimBoard();
 		Rules* sim_rules = rules->CopyRules(sim_board);
 		sim_rules->SetPiece(player, moves[i], moves[i + 1]);
-		score = sim_rules->bestScore(player);
+		score = sim_rules->Score(player);
 		if (max_score < score) {
 			max_score = score;
 		}

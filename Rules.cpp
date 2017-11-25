@@ -258,12 +258,16 @@ void Rules::Crawl(int color, int x, int y, int direction, int amount) {
 		board->set(cx, cy, color);
 	}
 }
-
-int Rules::bestScore(int playerColor) {
+/*
+ * Returns the score of the current board.
+ * @param player_color the player requesting the score.
+ * @return the number of pieces belonging to this player.
+ */
+int Rules::Score(int player_color) {
 	int countColor = 0;
 	for(int rows = 1; rows <= board->getHeight(); rows++) {
 		for(int cols = 1; cols <= board->getWidth(); cols++) {
-			if(board->get(rows, cols) == playerColor) {
+			if(board->get(rows, cols) == player_color) {
 				countColor++;
 			}
 		}

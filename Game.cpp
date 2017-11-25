@@ -4,7 +4,6 @@
  *  Author: Avihai Didi
  *  ID: 313137846
  */
-#include <iostream>
 #include <stdlib.h>
 #include "Game.h"
 #include "Player.h"
@@ -80,9 +79,9 @@ void Game::RunGame(Display* d) {
 				}
 			}
 			rules->SetPiece(turn, moves[move], moves[move + 1]);
-		}
-		if (!GetPlayer(turn)->PrintActions()) {
-			d->StatePlay(moves[move], moves[move + 1], turn);
+			if (!GetPlayer(turn)->PrintActions()) {
+				d->StatePlay(moves[move], moves[move + 1], turn);
+			}
 		}
 		free(moves);
 		free(state);

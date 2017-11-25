@@ -167,3 +167,7 @@ void ConsoleDisplay::StatePlay(int x, int y, int player) {
 	}
 	cout << " played (" << x << "," << y << ")" << endl;
 }
+
+void ConsoleDisplay::AskForPlayer(int playerNum) {
+	cout << "Please choose player " << playerNum << " (AI = 1 , player = 2)" << endl;
+}

@@ -8,7 +8,7 @@
 #include <iostream>
 using namespace std;
 /**
- * Constructor: Makes the board and fills it with blanks.
+ * Constructor: Makes a 8x8 board and fills it with blanks.
  */
 Board::Board() {
 	width = 8;

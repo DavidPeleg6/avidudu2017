@@ -43,7 +43,9 @@ int PlayerAI::GetMove(int* moves) {
 		Board* sim_board = b->SimBoard();
 		Rules* sim_rules = r->CopyRules(sim_board);
 		sim_rules->SetPiece(color, moves[i], moves[i + 1]);
-		score = BestMoveScore(sim_rules->PossibleMoves(3 - color), sim_board, sim_rules, 3 - color);
+		int* sim_moves = sim_rules->PossibleMoves(3 - color);
+		score = BestMoveScore(sim_moves, sim_board, sim_rules, 3 - color);
+		delete sim_moves;
 		if (score < min_enemy_score) {
 			min_enemy_score = score;
 			min_enemy_score_move = i;
@@ -75,6 +77,7 @@ int PlayerAI::BestMoveScore(int* moves, Board* board, Rules* rules, int player) 
 			max_score = score;
 		}
 		delete sim_board;
+		delete sim_rules;
 	}
 	return score;
 }

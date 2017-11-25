@@ -1,3 +1,21 @@
+commit c446a9add5d1082d6073b141736b55c440a66445
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Nov 25 12:51:27 2017 +0200
+
+    fixed player ai
+
+commit 3f4747c24579b734536631d50c4cc407d820b72a
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Sat Nov 25 12:22:44 2017 +0200
+
+    changed name tag
+
+commit 715bd29505bcc187082917ad2780c3a0127ce319
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Sat Nov 25 12:07:27 2017 +0200
+
+    git Log
+
 commit 3033be9c62f20bd438ff6170b230cc019d76f45d
 Merge: b0ab37b 424b21a
 Author: David Peleg <dudugeda@gmail.com>
@@ -210,5 +228,3 @@ Author: Avihai Didi <avihai.didi@gmail.com>
 Date:   Fri Nov 24 18:40:36 2017 +0200
 
     test commit
-(END)
-

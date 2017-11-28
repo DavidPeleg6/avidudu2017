@@ -101,8 +101,8 @@ void Board::SetUpGame() {
 Board* Board::SimBoard() {
 	Board *copiedBoard = new Board(this->width, this->height);
 	for(int rows = 1; rows <= this->height; rows++) {
-		for(int cols = 1; cols <= this->width; cols++) {
-			copiedBoard->set(rows, cols, b[rows - 1][cols - 1]);
+		for(int cols = 1; cols < this->width; cols++) {
+			copiedBoard->set(rows, cols, b[cols - 1][rows - 1]);
 		}
 	}
 	return copiedBoard;

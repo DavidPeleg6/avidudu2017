@@ -1,11 +1,3 @@
-/*
- * main.cpp
- *
- *  Author1: Avihai Didi
- *  ID: 313137846
- *  Author2: David Geda
- *  ID: 313237182
- */
 #include <iostream>
 #include "Board.h"
 #include "ConsoleDisplay.h"

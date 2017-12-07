@@ -1,10 +1,3 @@
-/*
- * PlayerHumanLocal.h
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
-
 #ifndef PLAYERHUMANLOCAL_H_
 #define PLAYERHUMANLOCAL_H_
 #include <iostream>

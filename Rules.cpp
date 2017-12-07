@@ -1,10 +1,3 @@
-/*
- * Rules.cpp
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
-
 #include "Rules.h"
 #include "Board.h"
 #include <stdlib.h>

@@ -1,10 +1,3 @@
-/*
- * ConsoleDisplay.h
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
-
 #ifndef CONSOLEDISPLAY_H_
 #define CONSOLEDISPLAY_H_
 #include <iostream>

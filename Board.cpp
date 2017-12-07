@@ -1,9 +1,3 @@
-/*
- * Board.cpp
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
 #include "Board.h"
 #include <iostream>
 using namespace std;

@@ -1,10 +1,3 @@
-/*
- * ConsoleDisplay.cpp
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
-
 #include "ConsoleDisplay.h"
 #include <iostream>
 #include <stdlib.h>

@@ -1,9 +1,3 @@
-/*
- * Player.cpp
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
 #include <iostream>
 #include "Player.h"
 using namespace std;

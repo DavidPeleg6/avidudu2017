@@ -1,10 +1,3 @@
-/*
- * Rules.h
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
-
 #ifndef RULES_H_
 #define RULES_H_
 #include <iostream>

@@ -1,10 +1,3 @@
-/*
- * Game.h
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
-
 #ifndef GAME_H_
 #define GAME_H_
 #include <iostream>

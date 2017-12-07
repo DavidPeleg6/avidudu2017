@@ -1,10 +1,3 @@
-/*
- * Player.h
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
-
 #ifndef PLAYER_H_
 #define PLAYER_H_
 #include <iostream>

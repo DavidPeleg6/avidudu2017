@@ -1,9 +1,3 @@
-/*
- * Game.cpp
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
 #include <stdlib.h>
 #include "Game.h"
 #include "Player.h"

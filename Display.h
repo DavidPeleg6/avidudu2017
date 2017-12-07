@@ -1,10 +1,3 @@
-/*
- * Display.h
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
-
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
 #include <iostream>

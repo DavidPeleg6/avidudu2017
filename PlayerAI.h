@@ -1,10 +1,3 @@
-/*
- * PlayerAI.h
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
-
 #ifndef PLAYERAI_H_
 #define PLAYERAI_H_
 #include <iostream>

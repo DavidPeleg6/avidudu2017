@@ -1,10 +1,3 @@
-/*
- * Board.h
- *
- *  Author: Avihai Didi
- *  ID: 313137846
- */
-
 #ifndef BOARD_H_
 #define BOARD_H_
 #include <iostream>

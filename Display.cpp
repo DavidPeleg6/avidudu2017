@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Display.h"
+#include "headers/Display.h"
 using namespace std;
 /**
  * The player class is abstract and so its functions don't need implementation.

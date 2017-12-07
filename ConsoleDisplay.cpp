@@ -1,7 +1,7 @@
-#include "ConsoleDisplay.h"
+#include "headers/ConsoleDisplay.h"
 #include <iostream>
 #include <stdlib.h>
-#include "Board.h"
+#include "headers/Board.h"
 using namespace std;
 /*
  * Constructor, does nothing as there is no need for CD to maintain any data.

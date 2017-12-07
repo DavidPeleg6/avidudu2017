@@ -1,4 +1,4 @@
-#include "Board.h"
+#include "headers/Board.h"
 #include <iostream>
 using namespace std;
 /**

@@ -1,6 +1,6 @@
-#include "PlayerAI.h"
-#include "Rules.h"
-#include "Board.h"
+#include "headers/PlayerAI.h"
+#include "headers/Rules.h"
+#include "headers/Board.h"
 #include <climits>
 #include <stdlib.h>
 /*

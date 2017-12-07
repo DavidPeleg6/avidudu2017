@@ -1,5 +1,5 @@
-#include "Rules.h"
-#include "Board.h"
+#include "headers/Rules.h"
+#include "headers/Board.h"
 #include <stdlib.h>
 using namespace std;
 /*

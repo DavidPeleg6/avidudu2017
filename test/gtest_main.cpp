@@ -7,11 +7,11 @@
 
 #include "gtest/gtest.h"
 #include <iostream>
-#include "Board.h"
-#include "Game.h"
-#include "Rules.h"
-#include "Player.h"
-#include "PlayerAI.h"
+#include "headers/Board.h"
+#include "headers/Game.h"
+#include "headers/Rules.h"
+#include "headers/Player.h"
+#include "headers/PlayerAI.h"
 
 GTEST_API_ int main(int argc,char **argv) {
 	testing::InitGoogleTest(&argc, argv);

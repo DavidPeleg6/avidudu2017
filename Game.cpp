@@ -1,9 +1,9 @@
 #include <stdlib.h>
-#include "Game.h"
-#include "Player.h"
-#include "Display.h"
-#include "Board.h"
-#include "Rules.h"
+#include "headers/Game.h"
+#include "headers/Player.h"
+#include "headers/Display.h"
+#include "headers/Board.h"
+#include "headers/Rules.h"
 using namespace std;
 /*
  * Constructor, adds references to the board the game will be played on and

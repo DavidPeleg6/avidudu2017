@@ -1,10 +1,10 @@
 #include <iostream>
-#include "Board.h"
-#include "ConsoleDisplay.h"
-#include "PlayerHumanLocal.h"
-#include "PlayerAI.h"
-#include "Rules.h"
-#include "Game.h"
+#include "headers/Board.h"
+#include "headers/ConsoleDisplay.h"
+#include "headers/PlayerHumanLocal.h"
+#include "headers/PlayerAI.h"
+#include "headers/Rules.h"
+#include "headers/Game.h"
 using namespace std;
 
 #define AI 1

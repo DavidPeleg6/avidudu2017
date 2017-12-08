@@ -4,7 +4,7 @@
 using namespace std;
 /*
  * Constructor - just gets a reference to a board.
- * @param gameBoard - the board to reference.
+ * @param game_board - the board to reference.
  */
 Rules::Rules(Board* game_board) {
 	board = game_board;
@@ -17,6 +17,7 @@ Rules::~Rules() { }
  * Returns a copy of this ruleset, but applied to the new board.
  * Currently does nothing, will require modification as new game rules are
  * added later in development.
+ * @param game_board - the board that the rules will govern
  */
 Rules* Rules::CopyRules(Board* game_board) {
 	return new Rules(game_board);
@@ -129,7 +130,7 @@ int Rules::NotOverlap(int x, int y) {
  * @param x - x cord to be placed at.
  * @param y - y cord to be placed at.
  * @param direction - the direction go travel in.
- * @return  - the number of pieces whose color should be inverted.
+ * @return - the number of pieces whose color should be inverted.
  */
 int Rules::CrawlCheck(int color, int x, int y, int direction) {
 	int cx = x;

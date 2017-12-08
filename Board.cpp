@@ -1,8 +1,8 @@
 #include "headers/Board.h"
 #include <iostream>
 using namespace std;
-/**
- * Constructor: Makes a 8x8 board and fills it with blanks.
+/*
+ * Default constructor: Makes a 8x8 board and fills it with blanks.
  */
 Board::Board() {
 	width = 8;
@@ -17,8 +17,10 @@ Board::Board() {
 		}
 	}
 }
-/**
+/*
  * Constructor: Makes the board and fills it with blanks.
+ * @param board_width - the desired board width
+ * @param board_height - the desired board height
  */
 Board::Board(int board_width, int board_height) {
 	width = board_width;
@@ -34,7 +36,7 @@ Board::Board(int board_width, int board_height) {
 	}
 }
 
-/**
+/*
  * Destructor: Deletes the board and all its contents.
  */
 Board::~Board() {

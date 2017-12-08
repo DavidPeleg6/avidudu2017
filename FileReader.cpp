@@ -7,20 +7,25 @@ using namespace std;
 #define IP_PARTS 4
 #define IP_PART_SIZE 3
 #define BIGGEST_PORT_SIZE 5
-#define ANS 48 /* Aacii Number Spot */
+#define ANS 48 /* Ascii Number Spot */
+/*
+ * Constructor, makes a new file reader.
+ * @param target_file - the file to be read by the reader.
+ */
 FileReader::FileReader(string target_file) {
 	file_name = target_file;
 }
-
-FileReader::~FileReader() {
-	// TODO Auto-generated destructor stub
-}
+/*
+ * Destructor, does nothing.
+ */
+FileReader::~FileReader() { }
 /*
  * This function reads the file and returns a pointer referencing:
  * ip ip ip ip port
  * 0  1  2  3  4
  * It expects the file to have the format:
  * ip.ip.ip.ip:port
+ * @return a pointer to the data listed above.
  */
 int* FileReader::read() {
 	ifstream reader;

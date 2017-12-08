@@ -150,6 +150,9 @@ void ConsoleDisplay::DeclareWinner(int* state) {
 }
 /*
  * States what action the player in question took.
+ * @param x - the x coordinate
+ * @param y - the y coordinate
+ * @param player - the color of the player making the move.
  */
 void ConsoleDisplay::StatePlay(int x, int y, int player) {
 	if (player == 1) {
@@ -161,7 +164,11 @@ void ConsoleDisplay::StatePlay(int x, int y, int player) {
 	}
 	cout << " played (" << x << "," << y << ")" << endl;
 }
-
+/*
+ * Asks the user for input on what kind of players it would like.
+ * @param playerNum - the number of the player being asked for,
+ *  if it equals -1 it means the number is irrelevent.
+ */
 void ConsoleDisplay::AskForPlayer(int playerNum) {
 	if (playerNum == -1) {
 		cout << "Please choose your opponent:";
@@ -177,6 +184,9 @@ void ConsoleDisplay::AskForPlayer(int playerNum) {
 	}
 	cout << " (AI = 1 , player = 2, remote player = 3)" << endl;
 }
+/*
+ * Informs the player that they've made an invalid choice.
+ */
 void ConsoleDisplay::InvalidChoice() {
 	cout << "Invalid choice, please input a diffrent choice." << endl;
 }

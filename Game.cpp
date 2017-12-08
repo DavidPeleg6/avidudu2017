@@ -87,6 +87,11 @@ void Game::RunGame(Display* d) {
 	}
 	d->DeclareWinner(state);
 }
+/*
+ * Returns the player object whose number is the one given.
+ * @param player - the index of the player to be returned.
+ * @return the requested player object.
+ */
 Player* Game::GetPlayer(int player) {
 	if (player == 1) {
 		return p1;

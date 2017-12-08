@@ -1,4 +1,3 @@
-#include <iostream>
 #include "headers/Display.h"
 using namespace std;
 /**

@@ -8,11 +8,20 @@
 #include <string.h>
 #include <unistd.h>
 using namespace std;
+/*
+ * Constructor, makes a new client object.
+ * @param serverIP - the IP adress of the server the client will connect to.
+ * @param serverPort - the port it will use to connect to the server.
+ */
 Client::Client(const char *serverIP, int serverPort):
 	serverIP(serverIP), serverPort(serverPort),
 	clientSocket(0) {
 		cout << "Client" << endl;
 }
+/*
+ * Connects to the server as the name would imply.
+ * @return the color of this client.
+ */
 int Client::connectToServer() {
 	// Create a socket point
 	clientSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -54,6 +63,12 @@ int Client::connectToServer() {
 	cout << "player 2 logged in" << endl;
 	return color;
 }
+/*
+ * Sends a move to the other player.
+ * @param x - the x coordinate
+ * @param y - the y coordinate
+ * @param color - the color of the player making the move.
+ */
 void Client::SendMove(int x, int y, int color) {
 	// Write the exercise arguments to the socket
 	int n = write(clientSocket, &x, sizeof(x));
@@ -69,6 +84,9 @@ void Client::SendMove(int x, int y, int color) {
 		throw "Error writing color to socket";
 	}
 }
+/*
+ * Gets a move from the other player which will be acted out on this instance of the game.
+ */
 int* Client::GetMove() {
 	int n, x, y, color;
 	n = read(clientSocket, &x, sizeof(x));

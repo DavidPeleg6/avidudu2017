@@ -13,7 +13,7 @@ Client::Client(const char *serverIP, int serverPort):
 	clientSocket(0) {
 		cout << "Client" << endl;
 }
-void Client::connectToServer() {
+int Client::connectToServer() {
 	// Create a socket point
 	clientSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if (clientSocket == -1) {
@@ -45,6 +45,14 @@ void Client::connectToServer() {
 		throw "Error connecting to server";
 	}
 	cout << "Connected to server" << endl;
+	cout << "waiting for opponent..." << endl;
+	int color;
+	int n = read(clientSocket, &color, sizeof(color));
+	if (n == -1) {
+		throw "Error reading color from socket";
+	}
+	cout << "player 2 logged in" << endl;
+	return color;
 }
 void Client::SendMove(int x, int y, int color) {
 	// Write the exercise arguments to the socket

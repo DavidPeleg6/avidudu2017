@@ -3,11 +3,12 @@
 
 using namespace std;
 /*
- * Constructor, does nothing.
+ * Constructor, starts the client and recieves the color.
  */
 PlayerRemote::PlayerRemote(const char *serverIP, int serverPort) {
 	player_color = 0;
 	client = new Client(serverIP, serverPort);
+	setColor(client->connectToServer());
 }
 /*
  * Constructor, tells the player what color it is.
@@ -16,11 +17,16 @@ PlayerRemote::PlayerRemote(const char *serverIP, int serverPort) {
 PlayerRemote::PlayerRemote(const char *serverIP, int serverPort, int color) {
 	player_color = color;
 	client = new Client(serverIP, serverPort);
+	client->connectToServer();
 }
+
 /*
- * Destructor, does nothing.
+ * Destructor, deletes client.
  */
-PlayerRemote::~PlayerRemote() { }
+PlayerRemote::~PlayerRemote() {
+	delete client;
+}
+
 int PlayerRemote::GetMove(int* moves) {
 	//TODO get the move from the server
 	return 0;

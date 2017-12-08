@@ -6,7 +6,7 @@
 class Client {
 public:
 	Client(const char *serverIP, int serverPort);
-	void connectToServer();
+	int connectToServer();
 	int* GetMove();
 	void SendMove(int x, int y, int color);
 private:

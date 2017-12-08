@@ -1,6 +1,6 @@
 /*
  * Server.cpp
- * the ser
+ * a class representing the game server
  */
 #include "headersS/Server.h"
 
@@ -15,6 +15,9 @@ Server::Server(int port): port(port), serverSocket(0) {
 	cout << "Server innitialized" << endl;
 }
 
+/*
+ * a constructor for Server
+ */
 void Server::start() {
 	serverSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if(serverSocket == -1) {

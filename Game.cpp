@@ -72,7 +72,7 @@ void Game::RunGame(Display* d) {
 					move = -1;
 				}
 			}
-			GetPlayer(3 - turn)->AcknowledgeMove(moves[move], moves[move + 1]);
+			GetPlayer(3 - turn)->AcknowledgeMove(moves[move], moves[move + 1], turn);
 			rules->SetPiece(turn, moves[move], moves[move + 1]);
 			if (!GetPlayer(turn)->PrintActions()) {
 				d->StatePlay(moves[move], moves[move + 1], turn);

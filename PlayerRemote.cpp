@@ -1,5 +1,6 @@
 #include "headers/PlayerRemote.h"
 #include "headers/Client.h"
+#include <stdlib.h>
 
 using namespace std;
 /*
@@ -19,7 +20,14 @@ PlayerRemote::~PlayerRemote() {
 
 int PlayerRemote::GetMove(int* moves) {
 	int* move = client->GetMove();
-	return move;
+	for (int i = 1; i < moves[0] ; i+= 2) {
+		if (moves[i] == move[0] && moves[i + 1] == move[1]) {
+			free(move);
+			return i;
+		}
+	}
+	free(move);
+	return -1;
 }
 void PlayerRemote::setColor(int color) {
 	player_color = color;

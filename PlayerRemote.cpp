@@ -9,7 +9,8 @@ using namespace std;
 PlayerRemote::PlayerRemote(const char *serverIP, int serverPort) {
 	player_color = 0;
 	client = new Client(serverIP, serverPort);
-	setColor(client->connectToServer());
+	//set remote player with the opposite color
+	setColor(3 - client->connectToServer());
 }
 /*
  * Destructor, deletes client.
@@ -40,13 +41,6 @@ int PlayerRemote::GetMove(int* moves) {
  */
 void PlayerRemote::setColor(int color) {
 	player_color = color;
-}
-/*
- * Returns the color of this player.
- * @return the color of this player.
- */
-int PlayerRemote::getColor() {
-	return player_color;
 }
 /*
  * Returns 1, because this type of player requires visual output.

@@ -7,7 +7,6 @@
 #include "Server.h"
 
 #define MAX_CONNECTED_CLIENTS 10
-#define NO_MOVE -1
 #define END -2
 #define ERROR 0
 

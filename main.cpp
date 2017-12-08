@@ -9,11 +9,11 @@
 #include "headers/PlayerRemote.h"
 using namespace std;
 
-#define AI 1
-#define HUMAN 2
-#define REMOTE 3
 #define BOARDSIZE 8
 #define DATAFILE "ipfile"
+
+enum play{NONE, AI, HUMAN, REMOTE};
+
 /*
  * Main function of the program.
  */
@@ -32,7 +32,8 @@ int main() {
 	Display* d = new ConsoleDisplay();
 	Rules* r = new Rules(b);
 	Player *p[2];
-	int remote = 0, input;
+	int input;
+	/**
 	for(int i = 1; i <= 2; i++) {
 		d->AskForPlayer(i);
 		cin >> input;
@@ -57,6 +58,25 @@ int main() {
 			i--;
 			break;
 		}
+	}
+	*/
+	p[0] = new PlayerHumanLocal();
+	d->AskForPlayer(-1);
+	cin >> input;
+	switch (input) {
+	case AI:
+		p[1] = new PlayerAI(r, b, 2);
+		break;
+	case HUMAN:
+		p[1] = new PlayerHumanLocal();
+		break;
+	case REMOTE:
+		p[1] = new PlayerRemote("", 0);
+		//TODO propery form a remote player.
+		break;
+	default:
+		d->InvalidChoice();
+		break;
 	}
 	Game* g = new Game(b, r, p[0], p[1]);
 	g->RunGame(d);

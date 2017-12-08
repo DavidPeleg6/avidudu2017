@@ -17,8 +17,9 @@ int main() {
 		server.start();
 	} catch(const char *msg) {
 		cout << "server crashed because: " << msg << endl;
-		server stop();
+		server.stop();
 		exit(-1);
 	}
-	server stop();
+	server.stop();
+	return 0;
 }

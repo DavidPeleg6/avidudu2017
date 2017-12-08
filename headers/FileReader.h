@@ -11,6 +11,7 @@ public:
 	FileReader(string target_file);
 	virtual ~FileReader();
 	int* read();
+	char* ExtractIP(int* data);
 private:
 	int ParseInt(int i, int cin[]);
 	int IntConverter(char* c);

@@ -77,6 +77,12 @@ int* FileReader::read() {
 	reader.close();
 	return final;
 }
+/*
+ * Parses the ip address to an integer.
+ * @param i - the length of the input.
+ * @param cin[] - an array containing the input.
+ * @return an integer version of the input.
+ */
 int FileReader::ParseInt(int i, int cin[]) {
 	switch(i) {
 	case 2:
@@ -93,10 +99,44 @@ int FileReader::ParseInt(int i, int cin[]) {
 		return -1;
 	}
 }
+/*
+ * Converts the input string into an integer.
+ * DOES NOT HANDLE EXCEPTIONS, INVALID INPUTS WILL CASUSE ISSUES.
+ * @param c - input string.
+ * @return the input but as an integer.
+ */
 int FileReader::IntConverter(char* c) {
 	stringstream str;
 	int integer;
 	str << c;
 	str >> integer;
 	return integer;
+}
+/*
+ * Takes the output from the read function
+ * as input and returns the ip adress as a string.
+ * @param data - the output from the read() function.
+ * @return a string representation of the ip adress.
+ */
+char* FileReader::ExtractIP(int* data) {
+	int i = 0;
+	char* s = (char*)calloc(20, sizeof(char));
+	for (int j = 0; j < IP_PARTS; j++) {
+		if (data[j] / 100 != 0) {
+			s[i++] = (data[j] / 100) + ANS;
+		}
+		if ((data[j] % 100) / 10 != 0) {
+			s[i++] = ((data[j] % 100) / 10) + ANS;
+		}
+		s[i++] = (data[j] % 10) + ANS;
+		if (j < IP_PARTS - 1) {
+			s[i++] = '.';
+		}
+	}
+	char* rs = (char*)calloc(i, sizeof(char));
+	for (int j = 0; j < i; j++) {
+		rs[j] = s[j];
+	}
+	free(s);
+	return rs;
 }

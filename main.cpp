@@ -18,6 +18,15 @@ using namespace std;
  * Main function of the program.
  */
 int main() {
+	FileReader* reader = new FileReader(DATAFILE);
+	int* data = reader->read();
+	for (int i = 0; i < 5; i++) {
+		cout << data[i] << endl;
+	}
+	cout << "aaa" << endl;
+	cout << reader->ExtractIP(data) << endl;
+	cout << "aaa" << endl;
+	return 0;
 	Board* b = new Board(BOARDSIZE, BOARDSIZE);
 	b->SetUpGame();
 	Display* d = new ConsoleDisplay();

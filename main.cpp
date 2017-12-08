@@ -5,11 +5,13 @@
 #include "headers/PlayerAI.h"
 #include "headers/Rules.h"
 #include "headers/Game.h"
+#include "headers/FileReader.h"
 using namespace std;
 
 #define AI 1
 #define HUMAN 2
-/**
+#define DATAFILE "ipfile"
+/*
  * Main function of the program.
  */
 int main() {

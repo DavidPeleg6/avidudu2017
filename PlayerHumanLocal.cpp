@@ -56,4 +56,4 @@ int PlayerHumanLocal::GetMove(int* moves) {
  * Sends the move the other player did to this player object.
  * Doesn't do anything.
  */
-void PlayerHumanLocal::AcknowledgeMove(int x, int y) { }
+void PlayerHumanLocal::AcknowledgeMove(int x, int y, int color) { }

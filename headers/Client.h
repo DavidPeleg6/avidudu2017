@@ -1,7 +1,5 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
-
-using namespace std;
 /*
  * A client used to send and recieve information to and from a server object.
  */

@@ -79,4 +79,4 @@ int PlayerAI::BestMoveScore(int* moves, Board* board, Rules* rules, int player) 
  * Sends the move the other player did to this player object.
  * Doesn't do anything.
  */
-void PlayerAI::AcknowledgeMove(int x, int y) { }
+void PlayerAI::AcknowledgeMove(int x, int y, int color) { }

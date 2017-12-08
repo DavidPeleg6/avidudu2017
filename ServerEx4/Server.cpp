@@ -1,15 +1,16 @@
 /*
  * Server.cpp
- *
- *  Created on: Dec 8, 2017
- *      Author: david
+ * the ser
  */
-#include "Server.h"
+#include "headersS/Server.h"
 
 #define MAX_CONNECTED_CLIENTS 10
 #define END -2
 #define ERROR 0
 
+/*
+ * a constructor for Server
+ */
 Server::Server(int port): port(port), serverSocket(0) {
 	cout << "Server innitialized" << endl;
 }
@@ -102,7 +103,7 @@ int Server::startGame(int client1Socket, int client2Socket) {
 		return ERROR;
 	}
 	turn++;
-	n = write(client1Socket, &turn, sizeof(turn));
+	n = write(client2Socket, &turn, sizeof(turn));
 	if(n == -1) {
 		cout << "Error writing to client 2" << endl;
 		return ERROR;

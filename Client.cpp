@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <stdlib.h>
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
@@ -45,25 +46,38 @@ void Client::connectToServer() {
 	}
 	cout << "Connected to server" << endl;
 }
-int Client::sendExercise(int arg1, char op, int arg2) {
+void Client::SendMove(int x, int y, int color) {
 	// Write the exercise arguments to the socket
-	int n = write(clientSocket, &arg1, sizeof(arg1));
+	int n = write(clientSocket, &x, sizeof(x));
 	if (n == -1) {
-		throw "Error writing arg1 to socket";
+		throw "Error writing x to socket";
 	}
-	n = write(clientSocket, &op, sizeof(op));
+	n = write(clientSocket, &y, sizeof(y));
 	if (n == -1) {
-		throw "Error writing op to socket";
+		throw "Error writing y to socket";
 	}
-	n = write(clientSocket, &arg2, sizeof(arg2));
+	n = write(clientSocket, &color, sizeof(color));
 	if (n == -1) {
-		throw "Error writing arg2 to socket";
+		throw "Error writing color to socket";
 	}
-	// Read the result from the server
-	int result;
-	n = read(clientSocket, &result, sizeof(result));
+}
+int* Client::GetMove() {
+	int n, x, y, color;
+	n = read(clientSocket, &x, sizeof(x));
 	if (n == -1) {
-		throw "Error reading result from socket";
+		throw "Error reading x from socket";
 	}
-	return result;
+	n = read(clientSocket, &y, sizeof(y));
+	if (n == -1) {
+		throw "Error reading y from socket";
+	}
+	n = read(clientSocket, &color, sizeof(color));
+	if (n == -1) {
+		throw "Error reading color from socket";
+	}
+	int* move = (int*)calloc(3, sizeof(int));
+	move[0] = x;
+	move[1] = y;
+	move[2] = color;
+	return move;
 }

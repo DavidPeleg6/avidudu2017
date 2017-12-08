@@ -2,12 +2,15 @@
 #define CLIENT_H_
 
 using namespace std;
-
+/*
+ * A client used to send and recieve information to and from a server object.
+ */
 class Client {
 public:
 	Client(const char *serverIP, int serverPort);
 	void connectToServer();
-	int sendExercise(int arg1, char op, int arg2);
+	int* GetMove();
+	void SendMove(int x, int y, int color);
 private:
 	const char *serverIP;
 	int serverPort;

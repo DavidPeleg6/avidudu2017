@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include "headers/Board.h"
 #include "headers/ConsoleDisplay.h"
 #include "headers/PlayerHumanLocal.h"
@@ -38,6 +39,9 @@ int main() {
 		break;
 	case REMOTE:
 		try {
+			if (data == 0) {
+				throw "Missing ip data file.";
+			}
 			p[1] = new PlayerRemote(reader->ExtractIP(data), reader->ExtractPort(data));
 		} catch (const char *msg) {
 			cout << "unnable to connect because: " << msg << endl;
@@ -49,6 +53,7 @@ int main() {
 	}
 	Game* g = new Game(b, r, p[0], p[1]);
 	g->RunGame(d);
+	free(data);
 	delete b;
 	delete d;
 	delete p[0];

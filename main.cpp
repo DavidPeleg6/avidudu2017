@@ -6,6 +6,7 @@
 #include "headers/Rules.h"
 #include "headers/Game.h"
 #include "headers/FileReader.h"
+#include "headers/PlayerRemote.h"
 using namespace std;
 
 #define AI 1
@@ -22,16 +23,30 @@ int main() {
 	Display* d = new ConsoleDisplay();
 	Rules* r = new Rules(b);
 	Player *p[2];
-	int player;
+	int remote = 0, input;
 	for(int i = 1; i <= 2; i++) {
-		d->AskForPlayer();
-		cin >> player;
-		switch (player) {
+		d->AskForPlayer(i);
+		cin >> input;
+		switch (input) {
 		case AI:
 			p[i - 1] = new PlayerAI(r, b, i);
 			break;
 		case HUMAN:
 			p[i - 1] = new PlayerHumanLocal();
+			break;
+		case REMOTE:
+			if (!remote) {
+				p[i - 1] = new PlayerRemote();
+				//TODO propery form a remote player.
+				remote = 1;
+			} else {
+				d->InvalidChoice();
+			}
+			break;
+		default:
+			d->InvalidChoice();
+			i--;
+			break;
 		}
 	}
 	Game* g = new Game(b, r, p[0], p[1]);

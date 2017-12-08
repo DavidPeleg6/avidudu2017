@@ -12,6 +12,7 @@ public:
 	virtual ~PlayerHumanLocal();
 	int GetMove(int* moves);
 	int PrintActions();
+	void AcknowledgeMove(int x, int y);
 };
 
 #endif /* PLAYERHUMANLOCAL_H_ */

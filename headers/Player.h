@@ -10,7 +10,8 @@ public:
 	Player();
 	virtual ~Player();
 	virtual int GetMove(int* moves) = 0;
-	virtual int PrintActions() =0;
+	virtual int PrintActions() = 0;
+	virtual void AcknowledgeMove(int x, int y) = 0;
 };
 
 #endif /* PLAYER_H_ */

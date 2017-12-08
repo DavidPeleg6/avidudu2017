@@ -145,3 +145,11 @@ char* FileReader::ExtractIP(int* data) {
 	free(s);
 	return rs;
 }
+/*
+ * Extracts the port number from the data.
+ * @param data - the data to have the port number extracted from.
+ * @return the port number as an integer.
+ */
+int FileReader::ExtractPort(int* data) {
+	return data[IP_PARTS];
+}

@@ -1,4 +1,5 @@
 #include "headers/Client.h"
+#include <stdlib.h>
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -17,6 +18,10 @@ Client::Client(const char *serverIP, int serverPort):
 	serverIP(serverIP), serverPort(serverPort),
 	clientSocket(0) {
 		cout << "Client" << endl;
+}
+Client::~Client() {
+	//free(serverIP);
+	//TODO this maybe I dunno
 }
 /*
  * Connects to the server as the name would imply.

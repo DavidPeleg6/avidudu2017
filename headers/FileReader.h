@@ -12,6 +12,7 @@ public:
 	virtual ~FileReader();
 	int* read();
 	char* ExtractIP(int* data);
+	int ExtractPort(int* data);
 private:
 	int ParseInt(int i, int cin[]);
 	int IntConverter(char* c);

@@ -17,7 +17,7 @@ public:
 	virtual void InvalidFormat() = 0;
 	virtual void DeclareWinner(int* state) = 0;
 	virtual void StatePlay(int x, int y, int player) = 0;
-	virtual void AskForPlayer(int playerNum) = 0;
+	virtual void AskForPlayer() = 0;
 private:
 	virtual void PrintDashLine(Board* b) = 0;
 	virtual void PrintTurn(int turn) = 0;

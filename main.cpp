@@ -10,19 +10,21 @@ using namespace std;
 
 #define AI 1
 #define HUMAN 2
+#define REMOTE 3
+#define BOARDSIZE 8
 #define DATAFILE "ipfile"
 /*
  * Main function of the program.
  */
 int main() {
-	Board* b = new Board(8, 8);
+	Board* b = new Board(BOARDSIZE, BOARDSIZE);
 	b->SetUpGame();
 	Display* d = new ConsoleDisplay();
 	Rules* r = new Rules(b);
 	Player *p[2];
 	int player;
 	for(int i = 1; i <= 2; i++) {
-		d->AskForPlayer(i);
+		d->AskForPlayer();
 		cin >> player;
 		switch (player) {
 		case AI:

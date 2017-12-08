@@ -79,6 +79,7 @@ void Server::handleClients(int client1Socket, int client2Socket) {
 			cout << "Error writing to client 2" << endl;
 			break;
 		}
+		cout << move[0] << ", " << move[1] << " | " << move[2] << endl;
 		//check if game is alive
 		if(move[2] == END) {
 			break;
@@ -94,6 +95,7 @@ void Server::handleClients(int client1Socket, int client2Socket) {
 		if(move[2] == END) {
 			return;
 		}
+		cout << move[0] << ", " << move[1] << " | " << move[2] << endl;
 	}
 	return;
 }

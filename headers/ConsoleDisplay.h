@@ -18,7 +18,7 @@ public:
 	void InvalidFormat();
 	void DeclareWinner(int* state);
 	void StatePlay(int x, int y, int player);
-	void AskForPlayer(int playerNum);
+	void AskForPlayer();
 private:
 	void PrintDashLine(Board* b);
 	void PrintTurn(int turn);

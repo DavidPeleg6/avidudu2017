@@ -25,9 +25,12 @@ public:
 private:
 	int port;
 	int serverSocket;
+	int move[3];
 
-	void handleClient(int clientSocket);
-	int* passMove(int moveX, int moveY);
+	void handleClients(int client1Socket, int client2Socket);
+	int startGame(int client1Socket, int client2Socket);
+	int getMove(int clientSocket);
+	int passMove(int clientSocket);
 };
 
 

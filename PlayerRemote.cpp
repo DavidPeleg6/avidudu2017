@@ -53,7 +53,7 @@ int PlayerRemote::getColor() {
  * Returns 1, because this type of player requires visual output.
  */
 int PlayerRemote::PrintActions() {
-	return 1;
+	return 0;
 }
 /*
  * Sends the move just made to the other player.

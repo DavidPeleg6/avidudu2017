@@ -14,7 +14,7 @@ using namespace std;
 Game::Game(Board* b, Rules* r, Player* player1, Player* player2) {
 	board = b;
 	rules = r;
-	if (player1->getColor() == 1) {
+	if (player2->getColor() == 2) {
 		p1 = player1;
 		p2 = player2;
 	} else {
@@ -35,7 +35,7 @@ Game::~Game() { }
  * @param d - Outputs the state of the game visually.
  */
 void Game::RunGame(Display* d) {
-	int move, turn = 1;
+	int move, turn = 2;
 	int no_move_flag = 0;
 	int* moves;
 	int* state = rules->CheckBoardState();
@@ -61,10 +61,13 @@ void Game::RunGame(Display* d) {
 				if (GetPlayer(turn)->PrintActions()) {
 					d->AskForMove();
 				}
+				cout << endl;
 				if (turn == 1) {
 					move = p1->GetMove(moves);
+					p2->AcknowledgeMove(moves[move], moves[move + 1], turn);
 				} else {
 					move = p2->GetMove(moves);
+					p1->AcknowledgeMove(moves[move], moves[move + 1], turn);
 				}
 				if (move == -1) {
 					if (GetPlayer(turn)->PrintActions()) {
@@ -78,7 +81,7 @@ void Game::RunGame(Display* d) {
 					move = -1;
 				}
 			}
-			GetPlayer(3 - turn)->AcknowledgeMove(moves[move], moves[move + 1], turn);
+			//GetPlayer(3 - turn)->AcknowledgeMove(moves[move], moves[move + 1], turn);
 			rules->SetPiece(turn, moves[move], moves[move + 1]);
 			if (!GetPlayer(turn)->PrintActions()) {
 				d->StatePlay(moves[move], moves[move + 1], turn);

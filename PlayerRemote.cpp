@@ -46,7 +46,7 @@ void PlayerRemote::setColor(int color) {
  * Returns the color of this player.
  * @return the color of this player.
  */
-int PlayerHumanLocal::getColor() {
+int PlayerRemote::getColor() {
 	return player_color;
 }
 /*

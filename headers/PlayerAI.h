@@ -15,6 +15,7 @@ public:
 	int GetMove(int* moves);
 	int PrintActions();
 	void AcknowledgeMove(int x, int y, int color);
+	int getColor();
 private:
 	Board* b;
 	Rules* r;

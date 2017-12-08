@@ -8,11 +8,14 @@ using namespace std;
  */
 class PlayerHumanLocal : public Player {
 public:
-	PlayerHumanLocal();
+	PlayerHumanLocal(int color);
 	virtual ~PlayerHumanLocal();
 	int GetMove(int* moves);
 	int PrintActions();
 	void AcknowledgeMove(int x, int y, int color);
+	int getColor();
+private:
+	int player_color;
 };
 
 #endif /* PLAYERHUMANLOCAL_H_ */

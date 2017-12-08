@@ -12,6 +12,7 @@ public:
 	virtual int GetMove(int* moves) = 0;
 	virtual int PrintActions() = 0;
 	virtual void AcknowledgeMove(int x, int y, int color) = 0;
+	virtual int getColor() = 0;
 };
 
 #endif /* PLAYER_H_ */

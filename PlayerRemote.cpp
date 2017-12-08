@@ -42,6 +42,13 @@ void PlayerRemote::setColor(int color) {
 	player_color = color;
 }
 /*
+ * Returns the color of this player.
+ * @return the color of this player.
+ */
+int PlayerRemote::getColor() {
+	return player_color;
+}
+/*
  * Returns 1, because this type of player requires visual output.
  */
 int PlayerRemote::PrintActions() {

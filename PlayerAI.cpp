@@ -76,6 +76,13 @@ int PlayerAI::BestMoveScore(int* moves, Board* board, Rules* rules, int player) 
 	return max_score;
 }
 /*
+ * Returns the color of this player.
+ * @return the color of this player.
+ */
+int PlayerAI::getColor() {
+	return color;
+}
+/*
  * Sends the move the other player did to this player object.
  * Doesn't do anything.
  */

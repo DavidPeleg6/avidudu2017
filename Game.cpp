@@ -14,8 +14,14 @@ using namespace std;
 Game::Game(Board* b, Rules* r, Player* player1, Player* player2) {
 	board = b;
 	rules = r;
-	p1 = player1;
-	p2 = player2;
+	if (player1->getColor() == 1) {
+		p1 = player1;
+		p2 = player2;
+	} else {
+		p1 = player2;
+		p2 = player1;
+	}
+
 }
 /**
  * Destructor, doesn't do anything as the

@@ -3,9 +3,11 @@
 #include "headers/PlayerHumanLocal.h"
 using namespace std;
 /**
- * Constructor, does nothing as there is no need for PHL to maintain any data.
+ * Constructor, gives the player their color.
  */
-PlayerHumanLocal::PlayerHumanLocal() { }
+PlayerHumanLocal::PlayerHumanLocal(int color) {
+	player_color = color;
+}
 /**
  * Destructor, also does nothing.
  */
@@ -51,6 +53,13 @@ int PlayerHumanLocal::GetMove(int* moves) {
 		}
 	}
 	return -1;
+}
+/*
+ * Returns the color of this player.
+ * @return the color of this player.
+ */
+int PlayerHumanLocal::getColor() {
+	return player_color;
 }
 /*
  * Sends the move the other player did to this player object.

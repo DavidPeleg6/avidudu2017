@@ -53,7 +53,7 @@ int main() {
 		}
 	}
 	*/
-	p[0] = new PlayerHumanLocal();
+	p[0] = new PlayerHumanLocal(1);
 	d->AskForPlayer(-1);
 	cin >> input;
 	switch (input) {
@@ -61,11 +61,10 @@ int main() {
 		p[1] = new PlayerAI(r, b, 2);
 		break;
 	case HUMAN:
-		p[1] = new PlayerHumanLocal();
+		p[1] = new PlayerHumanLocal(2);
 		break;
 	case REMOTE:
-		p[1] = new PlayerRemote(reader->ExtractIP(data), 0);
-		//TODO propery form a remote player.
+		p[1] = new PlayerRemote(reader->ExtractIP(data), reader->ExtractPort(data));
 		break;
 	default:
 		d->InvalidChoice();

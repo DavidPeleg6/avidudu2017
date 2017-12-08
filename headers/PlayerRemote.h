@@ -13,6 +13,7 @@ public:
 	virtual ~PlayerRemote();
 	int GetMove(int* moves);
 	void setColor(int color);
+	int getColor();
 	int PrintActions();
 	void AcknowledgeMove(int x, int y, int color);
 private:

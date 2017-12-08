@@ -43,8 +43,10 @@ void Game::RunGame(Display* d) {
 		turn = 3 - turn;
 		move = -1;
 		moves = rules->PossibleMoves(turn);
-		if (GetPlayer(turn)->PrintActions()) {
+		if (GetPlayer(turn)->PrintActions() == 1) {
 			d->Print(board, turn, moves);
+		} else if (GetPlayer(turn)->PrintActions() == 2) {
+			d->PrintBoard(board);
 		}
 		if (moves[0] == 0) {
 			//no possible moves, switch to other player.
@@ -58,16 +60,15 @@ void Game::RunGame(Display* d) {
 		} else {
 			no_move_flag = 0;
 			while (move == -1) {
-				if (GetPlayer(turn)->PrintActions()) {
+				if (GetPlayer(turn)->PrintActions() == 1) {
 					d->AskForMove();
+				} else if (GetPlayer(turn)->PrintActions() == 2) {
+					d->WaitForOtherPlayer();
 				}
-				cout << endl;
 				if (turn == 1) {
 					move = p1->GetMove(moves);
-					p2->AcknowledgeMove(moves[move], moves[move + 1], turn);
 				} else {
 					move = p2->GetMove(moves);
-					p1->AcknowledgeMove(moves[move], moves[move + 1], turn);
 				}
 				if (move == -1) {
 					if (GetPlayer(turn)->PrintActions()) {
@@ -81,7 +82,7 @@ void Game::RunGame(Display* d) {
 					move = -1;
 				}
 			}
-			//GetPlayer(3 - turn)->AcknowledgeMove(moves[move], moves[move + 1], turn);
+			GetPlayer(3 - turn)->AcknowledgeMove(moves[move], moves[move + 1], turn);
 			rules->SetPiece(turn, moves[move], moves[move + 1]);
 			if (!GetPlayer(turn)->PrintActions()) {
 				d->StatePlay(moves[move], moves[move + 1], turn);

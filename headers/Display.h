@@ -19,6 +19,7 @@ public:
 	virtual void StatePlay(int x, int y, int player) = 0;
 	virtual void AskForPlayer(int playerNum) = 0;
 	virtual void InvalidChoice() = 0;
+	virtual void WaitForOtherPlayer() = 0;
 private:
 	virtual void PrintDashLine(Board* b) = 0;
 	virtual void PrintTurn(int turn) = 0;

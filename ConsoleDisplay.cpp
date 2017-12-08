@@ -190,3 +190,9 @@ void ConsoleDisplay::AskForPlayer(int playerNum) {
 void ConsoleDisplay::InvalidChoice() {
 	cout << "Invalid choice, please input a diffrent choice." << endl;
 }
+/*
+ * Tells the player to wait for the other player to make a move.
+ */
+void ConsoleDisplay::WaitForOtherPlayer() {
+	cout << "Please wait for the other player to finish their turn." << endl;
+}

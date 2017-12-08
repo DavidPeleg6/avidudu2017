@@ -20,6 +20,7 @@ public:
 	void StatePlay(int x, int y, int player);
 	void AskForPlayer(int playerNum);
 	void InvalidChoice();
+	void WaitForOtherPlayer();
 private:
 	void PrintDashLine(Board* b);
 	void PrintTurn(int turn);

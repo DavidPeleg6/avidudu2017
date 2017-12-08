@@ -26,33 +26,6 @@ int main() {
 	Rules* r = new Rules(b);
 	Player *p[2];
 	int input;
-	/**
-	for(int i = 1; i <= 2; i++) {
-		d->AskForPlayer(i);
-		cin >> input;
-		switch (input) {
-		case AI:
-			p[i - 1] = new PlayerAI(r, b, i);
-			break;
-		case HUMAN:
-			p[i - 1] = new PlayerHumanLocal();
-			break;
-		case REMOTE:
-			if (!remote) {
-				p[i - 1] = new PlayerRemote("", 0);
-				//TODO propery form a remote player.
-				remote = 1;
-			} else {
-				d->InvalidChoice();
-			}
-			break;
-		default:
-			d->InvalidChoice();
-			i--;
-			break;
-		}
-	}
-	*/
 	p[0] = new PlayerHumanLocal(1);
 	d->AskForPlayer(-1);
 	cin >> input;
@@ -64,7 +37,11 @@ int main() {
 		p[1] = new PlayerHumanLocal(2);
 		break;
 	case REMOTE:
-		p[1] = new PlayerRemote(reader->ExtractIP(data), reader->ExtractPort(data));
+		try {
+			p[1] = new PlayerRemote(reader->ExtractIP(data), reader->ExtractPort(data));
+		} catch (const char *msg) {
+			cout << "unnable to connect because: " << msg << endl;
+		}
 		break;
 	default:
 		d->InvalidChoice();

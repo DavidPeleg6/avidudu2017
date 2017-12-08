@@ -10,11 +10,7 @@ PlayerRemote::PlayerRemote(const char *serverIP, int serverPort) {
 	player_color = 0;
 	client = new Client(serverIP, serverPort);
 	//set remote player with the opposite color
-	try {
-		setColor(3 - client->connectToServer());
-	} catch (const char *msg) {
-		cout << "unnable to connect because: " << msg << endl;
-	}
+	setColor(3 - client->connectToServer());
 }
 /*
  * Destructor, deletes client.

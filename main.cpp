@@ -45,7 +45,7 @@ int main() {
 			break;
 		case REMOTE:
 			if (!remote) {
-				p[i - 1] = new PlayerRemote();
+				p[i - 1] = new PlayerRemote("", 0);
 				//TODO propery form a remote player.
 				remote = 1;
 			} else {

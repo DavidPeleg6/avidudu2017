@@ -17,6 +17,6 @@ public:
 	void AcknowledgeMove(int x, int y, int color);
 private:
 	int player_color;
-	Client client;
+	Client* client;
 };
 #endif /* PLAYERREMOTE_H_ */

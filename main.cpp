@@ -20,13 +20,6 @@ enum play{NONE, AI, HUMAN, REMOTE};
 int main() {
 	FileReader* reader = new FileReader(DATAFILE);
 	int* data = reader->read();
-	for (int i = 0; i < 5; i++) {
-		cout << data[i] << endl;
-	}
-	cout << "aaa" << endl;
-	cout << reader->ExtractIP(data) << endl;
-	cout << "aaa" << endl;
-	return 0;
 	Board* b = new Board(BOARDSIZE, BOARDSIZE);
 	b->SetUpGame();
 	Display* d = new ConsoleDisplay();
@@ -71,7 +64,7 @@ int main() {
 		p[1] = new PlayerHumanLocal();
 		break;
 	case REMOTE:
-		p[1] = new PlayerRemote("", 0);
+		p[1] = new PlayerRemote(reader->ExtractIP(data), 0);
 		//TODO propery form a remote player.
 		break;
 	default:

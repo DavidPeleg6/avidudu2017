@@ -168,28 +168,15 @@ int Server::getMove(int clientSocket) {
  * @return - error code if an error happened.
  */
 int Server::passMove(int clientSocket) {
-	int n;
-	try {
-		n = write(clientSocket, &move[0], sizeof(move[0]));
-	} catch (const char *msg) {
-		return ERROR;
-	}
+	int n = write(clientSocket, &move[0], sizeof(move[0]));
 	if(n == -1) {
 		return ERROR;
 	}
-	try {
-		n = write(clientSocket, &move[1], sizeof(move[1]));
-	} catch (const char *msg) {
-		return ERROR;
-	}
+	n = write(clientSocket, &move[1], sizeof(move[1]));
 	if(n == -1) {
 		return ERROR;
 	}
-	try {
-		n = write(clientSocket, &move[2], sizeof(move[2]));
-	} catch (const char *msg) {
-		return ERROR;
-	}
+	n = write(clientSocket, &move[2], sizeof(move[2]));
 	if(n == -1) {
 		return ERROR;
 	}

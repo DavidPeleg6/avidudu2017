@@ -9,7 +9,12 @@ using namespace std;
 PlayerRemote::PlayerRemote(const char *serverIP, int serverPort) {
 	client = new Client(serverIP, serverPort);
 	//set remote player with the opposite color
-	setColor(3 - client->connectToServer());
+	try {
+		setColor(3 - client->connectToServer());
+	} catch(const char *msg) {
+		cout << msg << endl;
+		exit(-1);
+	}
 }
 /*
  * Destructor, deletes client.
@@ -24,7 +29,13 @@ PlayerRemote::~PlayerRemote() {
  * @return the index of the chosen move.
  */
 int PlayerRemote::GetMove(int* moves) {
-	int* move = client->GetMove();
+	int* move;
+	try {
+		move = client->GetMove();
+	} catch(const char *msg) {
+		cout << msg << endl;
+		exit(-1);
+	}
 	for (int i = 1; i < moves[0] ; i+= 2) {
 		if (moves[i] == move[0] && moves[i + 1] == move[1]) {
 			free(move);
@@ -62,5 +73,10 @@ int PlayerRemote::PrintActions() {
  * @param color - the color of the player making the move.
  */
 void PlayerRemote::AcknowledgeMove(int x, int y, int color) {
-	client->SendMove(x, y, color);
+	try {
+		client->SendMove(x, y, color);
+	} catch(const char *msg) {
+		cout << msg << endl;
+		exit(-1);
+	}
 }

@@ -28,7 +28,7 @@ int PlayerAI::PrintActions() {
  */
 int PlayerAI::GetMove(int* moves) {
 	int score;
-	int min_enemy_score = INT_MIN;
+	int min_enemy_score = INT_MAX;
 	int min_enemy_score_move = 1;
 	if (moves[0] == 2) {
 		return min_enemy_score_move;

@@ -13,12 +13,14 @@ int main() {
 	FileReader* reader = new FileReader(DATAFILE);
 	int* data = reader->read();
 	Server server(reader->ExtractPort(data));
-	try {
-		server.start();
-	} catch(const char *msg) {
-		cout << "server crashed because: " << msg << endl;
-		server.stop();
-		exit(-1);
+	while (1) {
+		try {
+			server.start();
+		} catch(const char *msg) {
+			cout << "server crashed because: " << msg << endl;
+			server.stop();
+			exit(-1);
+		}
 	}
 	server.stop();
 	return 0;

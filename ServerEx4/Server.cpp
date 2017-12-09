@@ -3,8 +3,10 @@
  * a class representing the game server
  */
 #include "headersS/Server.h"
+#include <stdio.h>
 
 #define MAX_CONNECTED_CLIENTS 10
+#define CLOSED -4
 #define END -2
 #define ERROR 0
 
@@ -70,32 +72,44 @@ void Server::handleClients(int client1Socket, int client2Socket) {
 	}
 	while(true) {
 		//get a move from first client
-		if(!getMove(client1Socket)) {
+		int n = getMove(client1Socket);
+		if (n == CLOSED) {
+			cout << "Client 1 disconnected" << endl;
+			break;
+		}
+		if(n == ERROR) {
 			cout << "Error reading from client 1" << endl;
 			break;
 		}
+		cout << move[2] << " | (" << move[0] << ", " << move[1] << ")" << endl;
 		//pass move to the second
-		if(!passMove(client2Socket)) {
+		if(passMove(client2Socket) == ERROR) {
 			cout << "Error writing to client 2" << endl;
 			break;
 		}
-		cout << move[0] << ", " << move[1] << " | " << (3 - move[2]) << endl;
 		//check if game is alive
 		if(move[2] == END) {
 			break;
 		}
-		if(!getMove(client2Socket)) {
-			cout << "Error reading from client 1" << endl;
+		//get a move from first client
+		n = getMove(client2Socket);
+		if (n == CLOSED) {
+			cout << "Client 2 disconnected" << endl;
 			break;
 		}
-		if(!passMove(client1Socket)) {
-			cout << "Error writing to client 2" << endl;
+		if(n == ERROR) {
+			cout << "Error reading from client 2" << endl;
+			break;
+		}
+		//pass move to the first
+		cout << move[2] << " | (" << move[0] << ", " << move[1] << ")" << endl;
+		if(passMove(client1Socket) == ERROR) {
+			cout << "Error writing to client 1" << endl;
 			break;
 		}
 		if(move[2] == END) {
-			return;
+			break;
 		}
-		cout << move[0] << ", " << move[1] << " | " << (3 - move[2]) << endl;
 	}
 	return;
 }
@@ -120,14 +134,20 @@ int Server::getMove(int clientSocket) {
 	int n = read(clientSocket, &move[0], sizeof(move[0]));
 	if(n == -1) {
 		return ERROR;
+	} if (n == 0) {
+		return CLOSED;
 	}
 	n = read(clientSocket, &move[1], sizeof(move[1]));
 	if(n == -1) {
 		return ERROR;
+	} if (n == 0) {
+		return CLOSED;
 	}
 	n = read(clientSocket, &move[2], sizeof(move[2]));
 	if(n == -1) {
 		return ERROR;
+	} if (n == 0) {
+		return CLOSED;
 	}
 	return 1;
 }

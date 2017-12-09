@@ -62,6 +62,7 @@ void Game::RunGame(Display* d) {
 				free(state);
 				break;
 			}
+			GetPlayer(3 - turn)->AcknowledgeMove(0, 0, turn);
 		} else {
 			no_move_flag = 0;
 			while (move == -1) {
@@ -75,16 +76,18 @@ void Game::RunGame(Display* d) {
 				} else {
 					move = p2->GetMove(moves);
 				}
-				if (move == -1) {
-					if (GetPlayer(turn)->PrintActions()) {
-						d->InvalidMove();
+				if (GetPlayer(turn)->PrintActions() != 2) {
+					if (move == -1) {
+						if (GetPlayer(turn)->PrintActions()) {
+							d->InvalidMove();
+						}
 					}
-				}
-				if (move == -2) {
-					if (GetPlayer(turn)->PrintActions()) {
-						d->InvalidFormat();
+					if (move == -2) {
+						if (GetPlayer(turn)->PrintActions()) {
+							d->InvalidFormat();
+						}
+						move = -1;
 					}
-					move = -1;
 				}
 			}
 			GetPlayer(3 - turn)->AcknowledgeMove(moves[move], moves[move + 1], turn);

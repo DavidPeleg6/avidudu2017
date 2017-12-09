@@ -40,8 +40,8 @@ int* FileReader::read() {
 		/* file failed to open */
 		free(ip);
 		free(port);
-		free(final);
-		return 0;
+		final[0] = -1;
+		return final;
 	}
 	while (reader >> c) {
 		switch (c) {
@@ -52,8 +52,8 @@ int* FileReader::read() {
 				/* error */
 				free(ip);
 				free(port);
-				free(final);
-				return 0;
+				final[0] = -1;
+				return final;
 			}
 			ip[j++] = cin[0];
 			break;
@@ -65,8 +65,8 @@ int* FileReader::read() {
 				/* error */
 				free(ip);
 				free(port);
-				free(final);
-				return 0;
+				final[0] = -1;
+				return final;
 			}
 			ip[j++] = cin[0];
 			break;
@@ -75,8 +75,8 @@ int* FileReader::read() {
 				if (IP_PART_SIZE < i) {
 					free(ip);
 					free(port);
-					free(final);
-					return 0;
+					final[0] = -1;
+					return final;
 				}
 				cin[i++] = c;
 			} else {

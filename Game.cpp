@@ -50,6 +50,11 @@ void Game::RunGame(Display* d) {
 		}
 		if (moves[0] == 0) {
 			//no possible moves, switch to other player.
+			cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
+			cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
+			cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
+			cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
+			cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
 			if (no_move_flag == 0) {
 				no_move_flag = 1;
 			} else {

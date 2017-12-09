@@ -22,6 +22,7 @@ int main() {
 	FileReader* reader = new FileReader(DATAFILE);
 	int* data = reader->read();
 	char* ip;
+	int ip_set = 0;
 	Board* b = new Board(BOARDSIZE, BOARDSIZE);
 	b->SetUpGame();
 	Display* d = new ConsoleDisplay();
@@ -40,10 +41,11 @@ int main() {
 		break;
 	case REMOTE:
 		try {
-			if (data == 0) {
-				throw "Missing ip data file.";
+			if (data[0] == -1) {
+				throw "Ip data file error.";
 			}
 			ip = reader->ExtractIP(data);
+			ip_set = 1;
 			p[1] = new PlayerRemote(ip, reader->ExtractPort(data));
 		} catch (const char *msg) {
 			cout << "unnable to connect because: " << msg << endl;
@@ -55,8 +57,10 @@ int main() {
 	}
 	Game* g = new Game(b, r, p[0], p[1]);
 	g->RunGame(d);
+	if (data[0] != -1 && ip_set) {
+		free(ip);
+	}
 	free(data);
-	free(ip);
 	delete reader;
 	delete b;
 	delete d;

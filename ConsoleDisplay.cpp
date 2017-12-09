@@ -75,7 +75,7 @@ void ConsoleDisplay::PrintBoard(Board* b) {
  * Asks the player for a move.
  */
 void ConsoleDisplay::AskForMove() {
-	cout << "Please enter your move row,col: ";
+	cout << "Please enter your move row,col:" << endl;
 }
 /*
  * Tells the player that the move they chose is invalid.

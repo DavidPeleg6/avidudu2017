@@ -79,7 +79,7 @@ void Server::handleClients(int client1Socket, int client2Socket) {
 			cout << "Error writing to client 2" << endl;
 			break;
 		}
-		cout << move[0] << ", " << move[1] << " | " << move[2] << endl;
+		cout << move[0] << ", " << move[1] << " | " << (3 - move[2]) << endl;
 		//check if game is alive
 		if(move[2] == END) {
 			break;
@@ -95,19 +95,19 @@ void Server::handleClients(int client1Socket, int client2Socket) {
 		if(move[2] == END) {
 			return;
 		}
-		cout << move[0] << ", " << move[1] << " | " << move[2] << endl;
+		cout << move[0] << ", " << move[1] << " | " << (3 - move[2]) << endl;
 	}
 	return;
 }
 
 int Server::startGame(int client1Socket, int client2Socket) {
-	int turn = 1;
+	int turn = 2;
 	int n = write(client1Socket, &turn, sizeof(turn));
 	if(n == -1) {
 		cout << "Error writing to client 1" << endl;
 		return ERROR;
 	}
-	turn++;
+	turn--;
 	n = write(client2Socket, &turn, sizeof(turn));
 	if(n == -1) {
 		cout << "Error writing to client 2" << endl;

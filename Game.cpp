@@ -35,7 +35,7 @@ Game::~Game() { }
  * @param d - Outputs the state of the game visually.
  */
 void Game::RunGame(Display* d) {
-	int move, turn = 2;
+	int move, turn = 1;
 	int no_move_flag = 0;
 	int* moves;
 	int* state = rules->CheckBoardState();

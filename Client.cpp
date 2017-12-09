@@ -65,8 +65,8 @@ int Client::connectToServer() {
 	if (n == -1) {
 		throw "Error reading color from socket";
 	}
-	cout << "You are player number: " << color << endl;
-	if (color == 1) {
+	cout << "You are player number: " << (3 - color) << endl;
+	if (color == 2) {
 		cout << "player 2 logged in" << endl;
 	}
 	return color;

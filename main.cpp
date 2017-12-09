@@ -21,6 +21,7 @@ enum play{NONE, AI, HUMAN, REMOTE};
 int main() {
 	FileReader* reader = new FileReader(DATAFILE);
 	int* data = reader->read();
+	char* ip;
 	Board* b = new Board(BOARDSIZE, BOARDSIZE);
 	b->SetUpGame();
 	Display* d = new ConsoleDisplay();
@@ -42,7 +43,8 @@ int main() {
 			if (data == 0) {
 				throw "Missing ip data file.";
 			}
-			p[1] = new PlayerRemote(reader->ExtractIP(data), reader->ExtractPort(data));
+			ip = reader->ExtractIP(data);
+			p[1] = new PlayerRemote(ip, reader->ExtractPort(data));
 		} catch (const char *msg) {
 			cout << "unnable to connect because: " << msg << endl;
 		}
@@ -54,6 +56,8 @@ int main() {
 	Game* g = new Game(b, r, p[0], p[1]);
 	g->RunGame(d);
 	free(data);
+	free(ip);
+	delete reader;
 	delete b;
 	delete d;
 	delete p[0];

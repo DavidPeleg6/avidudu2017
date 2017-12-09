@@ -1,6 +1,5 @@
 #include "headers/ConsoleDisplay.h"
 #include <iostream>
-#include <stdlib.h>
 #include "headers/Board.h"
 using namespace std;
 /*
@@ -146,7 +145,6 @@ void ConsoleDisplay::DeclareWinner(int* state) {
 			cout <<	" a winner cannot be determined." << endl;
 		break;
 	}
-	free(state);
 }
 /*
  * States what action the player in question took.

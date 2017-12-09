@@ -19,10 +19,10 @@ Client::Client(const char *serverIP, int serverPort):
 	clientSocket(0) {
 		cout << "Client" << endl;
 }
-Client::~Client() {
-	//free(serverIP);
-	//TODO this maybe I dunno
-}
+/*
+ * Destructor, does nothing.
+ */
+Client::~Client() { }
 /*
  * Connects to the server as the name would imply.
  * @return the color of this client.

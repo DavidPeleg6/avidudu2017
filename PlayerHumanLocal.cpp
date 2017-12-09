@@ -25,6 +25,7 @@ int PlayerHumanLocal::PrintActions() {
  * -2 if the input format was invalid.
  */
 int PlayerHumanLocal::GetMove(int* moves) {
+	//return 1; //TODO highly advanced debugging tool
 	int x, y, sx, sy;
 	char comma;
 	if (cin.peek() == '\n') {

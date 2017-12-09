@@ -96,6 +96,7 @@ void Game::RunGame(Display* d) {
 		d->PrintBoard(board);
 	}
 	d->DeclareWinner(state);
+	free(state);
 }
 /*
  * Returns the player object whose number is the one given.

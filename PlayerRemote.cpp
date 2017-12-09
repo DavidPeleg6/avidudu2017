@@ -7,7 +7,6 @@ using namespace std;
  * Constructor, starts the client and recieves the color.
  */
 PlayerRemote::PlayerRemote(const char *serverIP, int serverPort) {
-	player_color = 0;
 	client = new Client(serverIP, serverPort);
 	//set remote player with the opposite color
 	setColor(3 - client->connectToServer());
@@ -50,7 +49,8 @@ int PlayerRemote::getColor() {
 	return player_color;
 }
 /*
- * Returns 1, because this type of player requires visual output.
+ * Returns 2, because this type of player requires
+ * visual output of the board but not the possible moves.
  */
 int PlayerRemote::PrintActions() {
 	return 2;

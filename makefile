@@ -1,7 +1,7 @@
 
 
 a.out: compileAll
-	g++ *.o
+	g++ *.o -o exe/client.out
 	rm -f *.o
 
 compileAll: headers/*.h ./*.cpp

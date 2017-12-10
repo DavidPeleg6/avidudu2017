@@ -101,3 +101,12 @@ TEST_F(PlayerAITest, AIsmart) {
 
 }
 
+TEST(FileReaderTest, Reader_Works) {
+	FileReader reader("ipfile");
+	int* data = reader->read();
+	EXPECT_EQ(127, data[0]);
+	EXPECT_EQ(0, data[1]);
+	EXPECT_EQ(0, data[0]);
+	EXPECT_EQ(1, data[2]);
+	EXPECT_EQ(51111, data[3]);
+}

@@ -85,7 +85,12 @@ void Server::handleClients(int client1Socket, int client2Socket) {
 		}
 		cout << move[2] << " | (" << move[0] << ", " << move[1] << ")" << endl;
 		//pass move to the second
-		if(passMove(client2Socket) == ERROR) {
+		n = passMove(client2Socket);
+		if (n == CLOSED) {
+			cout << "Client 2 disconnected" << endl;
+			break;
+		}
+		if(n == ERROR) {
 			cout << "Error writing to client 2" << endl;
 			break;
 		}
@@ -105,8 +110,13 @@ void Server::handleClients(int client1Socket, int client2Socket) {
 		}
 		//pass move to the first
 		cout << move[2] << " | (" << move[0] << ", " << move[1] << ")" << endl;
-		if(passMove(client1Socket) == ERROR) {
+		n = passMove(client1Socket);
+		if(n == ERROR) {
 			cout << "Error writing to client 1" << endl;
+			break;
+		}
+		if (n == CLOSED) {
+			cout << "Client 1 disconnected" << endl;
 			break;
 		}
 		if(move[2] == END) {
@@ -171,14 +181,20 @@ int Server::passMove(int clientSocket) {
 	int n = write(clientSocket, &move[0], sizeof(move[0]));
 	if(n == -1) {
 		return ERROR;
+	} if (n == 0) {
+		return CLOSED;
 	}
 	n = write(clientSocket, &move[1], sizeof(move[1]));
 	if(n == -1) {
 		return ERROR;
+	} if (n == 0) {
+		return CLOSED;
 	}
 	n = write(clientSocket, &move[2], sizeof(move[2]));
 	if(n == -1) {
 		return ERROR;
+	} if (n == 0) {
+		return CLOSED;
 	}
 	return 1;
 }

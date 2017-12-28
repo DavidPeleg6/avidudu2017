@@ -69,5 +69,6 @@ int Server::getMessage(int clientSocket) {
 	char* test = new char(stringSize);
 	n = read(clientSocket, test, sizeof(char) * stringSize);
 	return 1;
+	delete test;
 }
 

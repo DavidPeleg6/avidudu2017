@@ -1,4 +1,5 @@
 #include "headersS/Server.h"
+#include <stdlib.h>
 #define MAX_CONNECTED_CLIENTS 10
 #define ERROR 0
 
@@ -62,7 +63,7 @@ int Server::getMessage(int clientSocket) {
 	if(n <= 0) {
 		return ERROR;
 	}
-	char* test = new char(stringSize);
+	char* test = (char*)malloc(stringSize);
 	n = read(clientSocket, test, sizeof(char) * stringSize);
 	cout << test << endl;
 	delete test;

@@ -1,17 +1,16 @@
 #include "headersS/Server.h"
-#include <stdlib.h>
 #define MAX_CONNECTED_CLIENTS 10
 #define ERROR 0
 
 /*
  * a constructor for Server
  */
-Server::Server(int port): port(port), serverSocket(0),stringSize(0) {
+Server::Server(int port, CommandManager manager): port(port), serverSocket(0), command(command) {
 	cout << "Server innitialized" << endl;
 }
 
 /*
- * a constructor for Server
+ * a method for running the mainframe of the server
  */
 void Server::start() {
 	serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -50,23 +49,30 @@ void Server::start() {
 
 void Server::handleClient(int clientSocket) {
 	while(true) {
-		//get a move from first client
-		if(!getMessage(clientSocket)) {
+		if(!getString(clientSocket)) {
 			cout << "Error reading from client" << endl;
 			return;
 		}
 	}
 }
 
-int Server::getMessage(int clientSocket) {
+int Server::getString(int clientSocket) {
+	int stringSize;
 	int n = read(clientSocket, &stringSize, sizeof(stringSize));
 	if(n <= 0) {
 		return ERROR;
 	}
-	char* test = (char*)malloc(stringSize);
-	n = read(clientSocket, test, sizeof(char) * stringSize);
-	cout << test << endl;
-	delete test;
+	char* message = new char [stringSize];
+	n = read(clientSocket, message, stringSize);
+	return 1;
+}
+
+int Server::passString(int clientSocket, int stringSize, char* message) {
+	int n = write(clientSocket, &stringSize, sizeof(stringSize));
+	if(n <= 0) {
+		return ERROR;
+	}
+	n = write(clientSocket, message, stringSize);
 	return 1;
 }
 
@@ -74,3 +80,13 @@ void Server::stop() {
 	close(serverSocket);
 }
 
+int Server::passInt(int clientSocket, int num) {
+	int n = write(clientSocket, &num, sizeof(int));
+	if(n <= 0) {
+		return ERROR;
+	}
+	return 1;
+}
+
+void Server::closeSocket(int clientSocket) {
+}

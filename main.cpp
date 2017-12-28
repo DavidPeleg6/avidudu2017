@@ -52,6 +52,7 @@ int main() {
 			cout << "unnable to connect because: " << msg << endl;
 		}
 		//TODO get a list of games and let the user choose one.
+
 		break;
 	default:
 		d->InvalidChoice();

@@ -21,6 +21,8 @@ public:
 	void AskForPlayer(int playerNum);
 	void InvalidChoice();
 	void WaitForOtherPlayer();
+	void PrintGameList(char** games);
+	void ServerCrash();
 private:
 	void PrintDashLine(Board* b);
 	void PrintTurn(int turn);

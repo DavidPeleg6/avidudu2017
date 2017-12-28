@@ -1,5 +1,6 @@
 #include "headers/ConsoleDisplay.h"
 #include <iostream>
+#include <stdlib.h>
 #include "headers/Board.h"
 using namespace std;
 /*
@@ -10,6 +11,29 @@ ConsoleDisplay::ConsoleDisplay() { }
  * Destructor, does nothing as there is no need for CD to maintain any data.
  */
 ConsoleDisplay::~ConsoleDisplay() { }
+/*
+ * Notify the user that the server has crashed.
+ */
+void ConsoleDisplay::ServerCrash() {
+	cout << "A server error has occured, closing game." << endl;
+}
+/*
+ * Gets a list of pointers to strings and prints them.
+ * The first string is actually just a byte containing the size of the rest of the list.
+ * IT ALSO FREES THE MEMORY.
+ * @param games - a pointer to a list of pointers to strings.
+ */
+void ConsoleDisplay::PrintGameList(char** games) {
+	int listsize = games[0][0];
+	cout << "The avilable games are:" << endl;
+	for (int i = 1; i < listsize + 1; i++) {
+		cout << games[i] << endl;
+		free(games[i]);
+	}
+	free(games[0]);
+	free(games);
+
+}
 /**
  * Prints a list of possible moves the player can make.
  * @param moves - a list of cords, assumed to be 1 + even.

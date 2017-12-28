@@ -59,6 +59,21 @@ int Client::connectToServer() {
 		throw "Error connecting to server";
 	}
 	cout << "Connected to server" << endl;
+
+
+
+	//TODO this is temp for testing string sending
+	int testSize = 6;
+	char* test = (char*)malloc(testSize);
+	test = "hello\0";
+	write(clientSocket, &testSize, sizeof(testSize));
+	write(clientSocket, &test, testSize * sizeof(char));
+	free(test);
+	return 0;
+	//TODO this is temp for testing string sending
+
+
+
 	cout << "waiting for opponent..." << endl;
 	int color;
 	int n = read(clientSocket, &color, sizeof(color));

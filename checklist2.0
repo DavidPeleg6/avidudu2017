@@ -1,5 +1,9 @@
 Client and server send and receive strings
 
+ConsoleDisplay:
+	Server crash messege
+	Display games list
+
 Client:
 	Get game list
 	Display game list	(list_games)

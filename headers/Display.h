@@ -20,6 +20,8 @@ public:
 	virtual void AskForPlayer(int playerNum) = 0;
 	virtual void InvalidChoice() = 0;
 	virtual void WaitForOtherPlayer() = 0;
+	virtual void PrintGameList(char** games) = 0;
+	virtual void ServerCrash() = 0;
 private:
 	virtual void PrintDashLine(Board* b) = 0;
 	virtual void PrintTurn(int turn) = 0;

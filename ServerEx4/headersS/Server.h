@@ -1,8 +1,5 @@
 /*
  * Server.h
- *
- *  Created on: Dec 8, 2017
- *      Author: david
  */
 
 #ifndef HEADERSS_SERVER_H_
@@ -11,26 +8,38 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <string.h>
+#include <vector>
 #include <iostream>
 #include <stdio.h>
+#include <pthread.h>
+#include <cstdlib>
 
 using namespace std;
+
+struct Games {
+	int status;
+	pthread_t game_thread;
+	string name;
+} Games;
 
 class Server {
 public:
 	Server(int port);
 	void start();
 	void stop();
+	vector<string> getGames();
 
 private:
 	int port;
 	int serverSocket;
-	int move[3];
+	vector<string> games;
+	int serverStatus;
 
+	void* manageServer(void *none);
 	void handleClients(int client1Socket, int client2Socket);
 	int startGame(int client1Socket, int client2Socket);
-	int getMove(int clientSocket);
-	int passMove(int clientSocket);
+	int getMove(int clientSocket, int *move);
+	int passMove(int clientSocket, int *move);
 };
 
 

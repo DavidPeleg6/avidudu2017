@@ -1,7 +1,7 @@
 #include "headers/PlayerRemote.h"
 #include "headers/Client.h"
 #include <stdlib.h>
-
+#define END_MESSAGE -2
 using namespace std;
 /*
  * Constructor, starts the client and recieves the color.
@@ -27,6 +27,7 @@ PlayerRemote::~PlayerRemote() {
  * @param moves - the list of possible moves,
  * the other player should have the game list.
  * @return the index of the chosen move.
+ * @throws exception if end game was suddenly received from server
  */
 int PlayerRemote::GetMove(int* moves) {
 	int* move;
@@ -35,6 +36,9 @@ int PlayerRemote::GetMove(int* moves) {
 	} catch(const char *msg) {
 		cout << msg << endl;
 		exit(-1);
+	}
+	if(move[0] == END_MESSAGE) {
+		throw " Game has ended due to unexpected server crush ";
 	}
 	for (int i = 1; i < moves[0] ; i+= 2) {
 		if (moves[i] == move[0] && moves[i + 1] == move[1]) {

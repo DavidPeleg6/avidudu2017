@@ -72,16 +72,23 @@ void Game::RunGame(Display* d) {
 					move = p2->GetMove(moves);
 				}
 				if (GetPlayer(turn)->PrintActions() != 2) {
-					if (move == -1) {
-						if (GetPlayer(turn)->PrintActions()) {
-							d->InvalidMove();
+					try {
+						if (move == -1) {
+							if (GetPlayer(turn)->PrintActions()) {
+								d->InvalidMove();
+							}
 						}
-					}
-					if (move == -2) {
-						if (GetPlayer(turn)->PrintActions()) {
-							d->InvalidFormat();
+						if (move == -2) {
+							if (GetPlayer(turn)->PrintActions()) {
+								d->InvalidFormat();
+							}
+							move = -1;
 						}
-						move = -1;
+					//if end game signal received make clean exit and throw again
+					} catch (const char* msg) {
+						free(moves);
+						free(state);
+						throw msg;
 					}
 				}
 			}

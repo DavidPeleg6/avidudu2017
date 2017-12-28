@@ -56,7 +56,11 @@ int main() {
 		break;
 	}
 	Game* g = new Game(b, r, p[0], p[1]);
-	g->RunGame(d);
+	try {
+		g->RunGame(d);
+	} catch (const char* msg) {
+		cout << msg << endl;
+	}
 	if (data[0] != -1 && ip_set) {
 		free(ip);
 	}

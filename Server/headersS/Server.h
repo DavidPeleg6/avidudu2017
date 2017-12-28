@@ -22,10 +22,9 @@ public:
 private:
 	int port;
 	int serverSocket;
-	int stringSize = 0;
+	int stringSize;
 
 	void handleClient(int clientSocket);
-	int startGame(int client1Socket, int client2Socket);
 	int getMessage(int clientSocket);
 	int passMove(int clientSocket);
 };

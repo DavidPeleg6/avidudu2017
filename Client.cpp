@@ -16,9 +16,7 @@ using namespace std;
  */
 Client::Client(const char *serverIP, int serverPort):
 	serverIP(serverIP), serverPort(serverPort),
-	clientSocket(0) {
-		cout << "Client" << endl;
-}
+	clientSocket(0) { }
 /*
  * Destructor, does nothing.
  */
@@ -151,7 +149,7 @@ int Client::joinGame(char* command) {
 	//reads the servers responese.
 	n = read(clientSocket, &succsus, sizeof(succsus));
 	if (n == -1) {
-		throw "joinGame()| Error reading succsus from socket";
+		throw "joinGame()| Error reading succses from socket";
 	}
 	return succsus;
 }

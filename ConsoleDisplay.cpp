@@ -1,8 +1,11 @@
 #include "headers/ConsoleDisplay.h"
 #include <iostream>
 #include <stdlib.h>
+#include <string.h>
 #include "headers/Board.h"
 using namespace std;
+#define BUFFER_SIZE 225
+#define LONGEST_INPUT 11
 /*
  * Constructor, does nothing as there is no need for CD to maintain any data.
  */
@@ -11,6 +14,72 @@ ConsoleDisplay::ConsoleDisplay() { }
  * Destructor, does nothing as there is no need for CD to maintain any data.
  */
 ConsoleDisplay::~ConsoleDisplay() { }
+/*
+ * Asks the user to choose a command for the remote server and returns it.
+ * Checks that the command is valid before doing so.
+ * Note, the address returned must be freed.
+ * @return - a pointer to the user input.
+ */
+char* ConsoleDisplay::GetClientCommand() {
+	//I assumed the users input will be shorter than BUFFER_SIZE letters.
+	char* buffer = (char*)malloc(BUFFER_SIZE * sizeof(char));
+	char* inchk = (char*)malloc(LONGEST_INPUT * sizeof(char));
+	char* output;
+	int i, valid_input = 0;
+	cout << "Please input one of the following commands:" << endl;
+	cout << "list_games\tReturns a list of games you can join." << endl;
+	cout << "join <name>\tJoin a game called <name>." << endl;
+	cout << "start <name>\tStart a new game called <name> that other";
+	cout << " players will be able to join." << endl;
+	cout << "close <name>\tCloses a game running on the server, why is this";
+	cout << " an option given to users. letting people shut down other ";
+	cout << "peoples games doesn't make sense ";
+	cout << "but whatever you can do it if you want to." << endl;
+	cin >> buffer;
+	while (valid_input == 0) {
+		//check that the given input is actually one of the commands.
+		i = 0;
+		while (buffer[i] != '\0' && buffer[i] != ' ' && i < LONGEST_INPUT) {
+			i++;
+		}
+		for (int j = 0; j < i; j++) {
+			inchk[j] = buffer[j];
+		}
+		if (strcmp(inchk, "list_games") == 0) {
+			valid_input = 2;
+		}
+		if (strcmp(inchk, "join") == 0 ||
+				strcmp(inchk, "start") == 0 || strcmp(inchk, "close") == 0) {
+			valid_input = 1;
+		}
+		if (valid_input == 1) {
+			//get the parameter
+			cin >> buffer;
+		} else if (valid_input == 0) {
+			cout << "Invalid input, please choose one of the commands listed above." << endl;
+			cin >> buffer;
+			free(inchk);
+			inchk = (char*)calloc(LONGEST_INPUT, sizeof(char));
+		} else {
+			output = inchk;
+		}
+	}
+	if (valid_input == 1) {
+		int paramlen = 0;
+		while (buffer[paramlen++] != '\0');
+		output = (char*)malloc(sizeof(char) * (2 + i + paramlen));
+		for (int o = 0; o < i; o++) {
+			output[o] = inchk[o];
+		}
+		output[i] = ' ';
+		for (int o = 0; o < paramlen; o++) {
+			output[i + 1 + o] = buffer[o];
+		}
+		free(inchk);
+	}
+	free(buffer);
+	return output;
+}
 /*
  * Notify the user that the server has crashed.
  */
@@ -190,8 +259,10 @@ void ConsoleDisplay::StatePlay(int x, int y, int player) {
  * Asks the user for input on what kind of players it would like.
  * @param playerNum - the number of the player being asked for,
  *  if it equals -1 it means the number is irrelevent.
+ * @return the value chosen.
  */
-void ConsoleDisplay::AskForPlayer(int playerNum) {
+int ConsoleDisplay::AskForPlayer(int playerNum) {
+	int input;
 	if (playerNum == -1) {
 		cout << "Please choose your opponent:";
 	} else {
@@ -205,6 +276,8 @@ void ConsoleDisplay::AskForPlayer(int playerNum) {
 		}
 	}
 	cout << " (AI = 1 , player = 2, remote player = 3)" << endl;
+	cin >> input;
+	return input;
 }
 /*
  * Informs the player that they've made an invalid choice.

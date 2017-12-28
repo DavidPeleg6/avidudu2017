@@ -19,7 +19,6 @@ enum play{NONE, AI, HUMAN, REMOTE};
  * Main function of the program.
  */
 int main() {
-	cout << "TESING STRING SENDING!" << endl;
 	FileReader* reader = new FileReader(DATAFILE);
 	int* data = reader->read();
 	char* ip;
@@ -29,10 +28,8 @@ int main() {
 	Display* d = new ConsoleDisplay();
 	Rules* r = new Rules(b);
 	Player *p[2];
-	int input;
 	p[0] = new PlayerHumanLocal(1);
-	d->AskForPlayer(-1);
-	cin >> input;
+	int input = d->AskForPlayer(-1);
 	switch (input) {
 	case AI:
 		p[1] = new PlayerAI(r, b, 2);
@@ -51,8 +48,10 @@ int main() {
 		} catch (const char *msg) {
 			cout << "unnable to connect because: " << msg << endl;
 		}
-		//TODO get a list of games and let the user choose one.
-
+		//TODO user command stuff
+		char* command;
+		command = d->GetClientCommand();
+		free(command);
 		break;
 	default:
 		d->InvalidChoice();

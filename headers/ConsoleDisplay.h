@@ -18,11 +18,12 @@ public:
 	void InvalidFormat();
 	void DeclareWinner(int* state);
 	void StatePlay(int x, int y, int player);
-	void AskForPlayer(int playerNum);
+	int AskForPlayer(int playerNum);
 	void InvalidChoice();
 	void WaitForOtherPlayer();
 	void PrintGameList(char** games);
 	void ServerCrash();
+	char* GetClientCommand();
 private:
 	void PrintDashLine(Board* b);
 	void PrintTurn(int turn);

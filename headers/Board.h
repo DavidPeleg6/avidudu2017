@@ -10,7 +10,6 @@ using namespace std;
 class Board {
 	public:
 		Board* SimBoard();
-		Board();
 		Board(int width, int height);
 		virtual ~Board();
 		void SetUpGame();

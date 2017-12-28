@@ -23,7 +23,11 @@ public:
 	void WaitForOtherPlayer();
 	void PrintGameList(char** games);
 	void ServerCrash();
+	void WaitForOpponent();
+	void GameAlreadyExists();
+	void GameDoesntExist();
 	char* GetClientCommand();
+	int GetMove(int* moves);
 private:
 	void PrintDashLine(Board* b);
 	void PrintTurn(int turn);

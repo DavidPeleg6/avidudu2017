@@ -14,6 +14,58 @@ ConsoleDisplay::ConsoleDisplay() { }
  * Destructor, does nothing as there is no need for CD to maintain any data.
  */
 ConsoleDisplay::~ConsoleDisplay() { }
+void ConsoleDisplay::WaitForOpponent() {
+	cout << "waiting for opponent..." << endl;
+}
+/*
+ * Lets the user choose a move to perform, was originally incorrectly located in PlayerHumanLocal.
+ * @param moves - the move list
+ * @return the desired index. -1 if the choice made was not in the list.
+ * -2 if the input format was invalid.
+ */
+int ConsoleDisplay::GetMove(int* moves) {
+	//return 1; //highly advanced debugging tool
+	int x, y, sx, sy;
+	char comma;
+	if (cin.peek() == '\n') {
+		cin.ignore();
+	}
+	if (!isdigit(cin.peek())) {
+		do {
+			cin.ignore();
+		} while (cin.peek() != '\n');
+		return -2;
+	}
+	cin >> x;
+	cin >> comma;
+	if (!isdigit(cin.peek())) {
+		do {
+			cin.ignore();
+		} while (cin.peek() != '\n');
+		return -2;
+	}
+	cin >> y;
+	for (int i = 1; i < moves[0] ; i+= 2) {
+		sx = moves[i];
+		sy = moves[i + 1];
+		if (sx == x && sy == y) {
+			return i;
+		}
+	}
+	return -1;
+}
+/*
+ * Informs the user that a game with the name they've chosen already exists.
+ */
+void ConsoleDisplay::GameAlreadyExists() {
+	cout << "A game with that name already exists, please choose a diffrent name." << endl;
+}
+/*
+ * Informs the user that a game with the name they've chosen doesn't exist.
+ */
+void ConsoleDisplay::GameDoesntExist() {
+	cout << "A game with that name doesn't exist, please choose a diffrent name." << endl;
+}
 /*
  * Asks the user to choose a command for the remote server and returns it.
  * Checks that the command is valid before doing so.

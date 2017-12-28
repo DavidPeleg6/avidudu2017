@@ -1,12 +1,12 @@
-#include <iostream>
-#include <climits>
 #include "headers/PlayerHumanLocal.h"
+#include "headers/Display.h"
 using namespace std;
 /**
  * Constructor, gives the player their color.
  */
-PlayerHumanLocal::PlayerHumanLocal(int color) {
+PlayerHumanLocal::PlayerHumanLocal(int color, Display* display) {
 	player_color = color;
+	d = display;
 }
 /**
  * Destructor, also does nothing.
@@ -23,37 +23,10 @@ int PlayerHumanLocal::PrintActions() {
  * @param moves - the move list
  * @return the desired index. -1 if the choice made was not in the list.
  * -2 if the input format was invalid.
+ * (actually just calls the function in Display)
  */
 int PlayerHumanLocal::GetMove(int* moves) {
-	//return 1; //highly advanced debugging tool
-	int x, y, sx, sy;
-	char comma;
-	if (cin.peek() == '\n') {
-		cin.ignore();
-	}
-	if (!isdigit(cin.peek())) {
-		do {
-			cin.ignore();
-		} while (cin.peek() != '\n');
-		return -2;
-	}
-	cin >> x;
-	cin >> comma;
-	if (!isdigit(cin.peek())) {
-		do {
-			cin.ignore();
-		} while (cin.peek() != '\n');
-		return -2;
-	}
-	cin >> y;
-	for (int i = 1; i < moves[0] ; i+= 2) {
-		sx = moves[i];
-		sy = moves[i + 1];
-		if (sx == x && sy == y) {
-			return i;
-		}
-	}
-	return -1;
+	return d->GetMove(moves);
 }
 /*
  * Returns the color of this player.

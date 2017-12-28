@@ -21,8 +21,12 @@ public:
 	virtual void InvalidChoice() = 0;
 	virtual void WaitForOtherPlayer() = 0;
 	virtual void PrintGameList(char** games) = 0;
+	virtual void GameAlreadyExists() = 0;
+	virtual void GameDoesntExist() = 0;
 	virtual void ServerCrash() = 0;
+	virtual void WaitForOpponent() = 0;
 	virtual char* GetClientCommand() = 0;
+	virtual int GetMove(int* moves) = 0;
 private:
 	virtual void PrintDashLine(Board* b) = 0;
 	virtual void PrintTurn(int turn) = 0;

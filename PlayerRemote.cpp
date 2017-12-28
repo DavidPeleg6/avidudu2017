@@ -24,6 +24,12 @@ PlayerRemote::~PlayerRemote() {
 	delete client;
 }
 /*
+ * Returns the client.
+ */
+Client* PlayerRemote::getClient() {
+	return client;
+}
+/*
  * Gets a move from the remote player.
  * @param moves - the list of possible moves,
  * the other player should have the game list.

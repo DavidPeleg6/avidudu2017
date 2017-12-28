@@ -16,6 +16,7 @@ public:
 	int getColor();
 	int PrintActions();
 	void AcknowledgeMove(int x, int y, int color);
+	Client* getClient();
 private:
 	int player_color;
 	Client* client;

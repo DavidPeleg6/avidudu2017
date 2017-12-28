@@ -10,11 +10,8 @@ public:
 	void connectToServer();
 	int* GetMove();
 	void SendMove(int x, int y, int color);
-
-	char** listGames();
-	int joinGame(char* command);
-	int startGame(char* command);
-	int closeGame(char* command);
+	char** listGames(char* command);
+	int passSimpleCommand(char* command);
 private:
 	void writeCommand(char* command, int length);
 	int commandLength(char* command);

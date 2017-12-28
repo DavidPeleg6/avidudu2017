@@ -108,12 +108,11 @@ int* Client::GetMove() {
  * It is assumed that the list is returned in order, with the first item returned being the length of the list.
  * @return - a list of pointers to strings, the first element is the length of the rest of the list.
  */
-char** Client::listGames() {
+char** Client::listGames(char* command) {
 	int n, list_length, str_len;
 	char** out;
-	char command[11] = "list_games";
 	//send the command "list_games" to the server.
-	writeCommand(command, 11);
+	writeCommand(command, commandLength(command));
 	//read list length
 	n = read(clientSocket, &list_length, sizeof(list_length));
 	if (n == -1) {
@@ -137,51 +136,6 @@ char** Client::listGames() {
 		}
 	}
 	return out;
-}
-/*
- * Tells the server that it wishes to join a game whose name is <name>.
- * @param - "join <name>"
- * @return - 1 if it joined succsesfully, 0 otherwise
- */
-int Client::joinGame(char* command) {
-	int n, succsus;
-	writeCommand(command, commandLength(command));
-	//reads the servers responese.
-	n = read(clientSocket, &succsus, sizeof(succsus));
-	if (n == -1) {
-		throw "joinGame()| Error reading succses from socket";
-	}
-	return succsus;
-}
-/*
- * Tells the server that it wants to start a new game with a name given in the command.
- * @param - "start <name>"
- * @return - 1 if it started succsesfully, 0 otherwise
- */
-int Client::startGame(char* command) {
-	int n, succsus;
-	writeCommand(command, commandLength(command));
-	//reads the servers responese.
-	n = read(clientSocket, &succsus, sizeof(succsus));
-	if (n == -1) {
-		throw "joinGame()| Error reading succsus from socket";
-	}
-	return succsus;
-}
-/*
- * Tells the server that it wants to close a game with the name given in the command.
- * @param - "close <name>"
- * @return - 1 if it closed succsesfully, 0 otherwise
- */
-int Client::closeGame(char* command) {
-	int n, succsus;
-	writeCommand(command, commandLength(command));
-	//reads the servers responese.
-	n = read(clientSocket, &succsus, sizeof(succsus));
-	if (n == -1) {
-		throw "joinGame()| Error reading succsus from socket";
-	}
-	return succsus;
 }
 /*
  * Writes the length of a command and then the command itself to the server.
@@ -209,4 +163,20 @@ int Client::commandLength(char* command) {
 		len++;
 	}
 	return len;
+}
+/*
+ * Passes a simple command to the server.
+ * Simple commands are ones whose output is a simple number.
+ * @param command - the command to be passed.
+ * @return the values the server returned.
+ */
+int Client::passSimpleCommand(char* command) {
+	int n, succsus;
+	writeCommand(command, commandLength(command));
+	//reads the servers responese.
+	n = read(clientSocket, &succsus, sizeof(succsus));
+	if (n == -1) {
+		throw "Error reading succses from socket";
+	}
+	return succsus;
 }

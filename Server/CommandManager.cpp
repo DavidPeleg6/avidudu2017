@@ -1,6 +1,7 @@
 #include "headersS/CommandManager.h"
 using namespace std;
 
+
 CommandManager::CommandManager() {
 	//add commands in the following format
 	commandsMap["list_games"] = new PrintListCommand();
@@ -33,5 +34,5 @@ vector<string> CommandManager::stringParse(string commandMsg) {
 	return parsed;
 }
 
-void CommandManager::killAllGames() {
+void CommandManager::killServer(Server server) {
 }

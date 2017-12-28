@@ -7,7 +7,6 @@
 
 #include <string>
 #include <vector>
-#include "Server.h"
 
 using namespace std;
 /*
@@ -29,8 +28,7 @@ public:
 	vector<Games> getGames();
 	bool addGame(string name, int player1Socket);
 	bool startGame(string name, int player2Socket);
-	void closeGame(string name, Server server);
-	vector<int> getAllPlayers();
+	void closeGame(string name);
 	~GameManager();
 
 private:

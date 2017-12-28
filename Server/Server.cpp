@@ -5,7 +5,7 @@
 /*
  * a constructor for Server
  */
-Server::Server(int port, CommandManager manager): port(port), serverSocket(0), command(command) {
+Server::Server(int port): port(port), serverSocket(0), manager(0) {
 	cout << "Server innitialized" << endl;
 }
 
@@ -89,4 +89,9 @@ int Server::passInt(int clientSocket, int num) {
 }
 
 void Server::closeSocket(int clientSocket) {
+	close(clientSocket);
+}
+
+void Server::setCommandManager(CommandManager *manager) {
+	this-> manager = manager;
 }

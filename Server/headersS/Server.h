@@ -4,19 +4,21 @@
 
 #ifndef HEADERSS_SERVER_H_
 #define HEADERSS_SERVER_H_
+
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
 #include <stdio.h>
-#include "CommandManager.h"
 
 using namespace std;
 
+class CommandManager;
+
 class Server {
 public:
-	Server(int port, CommandManager manager);
+	Server(int port);
 	void start();
 	void stop();
 	void handleClient(int clientSocket);
@@ -24,11 +26,12 @@ public:
 	int passString(int clientSocket, int stringSize, char* message);
 	int passInt(int clientSocket, int num);
 	void closeSocket(int clientSocket);
+	void setCommandManager(CommandManager *manager);
 
 private:
 	int port;
 	int serverSocket;
-	CommandManager command;
+	CommandManager *manager;
 };
 
 

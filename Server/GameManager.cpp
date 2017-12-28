@@ -55,21 +55,18 @@ bool GameManager::addGame(string name, int player1Socket) {
  * closes an existing game
  * name = game name
  */
-void GameManager::closeGame(string name, Server server) {
+void GameManager::closeGame(string name) {
 	vector<Games>::iterator it;
 	for(it = games.begin(); it != games.end(); ++it) {
 		if(!name.compare(it -> name)) {
-			server.closeSocket(it -> player1Socket);
-			server.closeSocket(it -> player2Socket);
 			delete &it;
 			games.erase(it);
 		}
 	}
 }
-
-vector<int> GameManager::getAllPlayers() {
-}
-
+/*
+ * destructor method for safe delete
+ */
 GameManager::~GameManager() {
 	vector<Games>::iterator it;
 	for(it = games.begin(); it != games.end(); ++it) {

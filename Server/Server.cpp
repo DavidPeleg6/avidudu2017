@@ -5,7 +5,7 @@
 /*
  * a constructor for Server
  */
-Server::Server(int port): port(port), serverSocket(0) {
+Server::Server(int port): port(port), serverSocket(0),stringSize(0) {
 	cout << "Server innitialized" << endl;
 }
 
@@ -33,7 +33,6 @@ void Server::start() {
 	// Define the client socket's structures
 	struct sockaddr_in clientAddress;
 	socklen_t clientAddressLen;
-	//open 2 sockets for clients
 	while(true) {
 		cout << "Waiting for client connections..." << endl;
 		// Accept a new client connection
@@ -54,10 +53,6 @@ void Server::handleClient(int clientSocket) {
 			cout << "Error reading from client" << endl;
 			return;
 		}
-		if(!passMove(clientSocket)) {
-			cout << "Error writing to client" << endl;
-			return;
-		}
 	}
 }
 
@@ -70,5 +65,9 @@ int Server::getMessage(int clientSocket) {
 	n = read(clientSocket, test, sizeof(char) * stringSize);
 	delete test;
 	return 1;
+}
+
+void Server::stop() {
+	close(serverSocket);
 }
 

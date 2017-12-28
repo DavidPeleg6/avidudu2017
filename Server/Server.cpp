@@ -42,6 +42,7 @@ void Server::start() {
 			throw "Error on accept client";
 		}
 		cout << "Client connected" << endl;
+		handleClient(clientSocket);
 		close(clientSocket);
 	}
 }

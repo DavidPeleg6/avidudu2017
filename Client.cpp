@@ -65,7 +65,12 @@ int Client::connectToServer() {
 	//TODO this is temp for testing string sending
 	int testSize = 6;
 	char* test = (char*)malloc(testSize);
-	test = "hello\0";
+	test[0] = 'h';
+	test[1] = 'e';
+	test[2] = 'l';
+	test[3] = 'l';
+	test[4] = 'o';
+	test[5] = '\0';
 	write(clientSocket, &testSize, sizeof(testSize));
 	write(clientSocket, &test, testSize * sizeof(char));
 	free(test);

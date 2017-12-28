@@ -19,6 +19,7 @@ enum play{NONE, AI, HUMAN, REMOTE};
  * Main function of the program.
  */
 int main() {
+	cout << "TESING STRING SENDING!" << endl;
 	FileReader* reader = new FileReader(DATAFILE);
 	int* data = reader->read();
 	char* ip;

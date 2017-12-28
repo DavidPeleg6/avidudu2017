@@ -1,0 +1,31 @@
+Client and server send and receive strings
+
+Client:
+	Get game list
+	Display game list	(list_games)
+	Choose specific game	(join <name>)
+	Start new game		(start <game>)
+	Change play sending command	(play <X> <Y>)
+	game crash notification
+	close game		(close <name>)
+
+Server:
+	Maintain a second thread specifically for getting the exit command
+	Send a general shut down message to commandManager
+	Listen for commands and pass to GameManager
+
+CommandManager:
+	Maps inputs from server to command
+
+GameManager:
+	Maintain game list
+	
+
+Commands:
+	Make a class for every command listed in the pdf
+	start <name>
+	list_games
+	join <name>
+	play <X> <Y>
+	close <name>
+	close_all

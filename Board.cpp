@@ -2,22 +2,6 @@
 #include <iostream>
 using namespace std;
 /*
- * Default constructor: Makes a 8x8 board and fills it with blanks.
- */
-Board::Board() {
-	width = 8;
-	height = 8;
-	b = new int*[height];
-	for (int i = 0; i < height; i++) {
-		b[i] = new int[width];
-	}
-	for (int i = 0; i < width; i++) {
-		for (int j = 0; j < height; j++) {
-			b[i][j] = 0;
-		}
-	}
-}
-/*
  * Constructor: Makes the board and fills it with blanks.
  * @param board_width - the desired board width
  * @param board_height - the desired board height

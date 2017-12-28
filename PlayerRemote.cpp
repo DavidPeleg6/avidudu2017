@@ -10,7 +10,8 @@ PlayerRemote::PlayerRemote(const char *serverIP, int serverPort) {
 	client = new Client(serverIP, serverPort);
 	//set remote player with the opposite color
 	try {
-		setColor(3 - client->connectToServer());
+		//setColor(3 - client->connectToServer());
+		setColor(2);//TODO set color of dif players correctly, player who starts the game be black (X, 2)
 	} catch(const char *msg) {
 		cout << msg << endl;
 		exit(-1);

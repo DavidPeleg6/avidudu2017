@@ -83,10 +83,6 @@ char* ConsoleDisplay::GetClientCommand() {
 	cout << "join <name>\tJoin a game called <name>." << endl;
 	cout << "start <name>\tStart a new game called <name> that other";
 	cout << " players will be able to join." << endl;
-	cout << "close <name>\tCloses a game running on the server, why is this";
-	cout << " an option given to users. letting people shut down other ";
-	cout << "peoples games doesn't make sense ";
-	cout << "but whatever you can do it if you want to." << endl;
 	cin >> buffer;
 	while (valid_input == 0) {
 		//check that the given input is actually one of the commands.
@@ -94,14 +90,13 @@ char* ConsoleDisplay::GetClientCommand() {
 		while (buffer[i] != '\0' && buffer[i] != ' ' && i < LONGEST_INPUT) {
 			i++;
 		}
-		for (int j = 0; j < i; j++) {
+		for (int j = 0; j <= i; j++) {
 			inchk[j] = buffer[j];
 		}
 		if (strcmp(inchk, "list_games") == 0) {
 			valid_input = 2;
 		}
-		if (strcmp(inchk, "join") == 0 ||
-				strcmp(inchk, "start") == 0 || strcmp(inchk, "close") == 0) {
+		if (strcmp(inchk, "join") == 0 || strcmp(inchk, "start") == 0) {
 			valid_input = 1;
 		}
 		if (valid_input == 1) {

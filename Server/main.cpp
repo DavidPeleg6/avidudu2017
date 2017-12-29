@@ -24,7 +24,7 @@ int main() {
 			cout << "server crashed because: " << msg << endl;
 			server.stop();
 			delete reader;
-			delete manager;
+			//delete manager; //TODO fix this
 			exit(-1);
 		}
 	}

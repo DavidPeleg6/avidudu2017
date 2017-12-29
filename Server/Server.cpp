@@ -1,4 +1,5 @@
 #include "headersS/Server.h"
+#include <stdlib.h>
 #define MAX_CONNECTED_CLIENTS 10
 #define ERROR 0
 
@@ -80,7 +81,7 @@ char* Server::getString(int clientSocket) {
 		return NULL;
 	}
 	//read a message in the given size
-	char* message = new char [stringSize];
+	char* message = (char*)malloc(sizeof(char) * stringSize);
 	n = read(clientSocket, message, stringSize);
 	return message;
 }

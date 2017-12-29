@@ -8,6 +8,7 @@
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
+#include <sstream>
 using namespace std;
 /*
  * Constructor, makes a new client object.
@@ -61,54 +62,44 @@ void Client::connectToServer() {
  * Sends a move to the other player.
  * @param x - the x coordinate
  * @param y - the y coordinate
- * @param color - the color of the player making the move.
  */
-void Client::SendMove(int x, int y, int color) {
-	// Write the exercise arguments to the socket
-	int n = write(clientSocket, &x, sizeof(x));
-	if (n == -1) {
-		throw "Error writing x to socket";
-	}
-	n = write(clientSocket, &y, sizeof(y));
-	if (n == -1) {
-		throw "Error writing y to socket";
-	}
-	n = write(clientSocket, &color, sizeof(color));
-	if (n == -1) {
-		throw "Error writing color to socket";
-	}
+void Client::SendMove(int x, int y) {
+	stringstream send;
+	send << "play " << x << " " << y;
+	const char* sendc = send.str().c_str();
+	writeCommand(sendc, commandLength(sendc));
 }
 /*
  * Gets a move from the other player which will be acted out on this instance of the game.
  */
 int* Client::GetMove() {
-	int n, x, y, color;
-	n = read(clientSocket, &x, sizeof(x));
+	int n, len, x, y;
+	char* str;
+	stringstream ss;
+	string play_absorver;
+	n = read(clientSocket, &len, sizeof(len));
 	if (n == -1) {
-		throw "Error reading x from socket";
+		throw "Error reading len from socket";
 	}
-	n = read(clientSocket, &y, sizeof(y));
+	str = (char*)malloc(sizeof(char) * len);
+	n = read(clientSocket, str, sizeof(char) * len);
 	if (n == -1) {
-		throw "Error reading y from socket";
+		throw "Error reading string from socket";
 	}
-	n = read(clientSocket, &color, sizeof(color));
-	if (n == -1) {
-		throw "Error reading color from socket";
-	}
-	int* move = (int*)calloc(3, sizeof(int));
+	ss << str;
+	ss >> play_absorver >> x >> y;
+	int* move = (int*)calloc(2, sizeof(int));
 	move[0] = x;
 	move[1] = y;
-	move[2] = color;
 	return move;
 }
-
 //=======================================	new functions go here
 /*
  * Requests a list of game names from the server and returns it.
  * It is assumed that the list is returned in order, with the first item returned being the length of the list.
  * @return - a list of pointers to strings, the first element is the length of the rest of the list.
  */
-char** Client::listGames(char* command) {
+char** Client::listGames(const char* command) {
 	int n, list_length, str_len;
 	char** out;
 	//send the command "list_games" to the server.
@@ -142,7 +133,7 @@ char** Client::listGames(char* command) {
  * @param command - a pointer to the command to be written.
  * @param length - the length of said command.
  */
-void Client::writeCommand(char* command, int length) {
+void Client::writeCommand(const char* command, int length) {
 	int n;
 	n = write(clientSocket, &length, sizeof(length));
 	if (n == -1) {
@@ -156,7 +147,7 @@ void Client::writeCommand(char* command, int length) {
 /*
  * Gets a string and returns its length.
  */
-int Client::commandLength(char* command) {
+int Client::commandLength(const char* command) {
 	int i = 0, len = 0;
 	while (command[i] != '\0') {
 		i++;
@@ -170,7 +161,7 @@ int Client::commandLength(char* command) {
  * @param command - the command to be passed.
  * @return the values the server returned.
  */
-int Client::passSimpleCommand(char* command) {
+int Client::passSimpleCommand(const char* command) {
 	int n, succsus;
 	writeCommand(command, commandLength(command));
 	//reads the servers responese.

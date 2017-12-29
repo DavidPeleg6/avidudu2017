@@ -50,7 +50,6 @@ int main() {
 		} catch (const char *msg) {
 			cout << "unnable to connect because: " << msg << endl;
 		}
-		//TODO user command stuff
 		char* command;
 		int server_response, interacting_with_server;
 		interacting_with_server = 1;
@@ -62,7 +61,6 @@ int main() {
 				d->PrintGameList(client->listGames(command));
 			} else {
 				server_response = client->passSimpleCommand(command);
-				//TODO all should return the negation of their value if they fail
 				//start should return 1
 				//join should return 2
 				//close should return 3
@@ -79,16 +77,9 @@ int main() {
 					player_remote->setColor(2);
 					d->WaitForOpponent();
 					free(command);
-					command = (char*)malloc(sizeof(char) * 8);
-					command[0] = 'w';
-					command[1] = 'a';
-					command[2] = 'i';
-					command[3] = 't';
-					command[4] = 'i';
-					command[5] = 'n';
-					command[6] = 'g';
-					command[7] = '\0';
-					server_response = client->passSimpleCommand(command);
+					const char* waiting;
+					waiting = "waiting";
+					server_response = client->passSimpleCommand(waiting);
 					//TODO maybe do something with the response
 					interacting_with_server = 0;
 					break;

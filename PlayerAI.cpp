@@ -86,4 +86,4 @@ int PlayerAI::getColor() {
  * Sends the move the other player did to this player object.
  * Doesn't do anything.
  */
-void PlayerAI::AcknowledgeMove(int x, int y, int color) { }
+void PlayerAI::AcknowledgeMove(int x, int y) { }

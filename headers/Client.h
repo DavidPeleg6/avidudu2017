@@ -9,12 +9,12 @@ public:
 	virtual ~Client();
 	void connectToServer();
 	int* GetMove();
-	void SendMove(int x, int y, int color);
-	char** listGames(char* command);
-	int passSimpleCommand(char* command);
+	void SendMove(int x, int y);
+	char** listGames(const char* command);
+	int passSimpleCommand(const char* command);
 private:
-	void writeCommand(char* command, int length);
-	int commandLength(char* command);
+	void writeCommand(const char* command, int length);
+	int commandLength(const char* command);
 	const char *serverIP;
 	int serverPort;
 	int clientSocket;

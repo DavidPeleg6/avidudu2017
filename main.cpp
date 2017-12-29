@@ -39,6 +39,7 @@ int main() {
 		p[1] = new PlayerHumanLocal(2, d);
 		break;
 	case REMOTE:
+		cout << "FUCK" << endl;//TODO delete
 		PlayerRemote *player_remote;
 		try {
 			if (data[0] == -1) {
@@ -55,7 +56,7 @@ int main() {
 		interacting_with_server = 1;
 		Client* client;
 		client = player_remote->getClient();
-		while (interacting_with_server) {
+		while (interacting_with_server == 1) {
 			command = d->GetClientCommand();
 			if (strcmp(command, "list_games") == 0) {
 				d->PrintGameList(client->listGames(command));
@@ -69,7 +70,6 @@ int main() {
 					d->GameAlreadyExists();
 					break;
 				case -2:
-				case -3:
 					d->GameDoesntExist();
 					break;
 				case 1:
@@ -88,11 +88,16 @@ int main() {
 					player_remote->setColor(1);
 					interacting_with_server = 0;
 					break;
-				case 3:
-					//Closed a game, do nothing.
-					break;
 				default:
 					d->ServerCrash();
+					free(data);
+					delete reader;
+					delete b;
+					delete d;
+					delete p[0];
+					delete player_remote;
+					delete r;
+					return 0;
 					break;
 				}
 			}

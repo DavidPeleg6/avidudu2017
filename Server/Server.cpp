@@ -77,13 +77,14 @@ char* Server::getString(int clientSocket) {
 	//read the size of input that will be given
 	int stringSize;
 	int n = read(clientSocket, &stringSize, sizeof(stringSize));
-	cout << stringSize << endl;
+	cout << stringSize << endl;//TODO delet
 	if(n <= 0) {
 		return NULL;
 	}
 	//read a message in the given size
 	char* message = (char*)malloc(sizeof(char) * stringSize);
 	n = read(clientSocket, message, stringSize);
+	cout << message << endl;
 	return message;
 }
 

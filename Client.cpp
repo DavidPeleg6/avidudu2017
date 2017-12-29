@@ -109,6 +109,7 @@ char** Client::listGames(const char* command) {
 	if (n == -1) {
 		throw "listGames()| Error reading list_length from socket";
 	}
+	cout << list_length << endl; //TODO delet this
 	//allocate space for string list
 	out = (char**)malloc((list_length + 1) * sizeof(char*));
 	//put the list length as its first element, it is assumed to be less than 255
@@ -148,7 +149,7 @@ void Client::writeCommand(const char* command, int length) {
  * Gets a string and returns its length.
  */
 int Client::commandLength(const char* command) {
-	int i = 0, len = 0;
+	int i = 0, len = 1;
 	while (command[i] != '\0') {
 		i++;
 		len++;

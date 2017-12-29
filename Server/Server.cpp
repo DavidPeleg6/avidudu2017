@@ -77,6 +77,7 @@ char* Server::getString(int clientSocket) {
 	//read the size of input that will be given
 	int stringSize;
 	int n = read(clientSocket, &stringSize, sizeof(stringSize));
+	cout << stringSize << endl;
 	if(n <= 0) {
 		return NULL;
 	}

@@ -29,5 +29,6 @@ void PrintListCommand::execute(Server *server) {
 		const char* name = (it -> name).c_str();
 		server ->passString(clientSocket, nameSize, name);
 	}
+	server->closeSocket(clientSocket);
 	clientSocket = 0;
 }

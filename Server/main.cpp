@@ -23,9 +23,13 @@ int main() {
 		} catch(const char *msg) {
 			cout << "server crashed because: " << msg << endl;
 			server.stop();
+			delete reader;
+			delete manager;
 			exit(-1);
 		}
 	}
+	delete reader;
+	delete manager;
 	server.stop();
 	return 0;
 }

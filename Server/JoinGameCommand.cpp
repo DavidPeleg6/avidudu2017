@@ -5,7 +5,7 @@
 #include "headersS/JoinGameCommand.h"
 #include "headersS/Server.h"
 
-JoinGameCommand::JoinGameCommand(GameManager* info): info(info), name(0), player2Socket(0) {
+JoinGameCommand::JoinGameCommand(GameManager* info): info(info), player2Socket(0) {
 }
 
 JoinGameCommand::~JoinGameCommand() {
@@ -22,5 +22,6 @@ void JoinGameCommand::execute(Server* server) {
 		server->passInt(player2Socket, 2);
 	} else {
 		server->passInt(player2Socket, -2);
+		server->closeSocket(player2Socket);
 	}
 }

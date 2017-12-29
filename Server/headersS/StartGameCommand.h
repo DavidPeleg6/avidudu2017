@@ -11,7 +11,7 @@
 class StartGameCommand: public Command {
 public:
 	StartGameCommand(GameManager *info);
-	virtual ~StartGameCommand();
+	~StartGameCommand();
 	void setArgs(vector<string> args, int socket);
 	void execute(Server *server);
 

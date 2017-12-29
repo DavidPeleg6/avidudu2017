@@ -11,7 +11,7 @@
 class JoinGameCommand: public Command {
 public:
 	JoinGameCommand(GameManager *info);
-	virtual ~JoinGameCommand();
+	~JoinGameCommand();
 	void setArgs(vector<string> args, int socket);
 	void execute(Server *server);
 

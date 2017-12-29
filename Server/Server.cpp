@@ -41,11 +41,10 @@ void Server::start() {
 		int clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress,
 				&clientAddressLen);
 		if(clientSocket == -1) {
-			throw "Error on accept client";
+			cout << "Error on accept client" << endl;
 		}
 		cout << "Client connected" << endl;
 		handleClient(clientSocket);
-		close(clientSocket);
 	}
 }
 

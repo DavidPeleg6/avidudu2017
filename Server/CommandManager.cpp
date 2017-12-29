@@ -1,6 +1,6 @@
 #include "headersS/CommandManager.h"
-using namespace std;
 
+using namespace std;
 
 CommandManager::CommandManager() {
 	manager = new GameManager();

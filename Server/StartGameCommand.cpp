@@ -5,7 +5,7 @@
 #include "headersS/StartGameCommand.h"
 #include "headersS/Server.h"
 
-StartGameCommand::StartGameCommand(GameManager *info): info(info), name(NULL), player1Socket(0){
+StartGameCommand::StartGameCommand(GameManager *info): info(info), player1Socket(0){
 }
 
 StartGameCommand::~StartGameCommand() {
@@ -16,11 +16,12 @@ void StartGameCommand::setArgs(vector<string> args, int socket) {
 	player1Socket = socket;
 }
 
-void StartGameCommand::execute(Server* server) {
+void StartGameCommand::execute(Server *server) {
 	bool success = info->addGame(name,player1Socket);
 	if(success) {
 		server->passInt(player1Socket, 1);
 	} else {
 		server->passInt(player1Socket, -1);
+		server->closeSocket(player1Socket);
 	}
 }

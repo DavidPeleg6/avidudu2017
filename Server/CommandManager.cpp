@@ -3,18 +3,22 @@ using namespace std;
 
 
 CommandManager::CommandManager() {
+	manager = new GameManager();
 	//add commands in the following format
-	commandsMap["list_games"] = new PrintListCommand();
+	commandsMap["list_games"] = new PrintListCommand(manager);
+	commandsMap["exit"] = new killServerCommand(manager);
+	commandsMap["close"] = new CloseGameCommand(manager);
 }
 
-void CommandManager::executeCommand(char* commandMsg) {
+Command* CommandManager::getCommand(char* commandMsg, int socket) {
 	string str(commandMsg);
 	//parse string to command and param
 	vector<string> parsed = stringParse(commandMsg);
 	//get command name
 	Command *command = commandsMap[parsed.front()];
 	parsed.erase(parsed.begin());
-	command -> execute(parsed);
+	command -> setArgs(parsed, socket);
+	return command;
 }
 
 CommandManager::~CommandManager() {
@@ -22,6 +26,7 @@ CommandManager::~CommandManager() {
 	for(it = commandsMap.begin(); it != commandsMap.end(); it++) {
 		delete it -> second;
 	}
+	delete manager;
 }
 
 vector<string> CommandManager::stringParse(string commandMsg) {
@@ -32,7 +37,4 @@ vector<string> CommandManager::stringParse(string commandMsg) {
 		parsed.push_back(temp);
 	}
 	return parsed;
-}
-
-void CommandManager::killServer(Server server) {
 }

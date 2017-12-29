@@ -2,13 +2,14 @@
  * a class responsible for managing commands = we will add new commands to this class as we make them
  * server will use this class for executing commands given by clients or users
  */
-#ifndef SERVEREX5_HEADERSS_COMMANDMANAGER_H_
-#define SERVEREX5_HEADERSS_COMMANDMANAGER_H_
+#ifndef HEADERSS_COMMANDMANAGER_H_
+#define HEADERSS_COMMANDMANAGER_H_
 
-#include "Server.h"
-#include "Command.h"
-#include "PrintListCommand.h"
 #include "GameManager.h"
+#include "PrintListCommand.h"
+#include "killServerCommand.h"
+#include "CloseGameCommand.h"
+#include "Command.h"
 #include <map>
 #include <iostream>
 #include <sstream>
@@ -17,12 +18,11 @@ class CommandManager {
 public:
 	CommandManager();
 	~CommandManager();
-	void executeCommand(char* commandMsg);
-	void killServer(Server server);
+	Command* getCommand(char* commandMsg, int socket);
 
 private:
 	map<string, Command*> commandsMap;
-	GameManager manager;
+	GameManager *manager;
 	vector<string> stringParse(string commandMsg);
 };
 

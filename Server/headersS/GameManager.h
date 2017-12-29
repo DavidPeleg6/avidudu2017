@@ -25,9 +25,11 @@ class GameManager {
 
 public:
 	GameManager();
-	vector<Games> getGames();
+	vector<Games> getWaitingGames();
+	vector<int> getAllPlayers();
 	bool addGame(string name, int player1Socket);
 	bool startGame(string name, int player2Socket);
+	int* getGame(string name);
 	void closeGame(string name);
 	~GameManager();
 

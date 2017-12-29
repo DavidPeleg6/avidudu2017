@@ -3,17 +3,21 @@
  * all commands should inherit from this interface
  */
 
-#ifndef SERVEREX4_HEADERSS_COMMAND_H_
-#define SERVEREX4_HEADERSS_COMMAND_H_
+#ifndef HEADERSS_COMMAND_H_
+#define HEADERSS_COMMAND_H_
 
 #include <vector>
 #include <string>
+
 using namespace std;
+
+class Server;
 
 class Command {
 public:
-	virtual void execute(vector<string> args) = 0;
+	virtual void setArgs(vector<string> args, int socket) = 0;
+	virtual void execute(Server *server) = 0;
 	virtual ~Command() {}
 };
 
-#endif /* SERVEREX4_HEADERSS_COMMAND_H_ */
+#endif /* HEADERSS_COMMAND_H_ */

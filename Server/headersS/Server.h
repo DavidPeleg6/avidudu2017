@@ -11,27 +11,26 @@
 #include <string.h>
 #include <iostream>
 #include <stdio.h>
+#include "CommandManager.h"
+#include "Command.h"
 
 using namespace std;
 
-class CommandManager;
-
 class Server {
 public:
-	Server(int port);
+	Server(int port, CommandManager manager);
 	void start();
 	void stop();
 	void handleClient(int clientSocket);
-	int getString(int clientSocket);
-	int passString(int clientSocket, int stringSize, char* message);
+	int passString(int clientSocket, int stringSize, const char* message);
 	int passInt(int clientSocket, int num);
 	void closeSocket(int clientSocket);
-	void setCommandManager(CommandManager *manager);
 
 private:
 	int port;
 	int serverSocket;
-	CommandManager *manager;
+	CommandManager manager;
+	char* getString(int clientSocket);
 };
 
 

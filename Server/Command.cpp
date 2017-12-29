@@ -3,6 +3,10 @@
  */
 #include "headersS/Command.h"
 
-void Command::execute(vector<string>) {
+void Command::setArgs(vector<string> args, int socket) {
+
+}
+
+void Command::execute(Server *server) {
 
 }

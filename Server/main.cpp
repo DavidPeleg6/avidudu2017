@@ -6,6 +6,7 @@
 
 #include "headersS/Server.h"
 #include "headersS/FileReader.h"
+#include "headersS/CommandManager.h"
 #include <stdlib.h>
 #define DATAFILE "ipfile"
 /*
@@ -13,8 +14,9 @@
  */
 int main() {
 	FileReader* reader = new FileReader(DATAFILE);
+	CommandManager *manager = new CommandManager();
 	int* data = reader->read();
-	Server server(reader->ExtractPort(data));
+	Server server(reader->ExtractPort(data), *manager);
 	while (1) {
 		try {
 			server.start();

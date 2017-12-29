@@ -3,10 +3,23 @@
 GameManager::GameManager() {
 }
 /*
- * returns all games
+ * returns all games that haven't started
  */
-vector<Games> GameManager::getGames() {
-	return games;
+vector<Games> GameManager::getWaitingGames() {
+	vector<Games> deadGames;
+	vector<Games>::iterator it;
+	for(it = games.begin(); it != games.end(); ++it) {
+		//if game hasnt started
+		if(!(it -> status)) {
+			//deep copy
+			Games temp;
+			temp.name = it -> name;
+			temp.player1Socket = it -> player1Socket;
+			temp.status = false;
+			deadGames.push_back(temp);
+		}
+	}
+	return deadGames;
 }
 /*
  * adds the second player to the waiting game
@@ -73,4 +86,32 @@ GameManager::~GameManager() {
 		delete &it;
 		games.erase(it);
 	}
+}
+
+/*
+ * return all waiting and running player sockets
+ */
+vector<int> GameManager::getAllPlayers() {
+	vector<int> players;
+	vector<Games>::iterator it;
+	for(it = games.begin(); it != games.end(); ++it) {
+		players.push_back(it->player1Socket);
+		if(it->status) {
+			players.push_back(it->player2Socket);
+		}
+	}
+	return players;
+}
+
+int* GameManager::getGame(string name) {
+	int* players = new int[2];
+	vector<Games>::iterator it;
+	for(it = games.begin(); it != games.end(); ++it) {
+		if(!(it->name).compare(name)) {
+			players[0] = it->player1Socket;
+			players[1] = it->player2Socket;
+			return players;
+		}
+	}
+	return NULL;
 }

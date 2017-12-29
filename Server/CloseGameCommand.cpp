@@ -12,7 +12,7 @@ CloseGameCommand::~CloseGameCommand() {
 }
 
 void CloseGameCommand::setArgs(vector<string> args, int socket) {
-	target = args.front();
+	target.assign(args.front());
 }
 
 void CloseGameCommand::execute(Server* server) {

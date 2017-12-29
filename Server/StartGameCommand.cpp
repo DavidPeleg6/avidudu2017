@@ -1,18 +1,26 @@
 /*
  * StartGameCommand.cpp
- *
- *  Created on: Dec 29, 2017
- *      Author: david
  */
 
-#include "StartGameCommand.h"
+#include "headersS/StartGameCommand.h"
+#include "headersS/Server.h"
 
-StartGameCommand::StartGameCommand() {
-	// TODO Auto-generated constructor stub
-
+StartGameCommand::StartGameCommand(GameManager *info): info(info), name(NULL), player1Socket(0){
 }
 
 StartGameCommand::~StartGameCommand() {
-	// TODO Auto-generated destructor stub
 }
 
+void StartGameCommand::setArgs(vector<string> args, int socket) {
+	name.assign(args.front());
+	player1Socket = socket;
+}
+
+void StartGameCommand::execute(Server* server) {
+	bool success = info->addGame(name,player1Socket);
+	if(success) {
+		server->passInt(player1Socket, 1);
+	} else {
+		server->passInt(player1Socket, -1);
+	}
+}

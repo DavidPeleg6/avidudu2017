@@ -10,11 +10,15 @@
 
 class StartGameCommand: public Command {
 public:
-	StartGameCommand();
+	StartGameCommand(GameManager *info);
 	virtual ~StartGameCommand();
+	void setArgs(vector<string> args, int socket);
+	void execute(Server *server);
 
 private:
 	GameManager *info;
+	string name;
+	int player1Socket;
 };
 
 #endif /* STARTGAMECOMMAND_H_ */

@@ -8,6 +8,9 @@ CommandManager::CommandManager() {
 	commandsMap["list_games"] = new PrintListCommand(manager);
 	commandsMap["exit"] = new killServerCommand(manager);
 	commandsMap["close"] = new CloseGameCommand(manager);
+	commandsMap["start"] = new StartGameCommand(manager);
+	commandsMap["join"] = new JoinGameCommand(manager);
+	commandsMap["play"] = new PlayCommand(manager);
 }
 
 Command* CommandManager::getCommand(char* commandMsg, int socket) {

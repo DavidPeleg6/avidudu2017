@@ -56,11 +56,12 @@ bool GameManager::addGame(string name, int player1Socket) {
 			return false;
 		}
 	}
-	Games* newGame = new Games;
-	newGame -> name = name;
-	newGame -> player1Socket = player1Socket;
-	newGame -> status = false;
-	games.push_back(*newGame);
+	Games newGame;
+	newGame.name = name;
+	newGame.player1Socket = player1Socket;
+	newGame.player2Socket = 0;
+	newGame.status = false;
+	games.push_back(newGame);
 	return true;
 }
 
@@ -72,7 +73,6 @@ void GameManager::closeGame(string name) {
 	vector<Games>::iterator it;
 	for(it = games.begin(); it != games.end(); ++it) {
 		if(!name.compare(it -> name)) {
-			delete &it;
 			games.erase(it);
 		}
 	}
@@ -83,7 +83,6 @@ void GameManager::closeGame(string name) {
 GameManager::~GameManager() {
 	vector<Games>::iterator it;
 	for(it = games.begin(); it != games.end(); ++it) {
-		delete &it;
 		games.erase(it);
 	}
 }
@@ -114,4 +113,16 @@ int* GameManager::getGame(string name) {
 		}
 	}
 	return NULL;
+}
+
+int GameManager::getOpponent(int player) {
+	vector<Games>::iterator it;
+	for(it = games.begin(); it != games.end(); ++it) {
+		if(player == it->player1Socket) {
+			return it->player2Socket;
+		} else if (player == it->player2Socket) {
+			return it->player1Socket;
+		}
+	}
+	return 0;
 }

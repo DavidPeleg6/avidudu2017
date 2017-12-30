@@ -4,9 +4,11 @@
 #include <cstdlib>
 #define MAX_CONNECTED_CLIENTS 10
 #define ERROR 0
+#define SUCCESS 1
 
 int clientAmount = 0;
 bool alive = true;
+bool printflag = true;
 
 struct ServerInfo {
 	CommandManager* manager;
@@ -112,15 +114,7 @@ void Server::start() {
 	// Define the client socket's structures
 	struct sockaddr_in clientAddress;
 	socklen_t clientAddressLen;
-	bool printflag = true;
 	while(true) {
-		if(clientAmount == MAX_CONNECTED_CLIENTS) {
-			if(printflag) {
-				cout << "max client amount reached, holding connections" << endl;
-				printflag = false;
-			}
-			continue;
-		}
 		if(!alive) {
 			cout << "server terminated " << endl;
 			break;
@@ -130,8 +124,18 @@ void Server::start() {
 		int clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress,
 				&clientAddressLen);
 		if(clientSocket == -1) {
-			throw "Error on accept client";
+			return;
 		}
+		if(clientAmount == MAX_CONNECTED_CLIENTS) {
+			if(printflag) {
+				cout << "max client amount reached, holding connections" << endl;
+				printflag = false;
+			}
+			passInt(clientSocket, ERROR);
+			close(clientSocket);
+			continue;
+		}
+		passInt(clientSocket, SUCCESS);
 		ServerInfo *comInfo = new ServerInfo();
 		comInfo->manager = manager;
 		comInfo->server = this;

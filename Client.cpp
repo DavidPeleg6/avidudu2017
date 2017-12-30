@@ -9,6 +9,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <sstream>
+#define REJECTED 0
+#define CONNECTED 1
 using namespace std;
 /*
  * Constructor, makes a new client object.
@@ -56,6 +58,10 @@ void Client::connectToServer() {
 			*)&serverAddress, sizeof(serverAddress));
 	if (serverSocket == -1) {
 		throw "Error connecting to server";
+	}
+	int conrected = readInt();
+	if (conrected == REJECTED) {
+		throw "Server full.";
 	}
 	cout << "Connected to server." << endl;
 }

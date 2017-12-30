@@ -21,6 +21,9 @@ PlayerRemote::PlayerRemote(const char *serverIP, int serverPort) {
  * Destructor, deletes client.
  */
 PlayerRemote::~PlayerRemote() {
+	if (player_color == 2) {
+		client->writeCommand("close", 6);
+	}
 	delete client;
 }
 /*

@@ -130,7 +130,7 @@ void Server::start() {
 		comInfo->manager = manager;
 		comInfo->server = this;
 		comInfo->clientSocket = clientSocket;
-		cout << "Client connected" << endl;
+		cout << "Client connected: " << clientSocket << endl;
 		try {
 			int rc = pthread_create(&threads[clientAmount], NULL, handleClient, (void*)comInfo);
 			clientAmount++;
@@ -190,6 +190,7 @@ int Server::passString(int clientSocket, int stringSize, const char* message) {
  * clientSocket = (int) socket to be closed
  */
 void Server::closeSocket(int clientSocket) {
+	cout << "socket closed " << clientSocket << endl;
 	close(clientSocket);
 }
 

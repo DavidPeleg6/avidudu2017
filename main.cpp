@@ -73,7 +73,7 @@ int main() {
 					break;
 				case 1:
 					//Started a game, wait for other player.
-					player_remote->setColor(2);
+					player_remote->setColor(1);
 					d->WaitForOpponent();
 					server_response = client->readInt();
 					if (server_response == 1) {//todo fuckingdeltjkia tguhfjoss
@@ -86,7 +86,7 @@ int main() {
 					break;
 				case 2:
 					//Joined a game.
-					player_remote->setColor(1);
+					player_remote->setColor(2);
 					interacting_with_server = 0;
 					break;
 				default:

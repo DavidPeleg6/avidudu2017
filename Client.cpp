@@ -68,6 +68,7 @@ void Client::SendMove(int x, int y) {
 	stringstream send;
 	send << "play " << x << " " << y;
 	const char* sendc = send.str().c_str();
+	cout << sendc << endl;//todo delete
 	writeCommand(sendc, commandLength(sendc));
 }
 /*
@@ -89,6 +90,7 @@ int* Client::GetMove() {
 	}
 	ss << str;
 	ss >> play_absorver >> x >> y;
+	cout << "size "<<len <<endl<<"str: "<<str << endl;//todo delete
 	int* move = (int*)calloc(2, sizeof(int));
 	move[0] = x;
 	move[1] = y;
@@ -115,7 +117,8 @@ char** Client::listGames(const char* command) {
 	out = (char**)malloc((list_length + 1) * sizeof(char*));
 	//put the list length as its first element, it is assumed to be less than 255
 	out[0] = (char*)malloc(sizeof(char));
-	out[0][0] = list_length;
+	unsigned char converter = list_length;
+	out[0][0] = converter;
 	//read remaining strings
 	for (int i = 0; i < list_length; i++) {
 		n = read(clientSocket, &str_len, sizeof(str_len));

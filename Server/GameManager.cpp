@@ -1,14 +1,18 @@
 #include "headersS/GameManager.h"
+#include <stdio.h>
+#include <iostream>
 
 GameManager::GameManager() {
+	games = new vector<Games>();
+	games->clear();
 }
 /*
  * returns all games that haven't started
  */
-vector<Games> GameManager::getWaitingGames() {
-	vector<Games> deadGames;
+vector<Games>* GameManager::getWaitingGames() {
+	vector<Games> *deadGames = new vector<Games>();
 	vector<Games>::iterator it;
-	for(it = games.begin(); it != games.end(); ++it) {
+	for(it = games->begin(); it != games->end(); it++) {
 		//if game hasnt started
 		if(!(it -> status)) {
 			//deep copy
@@ -16,7 +20,7 @@ vector<Games> GameManager::getWaitingGames() {
 			temp.name = it -> name;
 			temp.player1Socket = it -> player1Socket;
 			temp.status = false;
-			deadGames.push_back(temp);
+			deadGames->push_back(temp);
 		}
 	}
 	return deadGames;
@@ -29,7 +33,7 @@ vector<Games> GameManager::getWaitingGames() {
  */
 bool GameManager::startGame(string name, int player2Socket) {
 	vector<Games>::iterator it;
-	for(it = games.begin(); it != games.end(); ++it) {
+	for(it = games->begin(); it != games->end(); it++) {
 		if(!name.compare(it -> name)) {
 			//check if game is full
 			if(it -> status) {
@@ -51,7 +55,7 @@ bool GameManager::startGame(string name, int player2Socket) {
  */
 bool GameManager::addGame(string name, int player1Socket) {
 	vector<Games>::iterator it;
-	for(it = games.begin(); it != games.end(); it++) {
+	for(it = games->begin(); it != games->end(); it++) {
 		if(!name.compare(it -> name)) {
 			return false;
 		}
@@ -61,7 +65,7 @@ bool GameManager::addGame(string name, int player1Socket) {
 	newGame.player1Socket = player1Socket;
 	newGame.player2Socket = 0;
 	newGame.status = false;
-	games.push_back(newGame);
+	games->push_back(newGame);
 	return true;
 }
 
@@ -69,11 +73,11 @@ bool GameManager::addGame(string name, int player1Socket) {
  * closes an existing game
  * name = game name
  */
-void GameManager::closeGame(string name) {
+void GameManager::closeGame(int player) {
 	vector<Games>::iterator it;
-	for(it = games.begin(); it != games.end(); ++it) {
-		if(!name.compare(it -> name)) {
-			games.erase(it);
+	for(it = games->begin(); it != games->end(); ++it) {
+		if((it->player1Socket == player) || (it->player2Socket == player)) {
+			games->erase(it);
 		}
 	}
 }
@@ -82,8 +86,8 @@ void GameManager::closeGame(string name) {
  */
 GameManager::~GameManager() {
 	vector<Games>::iterator it;
-	for(it = games.begin(); it != games.end(); ++it) {
-		games.erase(it);
+	for(it = games->begin(); it != games->end(); ++it) {
+		games->erase(it);
 	}
 }
 
@@ -93,7 +97,7 @@ GameManager::~GameManager() {
 vector<int> GameManager::getAllPlayers() {
 	vector<int> players;
 	vector<Games>::iterator it;
-	for(it = games.begin(); it != games.end(); ++it) {
+	for(it = games->begin(); it != games->end(); ++it) {
 		players.push_back(it->player1Socket);
 		if(it->status) {
 			players.push_back(it->player2Socket);
@@ -102,11 +106,11 @@ vector<int> GameManager::getAllPlayers() {
 	return players;
 }
 
-int* GameManager::getGame(string name) {
+int* GameManager::getGame(int player) {
 	int* players = new int[2];
 	vector<Games>::iterator it;
-	for(it = games.begin(); it != games.end(); ++it) {
-		if(!(it->name).compare(name)) {
+	for(it = games->begin(); it != games->end(); ++it) {
+		if((it->player1Socket == player) || (it->player2Socket == player)) {
 			players[0] = it->player1Socket;
 			players[1] = it->player2Socket;
 			return players;
@@ -117,7 +121,7 @@ int* GameManager::getGame(string name) {
 
 int GameManager::getOpponent(int player) {
 	vector<Games>::iterator it;
-	for(it = games.begin(); it != games.end(); ++it) {
+	for(it = games->begin(); it != games->end(); ++it) {
 		if(player == it->player1Socket) {
 			return it->player2Socket;
 		} else if (player == it->player2Socket) {

@@ -9,13 +9,12 @@ PlayCommand::PlayCommand(GameManager* info): info(info), senderSocket(0) {
 }
 
 PlayCommand::~PlayCommand() {
-	// TODO Auto-generated destructor stub
 }
 
 void PlayCommand::setArgs(vector<string> args, int socket) {
 	senderSocket = socket;
 	stringstream ss;
-	ss << args.at(0) << args.at(1);
+	ss << args.at(0) << " " << args.at(1);
 	ss >> move[0] >> move[1];
 }
 

@@ -16,12 +16,12 @@ int main() {
 	FileReader* reader = new FileReader(DATAFILE);
 	CommandManager *manager = new CommandManager();
 	int* data = reader->read();
-	Server server(reader->ExtractPort(data), *manager);
+	Server server(reader->ExtractPort(data), manager);
 	while (1) {
 		try {
 			server.start();
 		} catch(const char *msg) {
-			cout << "server crashed because: " << msg << endl;
+			cout << "server closed because: " << msg << endl;
 			server.stop();
 			delete reader;
 			//delete manager; //TODO fix this

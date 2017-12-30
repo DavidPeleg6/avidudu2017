@@ -21,7 +21,7 @@ class CommandManager {
 public:
 	CommandManager();
 	~CommandManager();
-	Command* getCommand(char* commandMsg, int socket);
+	Command* getCommand(const char* commandMsg, int socket);
 
 private:
 	map<string, Command*> commandsMap;

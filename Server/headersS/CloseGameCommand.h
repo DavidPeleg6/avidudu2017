@@ -17,7 +17,7 @@ public:
 
 private:
 	GameManager *info;
-	string target;
+	int target;
 };
 
 

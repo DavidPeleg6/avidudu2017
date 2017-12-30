@@ -18,19 +18,18 @@ using namespace std;
 
 class Server {
 public:
-	Server(int port, CommandManager manager);
+	Server(int port, CommandManager* manager);
 	void start();
 	void stop();
-	void handleClient(int clientSocket);
 	int passString(int clientSocket, int stringSize, const char* message);
 	int passInt(int clientSocket, int num);
 	void closeSocket(int clientSocket);
-
+	char* getString(int clientSocket);
 private:
 	int port;
 	int serverSocket;
-	CommandManager manager;
-	char* getString(int clientSocket);
+	CommandManager* manager;
+	//void *waitToDie(void* nothing);
 };
 
 

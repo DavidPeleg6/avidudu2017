@@ -1,21 +1,73 @@
 #include "headersS/Server.h"
 #include <stdlib.h>
+#include <pthread.h>
+#include <cstdlib>
 #define MAX_CONNECTED_CLIENTS 10
 #define ERROR 0
 
+int clientAmount = 0;
+
+struct ServerInfo {
+	CommandManager* manager;
+	Server* server;
+	int clientSocket;
+};
 /*
  * a constructor for Server
  * @param port = a port (int) number to set up server
  * @param manager = a CommandManager class to manage server actions
  */
-Server::Server(int port, CommandManager manager): port(port), serverSocket(0), manager(manager) {
+Server::Server(int port, CommandManager* manager): port(port), serverSocket(0), manager(manager) {
 	cout << "Server innitialized" << endl;
+}
+/*
+ * This function waits for "exit" to know to just kill the stupid server already no one even reads these.
+ */
+void* waitToDie(void* mang) {
+	ServerInfo *info = (ServerInfo*)mang;
+	string s;
+	cin >> s;
+	char* msg = new char[s.length() + 1];
+	strcpy(msg, s.c_str());
+	Command *killCommand = info->manager->getCommand(msg, 0);
+	killCommand->execute(info->server);
+	delete[] msg;
+	delete info;
+	return NULL;
+	//throw "Manual server shutdown.";
+}
+
+/*
+ * a method for handling all commands received from client - might become threaded later
+ * @param clientSocket = the socket of the calling client
+ */
+void *handleClient(void* info) {
+	ServerInfo *comInfo = (ServerInfo*) info;
+	char* msg;
+	while(true) {
+		//get an input string from client
+		msg = comInfo->server->getString(comInfo->clientSocket);
+		if(msg == NULL) {
+			cout << "Error reading from client" << endl;
+			const char* cls = "close";
+			Command *command = comInfo->manager->getCommand(cls, comInfo->clientSocket);
+			command->execute(comInfo->server);
+			return NULL; //todo fix this
+		}
+		//get appropriate command from the manager and execute
+		Command *command = comInfo->manager->getCommand(msg, comInfo->clientSocket);
+		command -> execute(comInfo->server);
+	}
 }
 
 /*
  * a method for running the mainframe of the server
  */
 void Server::start() {
+
+	pthread_t threads[MAX_CONNECTED_CLIENTS + 1];
+
+
 	serverSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if(serverSocket == -1) {
 		throw "Error opening socket";
@@ -31,42 +83,69 @@ void Server::start() {
 		throw "Error on binding";
 	}
 	cout << "Server started" << endl;
+
+
+	//threaded server suicide
+	try {
+		ServerInfo *info = new ServerInfo();
+		info->manager = manager;
+		info->server = this;
+		int rc = pthread_create(&threads[0], NULL, waitToDie, (void*)info);
+		if (rc) {
+			cout << "Thread fail w/e." << endl;
+			delete(info);
+			exit(-1);
+		}
+	} catch(const char* msg) {
+		cout << msg << endl;
+		return;
+	}
+
+
+
+
+
 	// Start listening to incoming connections
 	listen(serverSocket, MAX_CONNECTED_CLIENTS);
 	// Define the client socket's structures
 	struct sockaddr_in clientAddress;
 	socklen_t clientAddressLen;
+	bool printflag = true;
 	while(true) {
+		if(clientAmount == MAX_CONNECTED_CLIENTS) {
+			if(printflag) {
+				cout << "max client amount reached, holding connections" << endl;
+				printflag = false;
+			}
+			continue;
+		}
 		cout << "Waiting for client connections..." << endl;
 		// Accept a new client connection
 		int clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress,
 				&clientAddressLen);
 		if(clientSocket == -1) {
-			cout << "Error on accept client" << endl;
-			continue;
+			throw "Error on accept client";
 		}
+		ServerInfo *comInfo = new ServerInfo();
+		comInfo->manager = manager;
+		comInfo->server = this;
+		comInfo->clientSocket = clientSocket;
 		cout << "Client connected" << endl;
-		handleClient(clientSocket);
-		close(clientSocket);
-	}
-}
-
-/*
- * a method for handling all commands received from client - might become threaded later
- * @param clientSocket = the socket of the calling client
- */
-void Server::handleClient(int clientSocket) {
-	char* msg;
-	while(true) {
-		//get an input string from client
-		msg = getString(clientSocket);
-		if(msg == NULL) {
-			cout << "Error reading from client" << endl;
-			return;
+		try {
+			int rc = pthread_create(&threads[clientAmount], NULL, handleClient, (void*)comInfo);
+			clientAmount++;
+			if (rc) {
+				cout << "Thread fail w/e." << endl;
+				delete(comInfo);
+				exit(-1);
+			}
+		} catch(const char *msg) {
+			cout << "handleclients crashed coz: " << msg << endl;
+			delete(comInfo);
+			close(clientSocket);
+			clientAmount--;
+			printflag = true;
 		}
-		//get appropriate command from the manager and execute
-		Command *command = manager.getCommand(msg, clientSocket);
-		command -> execute(this);
 	}
 }
 
@@ -97,11 +176,12 @@ char* Server::getString(int clientSocket) {
  * @return = an int indicating success or fail
  */
 int Server::passString(int clientSocket, int stringSize, const char* message) {
-	int n = write(clientSocket, &stringSize, sizeof(stringSize));
+	int size = stringSize+1;
+	int n = write(clientSocket, &size, sizeof(size));
 	if(n <= 0) {
 		return ERROR;
 	}
-	n = write(clientSocket, message, stringSize);
+	n = write(clientSocket, message, size);
 	return 1;
 }
 
@@ -129,7 +209,7 @@ void Server::stop() {
 int Server::passInt(int clientSocket, int num) {
 	int n = write(clientSocket, &num, sizeof(int));
 	if(n <= 0) {
-		return ERROR;
+		throw ERROR;
 	}
 	return 1;
 }

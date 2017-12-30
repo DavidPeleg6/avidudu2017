@@ -25,17 +25,17 @@ class GameManager {
 
 public:
 	GameManager();
-	vector<Games> getWaitingGames();
+	vector<Games>* getWaitingGames();
 	int getOpponent(int player);
 	vector<int> getAllPlayers();
 	bool addGame(string name, int player1Socket);
 	bool startGame(string name, int player2Socket);
-	int* getGame(string name);
-	void closeGame(string name);
+	int* getGame(int player);
+	void closeGame(int player);
 	~GameManager();
 
 private:
-	vector<Games> games;
+	vector<Games>* games;
 };
 
 

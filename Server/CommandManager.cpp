@@ -13,12 +13,17 @@ CommandManager::CommandManager() {
 	commandsMap["play"] = new PlayCommand(manager);
 }
 
-Command* CommandManager::getCommand(char* commandMsg, int socket) {
+Command* CommandManager::getCommand(const char* commandMsg, int socket) {
 	string str(commandMsg);
 	//parse string to command and param
 	vector<string> parsed = stringParse(commandMsg);
 	//get command name
-	Command *command = commandsMap[parsed.front()];
+	Command *command = commandsMap[parsed.front().c_str()];
+	if (command == NULL) {
+		cout << "Unknown command." << endl;
+		return NULL;
+	}
+	//Command *command =new StartGameCommand(manager);
 	parsed.erase(parsed.begin());
 	command -> setArgs(parsed, socket);
 	return command;

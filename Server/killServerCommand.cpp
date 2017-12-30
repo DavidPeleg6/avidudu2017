@@ -26,5 +26,5 @@ void killServerCommand::execute(Server* server) {
 		server->passString(*it, 8, killMsg);
 		server->closeSocket(*it);
 	}
-	throw " manual termination";
+	//throw "manual termination";
 }

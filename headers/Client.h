@@ -13,8 +13,8 @@ public:
 	char** listGames(const char* command);
 	int passSimpleCommand(const char* command);
 	int readInt();
-private:
 	void writeCommand(const char* command, int length);
+private:
 	int commandLength(const char* command);
 	const char *serverIP;
 	int serverPort;

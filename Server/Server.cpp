@@ -6,6 +6,7 @@
 #define ERROR 0
 
 int clientAmount = 0;
+bool alive = true;
 
 struct ServerInfo {
 	CommandManager* manager;
@@ -33,6 +34,7 @@ void* waitToDie(void* mang) {
 	killCommand->execute(info->server);
 	delete[] msg;
 	delete info;
+	alive = false;
 	return NULL;
 	//throw "Manual server shutdown.";
 }
@@ -118,6 +120,10 @@ void Server::start() {
 				printflag = false;
 			}
 			continue;
+		}
+		if(!alive) {
+			cout << "server terminated " << endl;
+			break;
 		}
 		cout << "Waiting for client connections..." << endl;
 		// Accept a new client connection

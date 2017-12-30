@@ -22,8 +22,10 @@ void CloseGameCommand::execute(Server* server) {
 		server->passString(game[0], 8, killMsg);
 		server->passString(game[1], 8, killMsg);
 		server->closeSocket(game[0]);
-		server->closeSocket(game[1]);
-		delete game;
+		if(game[2]) {
+			server->closeSocket(game[1]);
+		}
+		delete []game;
 	}
 	info->closeGame(target);
 }

@@ -106,13 +106,21 @@ vector<int> GameManager::getAllPlayers() {
 	return players;
 }
 
+/*
+ * return array of size 3 = if game is alive return players[2] = 1.  0 else
+ */
 int* GameManager::getGame(int player) {
-	int* players = new int[2];
+	int* players = new int[3];
 	vector<Games>::iterator it;
 	for(it = games->begin(); it != games->end(); ++it) {
 		if((it->player1Socket == player) || (it->player2Socket == player)) {
 			players[0] = it->player1Socket;
 			players[1] = it->player2Socket;
+			if(it->status) {
+				players[2] = 1;
+			} else {
+				players[2] = 0;
+			}
 			return players;
 		}
 	}

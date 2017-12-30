@@ -45,7 +45,7 @@ int PlayerRemote::GetMove(int* moves) {
 		exit(-1);
 	}
 	if(move[0] == END_MESSAGE) {
-		throw " Game has ended due to unexpected server crush.";
+		throw " Game has ended due to unexpected server shutdown.";
 	}
 	for (int i = 1; i < moves[0] ; i+= 2) {
 		if (moves[i] == move[0] && moves[i + 1] == move[1]) {

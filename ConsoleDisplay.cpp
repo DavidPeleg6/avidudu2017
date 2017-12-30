@@ -140,8 +140,7 @@ void ConsoleDisplay::ServerCrash() {
  * @param games - a pointer to a list of pointers to strings.
  */
 void ConsoleDisplay::PrintGameList(char** games) {
-	int listsize = games[0][0];
-	cout << "number of games: " << listsize << endl;//todo delete
+	int listsize = (int)(*games[0]);
 	if (listsize != 0) {
 		cout << "The avilable games are:" << endl;
 	} else {

@@ -68,7 +68,6 @@ void Client::SendMove(int x, int y) {
 	stringstream send;
 	send << "play " << x << " " << y;
 	const char* sendc = send.str().c_str();
-	cout << sendc << endl;//todo delete
 	writeCommand(sendc, commandLength(sendc));
 }
 /*
@@ -88,9 +87,14 @@ int* Client::GetMove() {
 	if (n == -1) {
 		throw "Error reading string from socket";
 	}
+	if (strcmp(str, "SHUTDOWN") == 0) {
+		int* move = (int*)calloc(2, sizeof(int));
+		move[0] = -2;
+		move[1] = -2;
+		return move;
+	}
 	ss << str;
 	ss >> play_absorver >> x >> y;
-	cout << "size "<<len <<endl<<"str: "<<str << endl;//todo delete
 	int* move = (int*)calloc(2, sizeof(int));
 	move[0] = x;
 	move[1] = y;
@@ -112,15 +116,13 @@ char** Client::listGames(const char* command) {
 	if (n == -1) {
 		throw "listGames()| Error reading list_length from socket";
 	}
-	cout << "list_length: " << list_length << endl;//todo deletle
 	//allocate space for string list
 	out = (char**)malloc((list_length + 1) * sizeof(char*));
 	//put the list length as its first element, it is assumed to be less than 255
-	out[0] = (char*)malloc(sizeof(char));
-	unsigned char converter = list_length;
-	out[0][0] = converter;
+	out[0] = (char*)malloc(sizeof(int));
+	*out[0] = list_length;
 	//read remaining strings
-	for (int i = 0; i < list_length; i++) {
+	for (int i = 1; i < list_length + 1; i++) {
 		n = read(clientSocket, &str_len, sizeof(str_len));
 		if (n == -1) {
 			throw "listGames()| Error reading str_len from socket";

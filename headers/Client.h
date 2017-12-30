@@ -12,6 +12,7 @@ public:
 	void SendMove(int x, int y);
 	char** listGames(const char* command);
 	int passSimpleCommand(const char* command);
+	int readInt();
 private:
 	void writeCommand(const char* command, int length);
 	int commandLength(const char* command);

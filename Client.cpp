@@ -52,8 +52,9 @@ void Client::connectToServer() {
 	// htons converts values between host and network byte orders
 	serverAddress.sin_port = htons(serverPort);
 	// Establish a connection with the TCP server
-	if (connect(clientSocket, (struct sockaddr
-			*)&serverAddress, sizeof(serverAddress)) == -1) {
+	int serverSocket = connect(clientSocket, (struct sockaddr
+			*)&serverAddress, sizeof(serverAddress));
+	if (serverSocket == -1) {
 		throw "Error connecting to server";
 	}
 	cout << "Connected to server." << endl;
@@ -109,7 +110,6 @@ char** Client::listGames(const char* command) {
 	if (n == -1) {
 		throw "listGames()| Error reading list_length from socket";
 	}
-	cout << list_length << endl; //TODO delet this
 	//allocate space for string list
 	out = (char**)malloc((list_length + 1) * sizeof(char*));
 	//put the list length as its first element, it is assumed to be less than 255
@@ -171,4 +171,16 @@ int Client::passSimpleCommand(const char* command) {
 		throw "Error reading succses from socket";
 	}
 	return succsus;
+}
+/*
+ * Reads one integer from the server and returns it.
+ */
+int Client::readInt() {
+	int n, val;
+	//reads the servers responese.
+	n = read(clientSocket, &val, sizeof(val));
+	if (n == -1) {
+		throw "Error reading succses from socket";
+	}
+	return val;
 }

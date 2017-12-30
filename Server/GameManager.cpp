@@ -51,7 +51,7 @@ bool GameManager::startGame(string name, int player2Socket) {
  */
 bool GameManager::addGame(string name, int player1Socket) {
 	vector<Games>::iterator it;
-	for(it = games.begin(); it != games.end(); ++it) {
+	for(it = games.begin(); it != games.end(); it++) {
 		if(!name.compare(it -> name)) {
 			return false;
 		}

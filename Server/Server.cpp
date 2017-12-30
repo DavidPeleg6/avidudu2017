@@ -43,9 +43,11 @@ void Server::start() {
 				&clientAddressLen);
 		if(clientSocket == -1) {
 			cout << "Error on accept client" << endl;
+			continue;
 		}
 		cout << "Client connected" << endl;
 		handleClient(clientSocket);
+		close(clientSocket);
 	}
 }
 
@@ -77,7 +79,6 @@ char* Server::getString(int clientSocket) {
 	//read the size of input that will be given
 	int stringSize;
 	int n = read(clientSocket, &stringSize, sizeof(stringSize));
-	cout << stringSize << endl;//TODO delet
 	if(n <= 0) {
 		return NULL;
 	}

@@ -39,7 +39,6 @@ int main() {
 		p[1] = new PlayerHumanLocal(2, d);
 		break;
 	case REMOTE:
-		cout << "FUCK" << endl;//TODO delete
 		PlayerRemote *player_remote;
 		try {
 			if (data[0] == -1) {
@@ -76,10 +75,12 @@ int main() {
 					//Started a game, wait for other player.
 					player_remote->setColor(2);
 					d->WaitForOpponent();
-					free(command);
-					const char* waiting;
-					waiting = "waiting";
-					server_response = client->passSimpleCommand(waiting);
+					server_response = client->readInt();
+					if (server_response == 1) {//todo fuckingdeltjkia tguhfjoss
+						cout << "GOOD" <<endl;
+					} else {
+						cout << "BAD" <<endl;
+					}
 					//TODO maybe do something with the response
 					interacting_with_server = 0;
 					break;

@@ -141,6 +141,7 @@ void ConsoleDisplay::ServerCrash() {
  */
 void ConsoleDisplay::PrintGameList(char** games) {
 	int listsize = games[0][0];
+	cout << "number of games: " << listsize << endl;//todo delete
 	if (listsize != 0) {
 		cout << "The avilable games are:" << endl;
 	} else {

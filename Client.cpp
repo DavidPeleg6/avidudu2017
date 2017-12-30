@@ -110,11 +110,12 @@ char** Client::listGames(const char* command) {
 	if (n == -1) {
 		throw "listGames()| Error reading list_length from socket";
 	}
+	cout << "list_length: " << list_length << endl;//todo deletle
 	//allocate space for string list
 	out = (char**)malloc((list_length + 1) * sizeof(char*));
 	//put the list length as its first element, it is assumed to be less than 255
 	out[0] = (char*)malloc(sizeof(char));
-	out[0][0] = (char)list_length;
+	out[0][0] = list_length;
 	//read remaining strings
 	for (int i = 0; i < list_length; i++) {
 		n = read(clientSocket, &str_len, sizeof(str_len));

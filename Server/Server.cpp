@@ -171,6 +171,7 @@ char* Server::getString(int clientSocket) {
 	if(n <= 0) {
 		return NULL;
 	}
+	passInt(clientSocket, 1);
 	//read a message in the given size
 	char* message = (char*)malloc(sizeof(char) * stringSize);
 	n = read(clientSocket, message, stringSize);

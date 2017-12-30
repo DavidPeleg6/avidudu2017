@@ -24,6 +24,7 @@ public:
 	virtual void GameAlreadyExists() = 0;
 	virtual void GameDoesntExist() = 0;
 	virtual void ServerCrash() = 0;
+	virtual void ServerCrash(const char* msg) = 0;
 	virtual void WaitForOpponent() = 0;
 	virtual char* GetClientCommand() = 0;
 	virtual int GetMove(int* moves) = 0;

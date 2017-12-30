@@ -134,6 +134,13 @@ void ConsoleDisplay::ServerCrash() {
 	cout << "A server error has occured, closing game." << endl;
 }
 /*
+ * Notify the user that the server has crashed by printing a messege.
+ * @param msg - the messege to be printed.
+ */
+void ConsoleDisplay::ServerCrash(const char* msg) {
+	cout << msg << endl;
+}
+/*
  * Gets a list of pointers to strings and prints them.
  * The first string is actually just a byte containing the size of the rest of the list.
  * IT ALSO FREES THE MEMORY.

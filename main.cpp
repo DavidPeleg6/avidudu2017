@@ -58,9 +58,34 @@ int main() {
 		while (interacting_with_server == 1) {
 			command = d->GetClientCommand();
 			if (strcmp(command, "list_games") == 0) {
-				d->PrintGameList(client->listGames(command));
+				try {
+					d->PrintGameList(client->listGames(command));
+				} catch (const char* msg) {
+					d->ServerCrash(msg);
+					free(data);
+					delete reader;
+					delete b;
+					delete d;
+					delete p[0];
+					delete player_remote;
+					delete r;
+					return 0;
+				}
 			} else {
-				server_response = client->passSimpleCommand(command);
+				try {
+					server_response = client->passSimpleCommand(command);
+				} catch (const char* msg) {
+					d->ServerCrash(msg);
+					free(data);
+					delete reader;
+					delete b;
+					delete d;
+					delete p[0];
+					delete player_remote;
+					delete r;
+					return 0;
+				}
+
 				//start should return 1
 				//join should return 2
 				//close should return 3
@@ -76,12 +101,6 @@ int main() {
 					player_remote->setColor(1);
 					d->WaitForOpponent();
 					server_response = client->readInt();
-					if (server_response == 1) {//todo fuckingdeltjkia tguhfjoss
-						cout << "GOOD" <<endl;
-					} else {
-						cout << "BAD" <<endl;
-					}
-					//TODO maybe do something with the response
 					interacting_with_server = 0;
 					break;
 				case 2:

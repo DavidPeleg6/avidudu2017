@@ -149,10 +149,19 @@ char** Client::listGames(const char* command) {
 void Client::writeCommand(const char* command, int length) {
 	int n;
 	n = write(clientSocket, &length, sizeof(length));
+	if (n == 0) {
+		throw "Server unexpectedly shut down.";
+	}
 	if (n == -1) {
 		throw "Error writing str_len of list_games to socket";
 	}
+	//confirmation from server
+	readInt();
+	//that str len was recieved.
 	n = write(clientSocket, command, length * sizeof(char));
+	if (n == 0) {
+		throw "Server unexpectedly shut down.";
+	}
 	if (n == -1) {
 		throw "Error writing list_games command to socket";
 	}
@@ -191,8 +200,8 @@ int Client::readInt() {
 	int n, val;
 	//reads the servers responese.
 	n = read(clientSocket, &val, sizeof(val));
-	if (n == -1) {
-		throw "Error reading succses from socket";
+	if (n == -1 || n == 0) {
+		throw "Server unresponsive, shutting down.";
 	}
 	return val;
 }

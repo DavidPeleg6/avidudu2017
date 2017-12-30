@@ -23,6 +23,7 @@ public:
 	void WaitForOtherPlayer();
 	void PrintGameList(char** games);
 	void ServerCrash();
+	void ServerCrash(const char* msg);
 	void WaitForOpponent();
 	void GameAlreadyExists();
 	void GameDoesntExist();

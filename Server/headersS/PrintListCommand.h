@@ -12,7 +12,7 @@ class PrintListCommand: public Command {
 public:
 	PrintListCommand(GameManager *info);
 	void setArgs(vector<string> args, int clientSocket);
-	void execute(Server *server);
+	void execute();
 	virtual ~PrintListCommand();
 
 private:

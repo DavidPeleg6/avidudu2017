@@ -16,13 +16,13 @@ void JoinGameCommand::setArgs(vector<string> args, int socket) {
 	player2Socket = socket;
 }
 
-void JoinGameCommand::execute(Server* server) {
+void JoinGameCommand::execute() {
 	bool success = info->startGame(name, player2Socket);
 	int opponent = info->getOpponent(player2Socket);
 	if(success) {
-		server->passInt(opponent, 1);
-		server->passInt(player2Socket, 2);
+		passInt(opponent, 1);
+		passInt(player2Socket, 2);
 	} else {
-		server->passInt(player2Socket, -2);
+		passInt(player2Socket, -2);
 	}
 }

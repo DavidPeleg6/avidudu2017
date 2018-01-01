@@ -7,6 +7,6 @@ void Command::setArgs(vector<string> args, int socket) {
 
 }
 
-void Command::execute(Server *server) {
+void Command::execute() {
 
 }

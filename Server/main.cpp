@@ -17,16 +17,13 @@ int main() {
 	CommandManager *manager = new CommandManager();
 	int* data = reader->read();
 	Server server(reader->ExtractPort(data), manager);
-	while (1) {
-		try {
-			server.start();
-		} catch(const char *msg) {
-			cout << "server closed because: " << msg << endl;
-			server.stop();
-			delete reader;
-			//delete manager; //TODO fix this
-			exit(-1);
-		}
+	try {
+		server.start();
+	} catch(const char *msg) {
+		cout << "server closed because: " << msg << endl;
+		server.stop();
+		delete reader;
+		delete manager; //TODO fix this
 	}
 	delete reader;
 	delete manager;

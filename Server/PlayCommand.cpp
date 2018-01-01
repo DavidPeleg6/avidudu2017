@@ -18,11 +18,11 @@ void PlayCommand::setArgs(vector<string> args, int socket) {
 	ss >> move[0] >> move[1];
 }
 
-void PlayCommand::execute(Server* server) {
+void PlayCommand::execute() {
 	int opponent = info->getOpponent(senderSocket);
 	stringstream send;
 	send << "play " << move[0] << " " << move[1];
 	int messageSize = send.str().size();
 	const char* sendc = send.str().c_str();
-	server->passString(opponent, messageSize, sendc);
+	passString(opponent, messageSize, sendc);
 }

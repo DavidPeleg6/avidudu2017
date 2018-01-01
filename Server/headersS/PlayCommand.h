@@ -13,7 +13,7 @@ public:
 	PlayCommand(GameManager *info);
 	virtual ~PlayCommand();
 	void setArgs(vector<string> args, int socket);
-	void execute(Server *server);
+	void execute();
 
 private:
 	GameManager *info;

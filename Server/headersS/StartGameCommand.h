@@ -13,7 +13,7 @@ public:
 	StartGameCommand(GameManager *info);
 	~StartGameCommand();
 	void setArgs(vector<string> args, int socket);
-	void execute(Server *server);
+	void execute();
 
 private:
 	GameManager *info;

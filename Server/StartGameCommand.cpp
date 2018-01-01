@@ -15,12 +15,12 @@ void StartGameCommand::setArgs(vector<string> args, int socket) {
 	player1Socket = socket;
 }
 
-void StartGameCommand::execute(Server *server) {
+void StartGameCommand::execute() {
 	bool success = info->addGame(name,player1Socket);
 	//cout << success << endl;
 	if(success) {
-		server->passInt(player1Socket, 1);
+		passInt(player1Socket, 1);
 	} else {
-		server->passInt(player1Socket, -1);
+		passInt(player1Socket, -1);
 	}
 }

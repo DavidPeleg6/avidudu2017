@@ -19,10 +19,10 @@ void PrintListCommand::setArgs(vector<string> args, int clientSocket) {
 	this -> clientSocket = clientSocket;
 }
 
-void PrintListCommand::execute(Server *server) {
+void PrintListCommand::execute() {
 	vector<Games>* deadGames = info -> getWaitingGames();
 	//send client the size of the games list
-	server -> passInt(clientSocket, deadGames->size());
+	passInt(clientSocket, deadGames->size());
 	if(deadGames->empty()) {
 		return;
 	}
@@ -30,7 +30,7 @@ void PrintListCommand::execute(Server *server) {
 	for(it = deadGames->begin(); it != deadGames->end(); it++) {
 		int nameSize = it -> name.size();
 		const char* name = (it -> name).c_str();
-		server ->passString(clientSocket, nameSize, name);
+		passString(clientSocket, nameSize, name);
 	}
 	delete deadGames;
 	clientSocket = 0;

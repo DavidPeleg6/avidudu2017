@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -16,8 +17,9 @@ class Server;
 class Command {
 public:
 	virtual void setArgs(vector<string> args, int socket) = 0;
-	virtual void execute(Server *server) = 0;
+	virtual void execute() = 0;
 	virtual ~Command() {}
+
 };
 
 #endif /* HEADERSS_COMMAND_H_ */

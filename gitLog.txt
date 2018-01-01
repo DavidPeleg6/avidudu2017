@@ -1,245 +1,191 @@
-commit 559f5f4ebcd7a8e1a52dbf36020fe90753200a56
+commit d3e2c07c8dd2a0e25d680f92226671e735d8ea22
 Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Sat Nov 25 13:01:27 2017 +0200
+Date:   Sat Dec 30 23:19:59 2017 +0200
 
-    added some comments to some functions
+    rip hopes and dreams, this shit still aint done
 
-commit 4dc46ab2583235a938b304869e3054e76aa26e3c
+commit 3dddfb16037cb802d86512bdd21edeef243d52ba
 Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Sat Nov 25 12:56:49 2017 +0200
+Date:   Sat Dec 30 22:26:18 2017 +0200
 
-    added final log
+    GOMRIM HAYOM DUDU
 
-commit c446a9add5d1082d6073b141736b55c440a66445
+commit 91365c91534ce87b02e00160529e65513cd1eec7
 Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Sat Nov 25 12:51:27 2017 +0200
+Date:   Sat Dec 30 21:58:47 2017 +0200
 
-    fixed player ai
+    almost done
 
-commit 3f4747c24579b734536631d50c4cc407d820b72a
+commit 46e5fc7206af3fa87bc8155ee5926bb55d51c405
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Dec 30 21:26:20 2017 +0200
+
+    gomrim hayom dudu
+
+commit 791434d39d17d53c949b4ca119104daef2f1c1a4
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Dec 30 21:07:25 2017 +0200
+
+    server shit
+
+commit ef7b6b6d7b67bc4f39f4d6e0574c4f53fe1e2ff0
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Dec 30 20:33:44 2017 +0200
+
+    holy fuck wwe might actually finish this today
+
+commit bcbb4ccfddb1575b56b964afcd3a0201d84b3614
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Dec 30 19:27:18 2017 +0200
+
+    HOLY FUCK SOMETHING ACTUALLY WORKS FUCK FUCK FUCK FUCK
+
+commit df4c77a3d9408fd64ad4db362ea8360771850f12
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Dec 30 18:32:04 2017 +0200
+
+    still doesn't fuckign work
+
+commit 6a000bd8c83cd8d59d9dd7e0b8fb1cccb469ac5a
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Sat Dec 30 17:01:35 2017 +0200
+
+    some of the shit actually works, most doesnt. fucking add threads fuck ing fiasfu fuck sfiakggggg
+
+commit 593b8950549ca3ccfb67e1e6d04cede2415c4c8f
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Dec 29 22:22:26 2017 +0200
+
+    FUCK FUCK FUCK FUCK FAFDSAFASF
+
+commit bab01ef613aea375e976c767ca6a0336833d5fec
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Dec 29 22:03:31 2017 +0200
+
+    minor shit
+
+commit 9a10b4d34a1f1c3b474cd915b98cd05f0f031b4b
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Dec 29 21:44:54 2017 +0200
+
+    minor changes
+
+commit 068c5ae8cd6a396852174e232123715ed29af773
 Author: David Peleg <dudugeda@gmail.com>
-Date:   Sat Nov 25 12:22:44 2017 +0200
+Date:   Fri Dec 29 21:27:04 2017 +0200
 
-    changed name tag
+    minor bug fixes
 
-commit 715bd29505bcc187082917ad2780c3a0127ce319
+commit d952509b51ce5bc7ea684e315dae66b77c9405ba
 Author: David Peleg <dudugeda@gmail.com>
-Date:   Sat Nov 25 12:07:27 2017 +0200
+Date:   Fri Dec 29 18:18:34 2017 +0200
 
-    git Log
+    server now fully supports commands and all commands have been added
 
-commit 3033be9c62f20bd438ff6170b230cc019d76f45d
-Merge: b0ab37b 424b21a
+commit 80594fe370b2f254fcd9f831d59d2163e6ef7979
 Author: David Peleg <dudugeda@gmail.com>
-Date:   Sat Nov 25 12:02:21 2017 +0200
+Date:   Fri Dec 29 16:53:50 2017 +0200
+
+    server now support commands and new commands have been added
+
+commit 48b415adad221eb6876e9f90dd5f083998dd1def
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Dec 29 16:48:47 2017 +0200
+
+    Everything on the client side is finalized, probably.
+
+commit 05582f0f6d0faab619786e18b6c042b3ed3f9f54
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Thu Dec 28 22:41:12 2017 +0200
+
+    bugged version of the server to be fixed tommorrow
+
+commit 2c30253b59b2db36bc5a6602f5a25ac452233adf
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Thu Dec 28 22:06:15 2017 +0200
+
+    Almost everything on the client side is done, just gotta change how playerRemote sends and recieves move data (i.e send and get strings instead of ints) and that's it.
+
+commit fbca995272fb119f55e032136e348099e5fba281
+Merge: 6a9b313 764b5be
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Thu Dec 28 20:20:08 2017 +0200
 
     Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
 
-commit b0ab37b6afd107031739a2ddd1432796085f5a27
+commit 6a9b313737b2943df652eb7ac972f3d3c3f52ad2
 Author: David Peleg <dudugeda@gmail.com>
-Date:   Sat Nov 25 12:01:32 2017 +0200
+Date:   Thu Dec 28 20:19:17 2017 +0200
 
-    a document stating why we chose your avihais project
+    major server changes to start implementing the command manager
 
-commit 424b21ab8489e9606df3c5b4b48f0e8e6db16940
+commit 764b5be23b7e740cb7b60e4bb3ea50587cd28aeb
 Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Sat Nov 25 11:55:20 2017 +0200
+Date:   Thu Dec 28 20:02:30 2017 +0200
 
-    removed debug folders which I wasn't supposed to push in the first place.
+    added option selection in main and consoledisplay plus some other minor changes that'll help with the next assignment
 
-commit 5afcc3ff6fe34c1f197194cb0faf3b2e0e2da4e8
+commit a61f73ae9d3b631eeb5619cd1e46475540186c53
 Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Sat Nov 25 11:52:45 2017 +0200
+Date:   Thu Dec 28 17:07:31 2017 +0200
 
-    FIXED LAST MEM LEAK YEAAAAAHHHHH
+    added some functions to client
 
-commit f84a2d82b6d8421f25f14991f98b7a2e0db49bd8
+commit 281d7a6908f86b641b815a226f45ae655436b594
 Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Sat Nov 25 11:34:49 2017 +0200
+Date:   Thu Dec 28 15:51:49 2017 +0200
 
-    working on finding last mem error
+    fucking sent a stupid string fucking fuck shit dickaoshnglasbgjkasgbgkadsbghkag
 
-commit 61d5d0e1da2f0885b8481dd9d64e78e82ccb0684
-Merge: 3c69a7d 258a143
+commit ba7b7f76f6797f27c24939f2c1ff5716d467d125
 Author: David Peleg <dudugeda@gmail.com>
-Date:   Sat Nov 25 11:32:26 2017 +0200
+Date:   Thu Dec 28 15:35:58 2017 +0200
+
+    lsat time test bug
+
+commit d0f814e052ffb6b88644a75007f317e34cdb1d52
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Thu Dec 28 15:32:47 2017 +0200
+
+    bug
+
+commit 9b1beccea3de6515a8424c5f02df5a11f72457ff
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Thu Dec 28 15:25:05 2017 +0200
+
+    bug
+
+commit abdf98d2515e7438b2451832d3f68827977d804e
+Merge: a6a4d58 f7a56f2
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Thu Dec 28 15:23:34 2017 +0200
 
     Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
 
-commit 3c69a7d97a3eef45531fc85415da18ddd19632f6
+commit a6a4d5825da9397141bf33504e7b69139feed1fe
 Author: David Peleg <dudugeda@gmail.com>
-Date:   Sat Nov 25 11:31:29 2017 +0200
+Date:   Thu Dec 28 15:22:58 2017 +0200
 
-    new main function asking for AI or human
+    bug fix server
 
-commit 258a143706ff4162203c801233a8be2f94c48ea5
+commit f7a56f29bcbd787668914e07bed565f08f530ac2
 Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Sat Nov 25 11:08:32 2017 +0200
+Date:   Thu Dec 28 15:22:57 2017 +0200
 
-    additional minor mem fixes
+    also removed chosenproject, shoudln't be there
 
-commit 7b977243deedf14c545cec5fa883daef6abf2b46
-Author: David Peleg <dudugeda@gmail.com>
-Date:   Sat Nov 25 11:04:52 2017 +0200
-
-    a new method to ask for player
-
-commit 07fbec030add95fe83e611bf731ab72700224bed
+commit f94207d7dd13d8c702c21c9e68e859e4bf88ae7f
 Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Sat Nov 25 10:47:29 2017 +0200
+Date:   Thu Dec 28 15:22:11 2017 +0200
 
-    playerai memleak fixed
+    deleted more shit that shouldn't be on github
 
-commit 22d60230b785187cfa7ed1865b1d78223a602ce9
+commit 7ddb2f87a36991c7d35021663bd9526fe0fd7f2b
 Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 23:04:08 2017 +0200
+Date:   Thu Dec 28 15:17:11 2017 +0200
 
-    AI DUAL
+    updated git log
 
-commit bcb31d9a6facc4d89aa98a50f200e2a576870493
-Merge: f627464 8e9fc8a
-Author: David Peleg <dudugeda@gmail.com>
-Date:   Fri Nov 24 22:58:21 2017 +0200
-
-    Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
-    just because
-
-commit f627464b592917534c4d458c36eafe555a3f5946
-Author: David Peleg <dudugeda@gmail.com>
-Date:   Fri Nov 24 22:57:51 2017 +0200
-
-    a new makefile including PlayerAI
-
-commit 8e9fc8ab411b9012e7bcbf1e3e2c175fbe4b696a
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 22:56:28 2017 +0200
-
-    freed some memory
-
-commit ce7c03269153360fa177aa49950815317070b225
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 22:54:45 2017 +0200
-
-    Console diaplay changes to print ai player diffrently.
-
-commit ce5b0b00e2c361ac48b642d3b430c8fb0584a82f
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 22:31:33 2017 +0200
-
-    minor modifications to player AI
-
-commit 188f0db7e33670f40c52ffad5d17f7ff33ac686c
-Author: David Peleg <dudugeda@gmail.com>
-Date:   Fri Nov 24 22:28:26 2017 +0200
-
-    debugged the Board method copying itself
-
-commit 0e3cc9aa7fd58f3fc3beea644ec6111c95b53d77
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 22:20:29 2017 +0200
-
-    modified main and added dudufunc to playerAI
-
-commit dbaed28482afa56569209c230ae088b91c7f78f5
-Author: David Peleg <dudugeda@gmail.com>
-Date:   Fri Nov 24 22:14:07 2017 +0200
-
-    Rules with a function to get the score of a current move
-
-commit 86a2035c2b3a5defd32c5a1cac8d5ad9fa0ae500
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 21:53:49 2017 +0200
-
-    ai player mostly done, also some other stuff.
-
-commit 28808ca32a404d07f96b818e26cf292eb56e3a3a
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 20:46:20 2017 +0200
-
-    Moved some functions from Game to Rules, minor fixes to Board, buncha code in playerAI
-
-commit c23745b83e06a519469fea4e1f7614c80316f2dc
-Author: David Peleg <dudugeda@gmail.com>
-Date:   Fri Nov 24 20:15:25 2017 +0200
-
-    Board with a copy method
-
-commit 8633a093b6737fbb5a813e4a03ede699c3ca5e54
-Merge: 6e20eda 47b59ea
-Author: David Peleg <dudugeda@gmail.com>
-Date:   Fri Nov 24 19:58:27 2017 +0200
-
-    Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
-    nothing
-
-commit 6e20eda2195dd4b9b71fe5a572184beae7bd70dd
-Author: David Peleg <dudugeda@gmail.com>
-Date:   Fri Nov 24 19:58:01 2017 +0200
-
-    no changes
-
-commit 47b59ead1cbc1613de8c1ba1f8818d5bfb386c2d
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 19:56:36 2017 +0200
-
-    started working on playerAI
-
-commit 3e50ebc228c58b2cb4633cfe96f64c6566d754b2
-Merge: 8d2535c fba901e
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 19:53:57 2017 +0200
-
-    Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
-
-commit 8d2535cc5483995b3a30a5961e9670714060d6a5
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 19:52:42 2017 +0200
-
-    added a makefile
-
-commit fba901ed40c7f48593526750af5036be9716cc5e
-Merge: e55a28d 8250aea
-Author: David Peleg <dudugeda@gmail.com>
-Date:   Fri Nov 24 19:37:44 2017 +0200
-
-    Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
-    just because
-
-commit 8250aea7759c49677a19aa0ecac55c57bb9092c5
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 19:31:23 2017 +0200
-
-    ai player placeholder addition
-
-commit e55a28d27fbe699e07621975e2d52c7b8e20fc1f
-Author: David Peleg <dudugeda@gmail.com>
-Date:   Fri Nov 24 19:30:44 2017 +0200
-
-    generic README message...
-
-commit a2852ba7efce1341a0d532b0b564c16a1f16c92b
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 19:14:10 2017 +0200
-
-    test4
-
-commit 1105e1932ca833435708bf6997ac75ff73481a6a
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 19:04:46 2017 +0200
-
-    test3
-
-commit f8716a2a60554db780ef31219a4153db4d3a974d
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 18:42:00 2017 +0200
-
-    test commit 2
-
-commit 8b4f681fd1d5f69f6a1fa745da61e3b751704f7e
-Author: Avihai Didi <avihai.didi@gmail.com>
-Date:   Fri Nov 24 18:40:36 2017 +0200
-
-    test commit
 commit 38d61544f02d1493641702df12690479342f99a2
 Author: Avihai Didi <avihai.didi@gmail.com>
 Date:   Thu Dec 28 15:07:54 2017 +0200

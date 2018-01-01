@@ -24,7 +24,9 @@ int main() {
 		server.stop();
 		delete reader;
 		delete manager; //TODO fix this
+		exit(1);
 	}
+	cout << "server exited noramlly " << endl;
 	delete reader;
 	delete manager;
 	server.stop();

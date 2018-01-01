@@ -3,13 +3,14 @@
  */
 
 #include "headersS/PrintListCommand.h"
-#include "headersS/Server.h"
 
 PrintListCommand::PrintListCommand(GameManager *info): clientSocket(0), info(info) {
+	handler = new SocketHandler();
 }
 
 //does nothing
 PrintListCommand::~PrintListCommand() {
+	delete handler;
 }
 
 /*
@@ -19,19 +20,21 @@ void PrintListCommand::setArgs(vector<string> args, int clientSocket) {
 	this -> clientSocket = clientSocket;
 }
 
-void PrintListCommand::execute() {
+bool PrintListCommand::execute() {
 	vector<Games>* deadGames = info -> getWaitingGames();
 	//send client the size of the games list
-	passInt(clientSocket, deadGames->size());
+	handler->passInt(clientSocket, deadGames->size());
 	if(deadGames->empty()) {
-		return;
+		return false;
 	}
 	vector<Games>::iterator it;
 	for(it = deadGames->begin(); it != deadGames->end(); it++) {
 		int nameSize = it -> name.size();
 		const char* name = (it -> name).c_str();
-		passString(clientSocket, nameSize, name);
+		handler->passString(clientSocket, nameSize, name);
 	}
 	delete deadGames;
 	clientSocket = 0;
+	//dont close thread
+	return false;
 }

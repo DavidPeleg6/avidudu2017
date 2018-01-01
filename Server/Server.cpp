@@ -1,18 +1,18 @@
 #include "headersS/Server.h"
-#include <stdlib.h>
-#include <pthread.h>
-#include <cstdlib>
+
 #define MAX_CONNECTED_CLIENTS 10
 
-int clientAmount = 0;
+vector<int> clients;
 bool alive = true;
 bool printflag = true;
-
+pthread_mutex_t Server::serverLock;
 
 
 struct ServerInfo {
 	CommandManager* manager;
+	SocketHandler *handler;
 	int clientSocket;
+	pthread_mutex_t serverLock;
 };
 /*
  * a constructor for Server
@@ -20,6 +20,7 @@ struct ServerInfo {
  * @param manager = a CommandManager class to manage server actions
  */
 Server::Server(int port, CommandManager* manager): port(port), serverSocket(0), manager(manager) {
+	handler = new SocketHandler();
 	cout << "Server innitialized" << endl;
 }
 /*
@@ -32,11 +33,18 @@ static void* waitToDie(void* mang) {
 	char* msg = new char[s.length() + 1];
 	strcpy(msg, s.c_str());
 	Command *killCommand = info->manager->getCommand(msg, 0);
+	pthread_mutex_lock(&(info->serverLock));
 	killCommand->execute();
+	vector<int>::iterator it;
+	for(it = clients.begin(); it != clients.end(); it++) {
+		close(*it);
+	}
 	delete[] msg;
 	delete info;
 	alive = false;
-	throw "Manual server shutdown.";
+	pthread_mutex_unlock(&(info->serverLock));
+	delete info;
+	return NULL;
 }
 
 /*
@@ -45,26 +53,28 @@ static void* waitToDie(void* mang) {
  */
 static void *handleClient(void* info) {
 	ServerInfo *comInfo = (ServerInfo*) info;
+	bool shouldClose = false;
 	char* msg;
-	while(true) {
+	while(!shouldClose && alive) {
 		//get an input string from client
-		msg = getString(comInfo->clientSocket);
+		msg = comInfo->handler->getString(comInfo->clientSocket);
 		if(msg == NULL) {
 			cout << "Error reading from client" << endl;
-			const char* cls = "close";
-			Command *command = comInfo->manager->getCommand(cls, comInfo->clientSocket);
-			command->execute();
-			cout << "close command" << endl;
+			pthread_mutex_lock(&(comInfo->serverLock));
+			//find dead link socket and delete it from array
+			vector<int>::iterator it;
+			for(it = clients.begin(); *it != comInfo->clientSocket; it++) { }
+			clients.erase(it);
 			close(comInfo->clientSocket);
-			delete(comInfo);
+			pthread_mutex_unlock(&(comInfo->serverLock));
 			printflag = true;
-			clientAmount--;
-			return (void*) "server closed "; //todo fix this
+			break;
 		}
 		//get appropriate command from the manager and execute
 		Command *command = comInfo->manager->getCommand(msg, comInfo->clientSocket);
-		command -> execute();
+		shouldClose = command -> execute();
 	}
+	return (void*)SUCCESS;
 }
 
 /*
@@ -87,69 +97,65 @@ void Server::start() {
 	serverAddress.sin_port = htons(port);
 	if (bind(serverSocket, (struct sockaddr*)&serverAddress,
 			sizeof(serverAddress)) == - 1) {
-		throw "Error on binding2";
+		throw "Error on binding";
 	}
 	cout << "Server started" << endl;
 
 
 	//threaded server suicide
-	try {
-		ServerInfo *info = new ServerInfo();
-		info->manager = manager;
-		int rc = pthread_create(&threads[0], NULL, waitToDie, (void*)info);
-		if (rc) {
-			cout << "Thread fail w/e." << endl;
-			delete(info);
-			exit(-1);
-		}
-	} catch(const char* msg) {
-		cout << msg << endl;
-		return;
+	ServerInfo *info = new ServerInfo();
+	info->manager = manager;
+	info->serverLock = serverLock;
+	int rc = pthread_create(&threads[0], NULL, waitToDie, (void*)info);
+	if (rc) {
+		cout << "Thread fail w/e." << endl;
+		delete(info);
+		exit(-1);
 	}
-
-
-
-
 
 	// Start listening to incoming connections
 	listen(serverSocket, MAX_CONNECTED_CLIENTS);
 	// Define the client socket's structures
 	struct sockaddr_in clientAddress;
 	socklen_t clientAddressLen;
-	while(true) {
-		if(!alive) {
-			cout << "server terminated " << endl;
-			break;
-		}
+	while(alive) {
 		cout << "Waiting for client connections..." << endl;
 		// Accept a new client connection
 		int clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress,
 				&clientAddressLen);
 		if(clientSocket == -1) {
-			return;
+			continue;
 		}
-		if(clientAmount == MAX_CONNECTED_CLIENTS) {
+		if(clients.size() == MAX_CONNECTED_CLIENTS) {
 			if(printflag) {
 				cout << "max client amount reached, holding connections" << endl;
 				printflag = false;
 			}
-			passInt(clientSocket, ERROR);
+			handler->passInt(clientSocket, ERROR);
 			close(clientSocket);
 			continue;
 		}
-		passInt(clientSocket, SUCCESS);
+		//add a new client to the vector
+		pthread_mutex_lock(&serverLock);
+		clients.push_back(clientSocket);
+		pthread_mutex_unlock(&serverLock);
+		//confirm connection with client
+		handler->passInt(clientSocket, SUCCESS);
 		ServerInfo *comInfo = new ServerInfo();
+		//start struct for thread
 		comInfo->manager = manager;
 		comInfo->clientSocket = clientSocket;
+		comInfo->handler = handler;
+		comInfo->serverLock = serverLock;
 		cout << "Client connected: " << clientSocket << endl;
-			int rc = pthread_create(&threads[clientAmount], NULL, handleClient, (void*)comInfo);
-			clientAmount++;
-			if (rc) {
-				cout << "Thread fail w/e." << endl;
-				delete(comInfo);
-				exit(-1);
-			}
+		int rc = pthread_create(&threads[clients.size()], NULL, handleClient, (void*)comInfo);
+		if (rc) {
+			cout << "Thread fail w/e." << endl;
+			delete(comInfo);
+			exit(-1);
+		}
 	}
+	cout << "server terminated " << endl;
 }
 
 
@@ -159,6 +165,7 @@ void Server::start() {
  */
 void Server::stop() {
 	close(serverSocket);
+	delete handler;
 }
 
 

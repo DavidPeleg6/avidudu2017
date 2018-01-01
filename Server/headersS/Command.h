@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <string>
-#include <iostream>
+#include "SocketHandler.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ class Server;
 class Command {
 public:
 	virtual void setArgs(vector<string> args, int socket) = 0;
-	virtual void execute() = 0;
+	virtual bool execute() = 0;
 	virtual ~Command() {}
 
 };

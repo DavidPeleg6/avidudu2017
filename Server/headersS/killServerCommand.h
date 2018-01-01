@@ -13,10 +13,11 @@ public:
 	killServerCommand(GameManager *info);
 	virtual ~killServerCommand();
 	void setArgs(vector<string> args, int socket);
-	void execute();
+	bool execute();
 
 private:
 	GameManager *info;
+	SocketHandler *handler;
 };
 
 #endif /* KILLSERVERCOMMAND_H_ */

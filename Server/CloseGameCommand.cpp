@@ -3,29 +3,32 @@
  */
 
 #include "headersS/CloseGameCommand.h"
-#include "headersS/Server.h"
 
 CloseGameCommand::CloseGameCommand(GameManager *info): info(info) ,target(0){
+	handler = new SocketHandler();
 }
 
 CloseGameCommand::~CloseGameCommand() {
+	delete handler;
 }
 
 void CloseGameCommand::setArgs(vector<string> args, int socket) {
 	target = socket;
 }
-
-void CloseGameCommand::execute() {
+/*
+ * close game command
+ * return true, always closes thread
+ * will get a player in a game and close his an his opponent's sockets
+ */
+bool CloseGameCommand::execute() {
 	const char* killMsg = "SHUTDOWN";
-	int *game = info->getGame(target);
-	if(game != NULL) {
-		passString(game[0], 8, killMsg);
-		close(game[0]);
-		if(game[2]) {
-			passString(game[1], 8, killMsg);
-			close(game[1]);
-		}
-		delete []game;
-	}
+	int *players = info->getGame(target);
+	handler->passString(players[0], 8, killMsg);
+	close(players[0]);
+	handler->passString(players[1], 8, killMsg);
+	close(players[1]);
+	delete []players;
 	info->closeGame(target);
+	//close thread
+	return true;
 }

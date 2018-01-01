@@ -2,6 +2,10 @@
 
 using namespace std;
 
+/*
+ * command manager constructor
+ * creates and fills map
+ */
 CommandManager::CommandManager() {
 	manager = new GameManager();
 	//add commands in the following format
@@ -13,6 +17,10 @@ CommandManager::CommandManager() {
 	commandsMap["play"] = new PlayCommand(manager);
 }
 
+/*
+ * get command method
+ * will get string and return the appropriate command from the list of keys in map
+ */
 Command* CommandManager::getCommand(const char* commandMsg, int socket) {
 	string str(commandMsg);
 	//parse string to command and param
@@ -29,6 +37,9 @@ Command* CommandManager::getCommand(const char* commandMsg, int socket) {
 	return command;
 }
 
+/*
+ * destructor- deleting all objects from map
+ */
 CommandManager::~CommandManager() {
 	map<string, Command *>::iterator it;
 	for(it = commandsMap.begin(); it != commandsMap.end(); it++) {
@@ -37,6 +48,9 @@ CommandManager::~CommandManager() {
 	delete manager;
 }
 
+/*
+ * stringParse method returns a vector of arguments and the command key at the top
+ */
 vector<string> CommandManager::stringParse(string commandMsg) {
 	vector<string> parsed;
 	istringstream buf(commandMsg);

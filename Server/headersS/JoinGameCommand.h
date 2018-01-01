@@ -13,12 +13,13 @@ public:
 	JoinGameCommand(GameManager *info);
 	~JoinGameCommand();
 	void setArgs(vector<string> args, int socket);
-	void execute();
+	bool execute();
 
 private:
 	GameManager *info;
 	string name;
 	int player2Socket;
+	SocketHandler *handler;
 };
 
 #endif /* JOINGAMECOMMAND_H_ */

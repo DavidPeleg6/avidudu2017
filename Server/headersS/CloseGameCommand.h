@@ -13,11 +13,12 @@ public:
 	CloseGameCommand(GameManager *info);
 	~CloseGameCommand();
 	void setArgs(vector<string> args, int socket);
-	void execute();
+	bool execute();
 
 private:
 	GameManager *info;
 	int target;
+	SocketHandler *handler;
 };
 
 

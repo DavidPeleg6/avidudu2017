@@ -13,12 +13,13 @@ public:
 	StartGameCommand(GameManager *info);
 	~StartGameCommand();
 	void setArgs(vector<string> args, int socket);
-	void execute();
+	bool execute();
 
 private:
 	GameManager *info;
 	string name;
 	int player1Socket;
+	SocketHandler *handler;
 };
 
 #endif /* STARTGAMECOMMAND_H_ */

@@ -3,12 +3,13 @@
  */
 
 #include "headersS/JoinGameCommand.h"
-#include "headersS/Server.h"
 
 JoinGameCommand::JoinGameCommand(GameManager* info): info(info), player2Socket(0) {
+	handler = new SocketHandler();
 }
 
 JoinGameCommand::~JoinGameCommand() {
+	delete handler;
 }
 
 void JoinGameCommand::setArgs(vector<string> args, int socket) {
@@ -16,13 +17,21 @@ void JoinGameCommand::setArgs(vector<string> args, int socket) {
 	player2Socket = socket;
 }
 
-void JoinGameCommand::execute() {
+/*
+ * will get a game name and socket and will add the socket to the game if availible
+ */
+bool JoinGameCommand::execute() {
 	bool success = info->startGame(name, player2Socket);
 	int opponent = info->getOpponent(player2Socket);
 	if(success) {
-		passInt(opponent, 1);
-		passInt(player2Socket, 2);
+		//send players their colors
+		handler->passInt(opponent, 1);
+		handler->passInt(player2Socket, 2);
+		//dont close thread
+		return false;
 	} else {
-		passInt(player2Socket, -2);
+		handler->passInt(player2Socket, -2);
+		//dont close thread
+		return false;
 	}
 }

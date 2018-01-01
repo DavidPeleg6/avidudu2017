@@ -3,11 +3,13 @@
  */
 
 #include "headersS/StartGameCommand.h"
-#include "headersS/Server.h"
 
-StartGameCommand::StartGameCommand(GameManager *info): info(info), player1Socket(0){ }
+StartGameCommand::StartGameCommand(GameManager *info): info(info), player1Socket(0){
+	handler = new SocketHandler();
+}
 
 StartGameCommand::~StartGameCommand() {
+	delete handler;
 }
 
 void StartGameCommand::setArgs(vector<string> args, int socket) {
@@ -15,12 +17,16 @@ void StartGameCommand::setArgs(vector<string> args, int socket) {
 	player1Socket = socket;
 }
 
-void StartGameCommand::execute() {
+bool StartGameCommand::execute() {
 	bool success = info->addGame(name,player1Socket);
 	//cout << success << endl;
 	if(success) {
-		passInt(player1Socket, 1);
+		handler->passInt(player1Socket, 1);
+		//should close thread
+		return false;
 	} else {
-		passInt(player1Socket, -1);
+		handler->passInt(player1Socket, -1);
+		//shouldnt close thread
+		return false;
 	}
 }

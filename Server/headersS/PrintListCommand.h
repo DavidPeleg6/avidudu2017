@@ -12,12 +12,13 @@ class PrintListCommand: public Command {
 public:
 	PrintListCommand(GameManager *info);
 	void setArgs(vector<string> args, int clientSocket);
-	void execute();
+	bool execute();
 	virtual ~PrintListCommand();
 
 private:
 	int clientSocket;
 	GameManager *info;
+	SocketHandler *handler;
 };
 
 #endif /* PRINTLISTCOMMAND_H_ */

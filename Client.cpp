@@ -101,6 +101,7 @@ int* Client::GetMove() {
 	}
 	ss << str;
 	ss >> play_absorver >> x >> y;
+	free(str);
 	int* move = (int*)calloc(2, sizeof(int));
 	move[0] = x;
 	move[1] = y;

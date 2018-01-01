@@ -48,7 +48,14 @@ int main() {
 			ip_set = 1;
 			player_remote = new PlayerRemote(ip, reader->ExtractPort(data));
 		} catch (const char *msg) {
-			cout << "unnable to connect because: " << msg << endl;
+			cout << "Unable to connect because: " << msg << endl;
+			free(data);
+			delete reader;
+			delete b;
+			delete d;
+			delete p[0];
+			delete r;
+			return 0;
 		}
 		char* command;
 		int server_response, interacting_with_server;

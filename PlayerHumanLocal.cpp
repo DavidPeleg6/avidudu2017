@@ -1,5 +1,14 @@
 #include "headers/PlayerHumanLocal.h"
 #include "headers/Display.h"
+
+
+//todo delete
+#include <stdio.h>
+#include <time.h>
+#include <unistd.h>
+
+
+
 using namespace std;
 /**
  * Constructor, gives the player their color.

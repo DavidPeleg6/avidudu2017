@@ -1,17 +1,19 @@
-/*
- * JoinGameCommand.cpp
- */
-
 #include "headersS/JoinGameCommand.h"
-
+/*
+ * Makes a new command for joining a game.
+ */
 JoinGameCommand::JoinGameCommand(GameManager* info): info(info), player2Socket(0) {
 	handler = new SocketHandler();
 }
-
+/*
+ * Deletes the command for joining a game.
+ */
 JoinGameCommand::~JoinGameCommand() {
 	delete handler;
 }
-
+/*
+ * Sets the commands' arguements.
+ */
 void JoinGameCommand::setArgs(vector<string> args, int socket) {
 	name.assign(args.front());
 	player2Socket = socket;

@@ -126,7 +126,11 @@ int* GameManager::getGame(int player) {
 	}
 	return NULL;
 }
-
+/*
+ * returns the socket belonging to the opponent of this palyer.
+ * @param player - the player.
+ * @return their opponent
+ */
 int GameManager::getOpponent(int player) {
 	vector<Games>::iterator it;
 	for(it = games->begin(); it != games->end(); ++it) {

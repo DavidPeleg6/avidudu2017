@@ -1,11 +1,8 @@
-/*
- * Command.cpp
- */
 #include "headersS/Command.h"
-
-void Command::setArgs(vector<string> args, int socket) {
-
-}
+/*
+ * Empty source file, since the class is abstract.
+ */
+void Command::setArgs(vector<string> args, int socket) { }
 
 bool Command::execute() {
 	return false;

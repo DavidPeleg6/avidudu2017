@@ -1,13 +1,13 @@
-/*
- * killServerCommand.cpp
- */
-
 #include "headersS/killServerCommand.h"
-
+/*
+ * Constructor - Makes a new kill server commands.
+ */
 killServerCommand::killServerCommand(GameManager *info): info(info) {
 	handler = new SocketHandler();
 }
-
+/*
+ * Destructor - delete the command.
+ */
 killServerCommand::~killServerCommand() {
 	delete handler;
 }

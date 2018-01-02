@@ -1,17 +1,9 @@
-/*
- * SocketHandler.cpp
- */
-
 #include "headersS/SocketHandler.h"
-
-SocketHandler::SocketHandler() {
-
-}
-
-SocketHandler::~SocketHandler() {
-
-}
-
+/*
+ * Constructor and destructor, do nothing.
+ */
+SocketHandler::SocketHandler() { }
+SocketHandler::~SocketHandler() { }
 /*
  * a method to pass a given number to the client
  * @param clientSocket = a socket to write to (int)

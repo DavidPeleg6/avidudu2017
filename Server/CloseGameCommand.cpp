@@ -1,17 +1,19 @@
-/*
- * CloseGameCommand.cpp
- */
-
 #include "headersS/CloseGameCommand.h"
-
+/*
+ * Constructor - Makes a new command for closing a game.
+ */
 CloseGameCommand::CloseGameCommand(GameManager *info): info(info) ,target(0){
 	handler = new SocketHandler();
 }
-
+/*
+ * Destructor - delete the handeler.
+ */
 CloseGameCommand::~CloseGameCommand() {
 	delete handler;
 }
-
+/*
+ * Sets the target socket for the game to be closed.
+ */
 void CloseGameCommand::setArgs(vector<string> args, int socket) {
 	target = socket;
 }

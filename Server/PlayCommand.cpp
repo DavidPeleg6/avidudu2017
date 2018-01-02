@@ -1,25 +1,29 @@
-/*
- * PlayCommand.cpp
- */
-
 #include "headersS/PlayCommand.h"
 #include "headersS/Server.h"
-
+/*
+ * Constructor - make a new play command.
+ */
 PlayCommand::PlayCommand(GameManager* info): info(info), senderSocket(0) {
 	handler = new SocketHandler();
 }
-
+/*
+ * Destructor - delete the handler.
+ */
 PlayCommand::~PlayCommand() {
 	delete handler;
 }
-
+/*
+ * Sets the play commands arguments to be the move to be sent and its target.
+ */
 void PlayCommand::setArgs(vector<string> args, int socket) {
 	senderSocket = socket;
 	stringstream ss;
 	ss << args.at(0) << " " << args.at(1);
 	ss >> move[0] >> move[1];
 }
-
+/*
+ *	Sends the move data to the opponent of the user who sent the play command.
+ */
 bool PlayCommand::execute() {
 	int opponent = info->getOpponent(senderSocket);
 	stringstream send;

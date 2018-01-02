@@ -107,7 +107,7 @@ void Server::start() {
 	info->serverLock = serverLock;
 	int rc = pthread_create(&threads[0], NULL, waitToDie, (void*)info);
 	if (rc) {
-		cout << "Thread fail w/e." << endl;
+		cout << "Thread make fail." << endl;
 		delete(info);
 		exit(-1);
 	}
@@ -149,7 +149,7 @@ void Server::start() {
 		cout << "Client connected: " << clientSocket << endl;
 		int rc = pthread_create(&threads[clients.size()], NULL, handleClient, (void*)comInfo);
 		if (rc) {
-			cout << "Thread fail w/e." << endl;
+			cout << "Thread make fail." << endl;
 			delete(comInfo);
 			exit(-1);
 		}

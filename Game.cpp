@@ -38,8 +38,10 @@ void Game::RunGame(Display* d) {
 	int move, turn = 1;
 	int no_move_flag = 0;
 	int* moves;
+	int waitloopcounter = 0;
 	int* state = rules->CheckBoardState();
 	while (state[0] == 0) {
+		waitloopcounter = 0;
 		turn = 3 - turn;
 		move = -1;
 		moves = rules->PossibleMoves(turn);
@@ -64,12 +66,22 @@ void Game::RunGame(Display* d) {
 				if (GetPlayer(turn)->PrintActions() == 1) {
 					d->AskForMove();
 				} else if (GetPlayer(turn)->PrintActions() == 2) {
+					if (waitloopcounter == 1) {
+						throw "Server is unresponsive, shutting down.";
+					}
 					d->WaitForOtherPlayer();
+					waitloopcounter++;
 				}
-				if (turn == 1) {
-					move = p1->GetMove(moves);
-				} else {
-					move = p2->GetMove(moves);
+				try {
+					if (turn == 1) {
+						move = p1->GetMove(moves);
+					} else {
+						move = p2->GetMove(moves);
+					}
+				} catch (const char* msg) {
+					free(moves);
+					free(state);
+					throw msg;
 				}
 				if (GetPlayer(turn)->PrintActions() != 2) {
 					try {

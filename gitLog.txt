@@ -1,3 +1,52 @@
+commit f8e798adda09eb619bc5b2881714e9efae670782
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Tue Jan 2 19:54:00 2018 +0200
+
+    unexpected exit works
+
+commit 3ff8f413f64b35f59a3af5615da48a4034fb69b4
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Tue Jan 2 19:00:09 2018 +0200
+
+    server is hopefully almost done
+
+commit d1d5dfc4ae328e1447723366d13a9676077018b1
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Tue Jan 2 18:27:54 2018 +0200
+
+    added comments to everything
+
+commit 67176b6c10eb1b4e2e0adf07bcaa1b8bccafc01f
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Tue Jan 2 01:38:00 2018 +0200
+
+    fuck this shit just wont end
+
+commit 4227ed92b6c0563f3d029caf9924e08a0a2866a1
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Mon Jan 1 23:35:17 2018 +0200
+
+    fixed some memory leaks and crashes on the client side
+
+commit 7e075b203798e99d5e4b8f93602e3a4ee5f81151
+Merge: db04879 7169e3a
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Mon Jan 1 22:46:34 2018 +0200
+
+    Merge branch 'master' of https://github.com/AvihaiDidi/avidudu2017
+
+commit db048794d3681bad2177a2cd91af6400ac44ae06
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Mon Jan 1 22:45:41 2018 +0200
+
+    lets start some midnight debugging
+
+commit 7169e3a2bf5bb69adbdc774a09a4f4ad7fa78cc5
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Mon Jan 1 22:40:24 2018 +0200
+
+    updated log
+
 commit d3e2c07c8dd2a0e25d680f92226671e735d8ea22
 Author: Avihai Didi <avihai.didi@gmail.com>
 Date:   Sat Dec 30 23:19:59 2017 +0200

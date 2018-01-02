@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <exception>
 #include <stdlib.h>
 #include "headers/Board.h"
 #include "headers/ConsoleDisplay.h"
@@ -150,7 +151,9 @@ int main() {
 	delete b;
 	delete d;
 	delete p[0];
-	delete p[1];
+	try {
+		delete p[1];
+	} catch (const char* msg) { }
 	delete r;
 	delete g;
 	return 0;

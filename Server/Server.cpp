@@ -40,13 +40,11 @@ static void* waitToDie(void* mang) {
 		close(*it);
 	}
 	delete[] msg;
-	delete info;
 	alive = false;
 	pthread_mutex_unlock(&(info->serverLock));
 	delete info;
 	return NULL;
 }
-
 /*
  * a method for handling all commands received from client - might become threaded later
  * @param clientSocket = the socket of the calling client
@@ -76,7 +74,6 @@ static void *handleClient(void* info) {
 	}
 	return (void*)SUCCESS;
 }
-
 /*
  * a method for running the mainframe of the server
  */
@@ -157,9 +154,6 @@ void Server::start() {
 	}
 	cout << "server terminated " << endl;
 }
-
-
-
 /*
  * closes the server socket
  */

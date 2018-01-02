@@ -16,6 +16,12 @@ int main() {
 	FileReader* reader = new FileReader(DATAFILE);
 	CommandManager *manager = new CommandManager();
 	int* data = reader->read();
+	if (data[0] == -1) {
+		cout << "Ip data file error." << endl;
+		delete reader;
+		delete manager;
+		exit(1);
+	}
 	Server server(reader->ExtractPort(data), manager);
 	try {
 		server.start();
@@ -23,7 +29,7 @@ int main() {
 		cout << "server closed because: " << msg << endl;
 		server.stop();
 		delete reader;
-		delete manager; //TODO fix this
+		delete manager;
 		exit(1);
 	}
 	cout << "server exited noramlly " << endl;

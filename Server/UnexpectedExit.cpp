@@ -24,8 +24,12 @@ void UnexpectedExit::setArgs(vector<string> args, int socket) {
  */
 bool UnexpectedExit::execute() {
 	int opponent = info->getOpponent(target);
-	close(target);
-	close(opponent);//todo this might cause problems so keep it in games.
+	if (target != 0 && target != -1) {
+		close(target);
+	}
+	if (opponent != 0 && opponent != -1) {
+		close(opponent);
+	}
 	info->closeGame(target);
 	//close thread
 	return true;

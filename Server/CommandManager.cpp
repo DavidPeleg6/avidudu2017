@@ -15,6 +15,7 @@ CommandManager::CommandManager() {
 	commandsMap["start"] = new StartGameCommand(manager);
 	commandsMap["join"] = new JoinGameCommand(manager);
 	commandsMap["play"] = new PlayCommand(manager);
+	commandsMap["unexpected"] = new UnexpectedExit(manager);
 }
 
 /*

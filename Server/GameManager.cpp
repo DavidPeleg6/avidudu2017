@@ -75,9 +75,11 @@ bool GameManager::addGame(string name, int player1Socket) {
  */
 void GameManager::closeGame(int player) {
 	vector<Games>::iterator it;
-	for(it = games->begin(); it != games->end(); ++it) {
+	for(it = games->begin(); it != games->end(); it++) {
 		if((it->player1Socket == player) || (it->player2Socket == player)) {
-			games->erase(it);
+			//games->erase(it);
+			it = games->erase(it);
+			return;
 		}
 	}
 }
@@ -86,9 +88,7 @@ void GameManager::closeGame(int player) {
  */
 GameManager::~GameManager() {
 	vector<Games>::iterator it;
-	for(it = games->begin(); it != games->end(); ++it) {
-		games->erase(it);
-	}
+	games->clear();
 }
 
 /*

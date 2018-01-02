@@ -58,6 +58,8 @@ static void *handleClient(void* info) {
 		msg = comInfo->handler->getString(comInfo->clientSocket);
 		if(msg == NULL) {
 			cout << "Error reading from client" << endl;
+			Command *unexpected_exit = comInfo->manager->getCommand("unexpected", comInfo->clientSocket);
+			unexpected_exit -> execute();
 			pthread_mutex_lock(&(comInfo->serverLock));
 			//find dead link socket and delete it from array
 			vector<int>::iterator it;

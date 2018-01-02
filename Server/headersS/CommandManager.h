@@ -11,6 +11,7 @@
 #include "CloseGameCommand.h"
 #include "StartGameCommand.h"
 #include "JoinGameCommand.h"
+#include "UnexpectedExit.h"
 #include "PlayCommand.h"
 #include "Command.h"
 #include <map>

@@ -1,3 +1,27 @@
+commit 1f36a83ea2f4ef069729d7e4dfae487d241c4eeb
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Fri Jan 19 14:54:36 2018 +0200
+
+    deleted some things taht shouldn't be there
+
+commit 6c6e342508e3e4009c1fd2e737026513ff2b4763
+Author: David Peleg <dudugeda@gmail.com>
+Date:   Fri Jan 19 14:26:17 2018 +0200
+
+    the entire ex5 with changes (forgot to push last time)
+
+commit 2116adc30201beebeb0a82e10589e825ae8a2a37
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Tue Jan 2 20:59:47 2018 +0200
+
+    client finnaly crashes correctly
+
+commit aeae978f258b3638ae1015c623411409c84bc4f1
+Author: Avihai Didi <avihai.didi@gmail.com>
+Date:   Tue Jan 2 20:39:36 2018 +0200
+
+    some shit still doesn't work
+
 commit f8e798adda09eb619bc5b2881714e9efae670782
 Author: Avihai Didi <avihai.didi@gmail.com>
 Date:   Tue Jan 2 19:54:00 2018 +0200

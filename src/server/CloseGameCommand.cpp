@@ -31,6 +31,6 @@ bool CloseGameCommand::execute() {
 	close(players[1]);
 	delete []players;
 	info->closeGame(target);
-	//close thread
-	return true;
+	//stop getting input
+	return false;
 }

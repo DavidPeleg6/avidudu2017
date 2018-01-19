@@ -28,12 +28,13 @@ bool PlayCommand::execute() {
 	int opponent = info->getOpponent(senderSocket);
 	stringstream send;
 	send << "play " << move[0] << " " << move[1];
+	cout << send << endl; //TODO delete
 	int messageSize = send.str().size();
 	const char* sendc = send.str().c_str();
 	if(handler->passString(opponent, messageSize, sendc) == 0) {
 		info->closeGame(senderSocket);
 		close(senderSocket);
 	}
-	//dont close thread
-	return false;
+	//game still alive
+	return true;
 }

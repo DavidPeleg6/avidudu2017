@@ -26,11 +26,11 @@ bool StartGameCommand::execute() {
 	//cout << success << endl;
 	if(success) {
 		handler->passInt(player1Socket, 1);
-		//should close thread
-		return false;
+		//keep getting input
+		return true;
 	} else {
 		handler->passInt(player1Socket, -1);
-		//shouldnt close thread
-		return false;
+		//keep getting input
+		return true;
 	}
 }

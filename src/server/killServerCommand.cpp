@@ -26,6 +26,7 @@ bool killServerCommand::execute() {
 		//send socket int to server with the server crash close (= 0) message
 		handler->passString(*it, 8, killMsg);
 	}
-	return true;
+	//game is dead
+	return false;
 	//throw "manual termination";
 }

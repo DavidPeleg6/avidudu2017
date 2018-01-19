@@ -26,7 +26,7 @@ bool PrintListCommand::execute() {
 	//send client the size of the games list
 	handler->passInt(clientSocket, deadGames->size());
 	if(deadGames->empty()) {
-		return false;
+		return true;
 	}
 	vector<Games>::iterator it;
 	for(it = deadGames->begin(); it != deadGames->end(); it++) {
@@ -36,6 +36,6 @@ bool PrintListCommand::execute() {
 	}
 	delete deadGames;
 	clientSocket = 0;
-	//dont close thread
-	return false;
+	//keep getting input
+	return true;
 }

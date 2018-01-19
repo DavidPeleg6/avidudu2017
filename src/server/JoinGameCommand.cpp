@@ -29,11 +29,11 @@ bool JoinGameCommand::execute() {
 		//send players their colors
 		handler->passInt(opponent, 1);
 		handler->passInt(player2Socket, 2);
-		//dont close thread
-		return false;
+		//keep getting input
+		return true;;
 	} else {
 		handler->passInt(player2Socket, -2);
-		//dont close thread
-		return false;
+		//keep getting input
+		return true;
 	}
 }

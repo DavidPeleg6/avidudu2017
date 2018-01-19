@@ -1,19 +1,28 @@
 #include "headersS/Server.h"
 
-#define MAX_CONNECTED_CLIENTS 10
+#define THREAD_NUM 5
+#define LISTEN_QUEUE 50
 
 vector<int> clients;
-bool alive = true;
-bool printflag = true;
 pthread_mutex_t Server::serverLock;
 
+void executeCommand(void* args);
+void getInput(void* args);
 
 struct ServerInfo {
 	CommandManager* manager;
-	SocketHandler *handler;
 	int clientSocket;
 	pthread_mutex_t serverLock;
 	int serverSocket;
+	ThreadPool* pool;
+};
+
+struct ClientInfo {
+	CommandManager* manager;
+	Command* command;
+	int clientSocket;
+	pthread_mutex_t serverLock;
+	ThreadPool* pool;
 };
 /*
  * a constructor for Server
@@ -28,7 +37,8 @@ Server::Server(int port, CommandManager* manager): port(port), serverSocket(0), 
  * a method for handling all commands received from client - might become threaded later
  * @param clientSocket = the socket of the calling client
  */
-static void *handleClient(void* info) {
+/*
+ * static void *handleClient(void* info) {
 	ServerInfo *comInfo = (ServerInfo*) info;
 	bool shouldClose = false;
 	char* msg;
@@ -55,20 +65,20 @@ static void *handleClient(void* info) {
 	}
 	return (void*)SUCCESS;
 }
+*/
 
 /*
  * a method for listening to all connections
  */
-static void* listenClients(void* args) {
+void* listenClients(void* args) {
 	ServerInfo *info = (ServerInfo*)args;
-	pthread_t threads[MAX_CONNECTED_CLIENTS + 1];
 	SocketHandler *handler = new SocketHandler();
 	// Start listening to incoming connections
-	listen(info->serverSocket, MAX_CONNECTED_CLIENTS);
+	listen(info->serverSocket, LISTEN_QUEUE);
 	// Define the client socket's structures
 	struct sockaddr_in clientAddress;
 	socklen_t clientAddressLen;
-	while(alive) {
+	while(true) {
 		cout << "Waiting for client connections..." << endl;
 		// Accept a new client connection
 		int clientSocket = accept(info->serverSocket, (struct sockaddr*)&clientAddress,
@@ -76,35 +86,25 @@ static void* listenClients(void* args) {
 		if(clientSocket == -1) {
 			continue;
 		}
-		if(clients.size() == MAX_CONNECTED_CLIENTS) {
-			if(printflag) {
-				cout << "max client amount reached, holding connections" << endl;
-				printflag = false;
-			}
-			handler->passInt(clientSocket, ERROR);
-			close(clientSocket);
-			continue;
-		}
+		cout << "client accepted " << endl; //TODO delete
 		//add a new client to the vector
-		pthread_mutex_lock(&(info->serverLock));
 		clients.push_back(clientSocket);
-		pthread_mutex_unlock(&(info->serverLock));
 		//confirm connection with client
 		handler->passInt(clientSocket, SUCCESS);
-		ServerInfo *comInfo = new ServerInfo();
+		ClientInfo *taskInfo = new ClientInfo();
 		//start struct for thread
-		comInfo->manager = info->manager;
-		comInfo->clientSocket = clientSocket;
-		comInfo->handler = handler;
-		comInfo->serverLock = info->serverLock;
+		taskInfo->manager = info->manager;
+		taskInfo->clientSocket = clientSocket;
+		taskInfo->pool = info->pool;
+		taskInfo->serverLock = info->serverLock;
+		cout << "client accepted and message was sent" << endl; //TODO delete
+		Task *task = new Task(getInput, (void*) taskInfo);
+		cout << "task initialized " << endl; //TODO delete
+		taskInfo->pool->addTask(task);
 		cout << "Client connected: " << clientSocket << endl;
-		int rc = pthread_create(&threads[clients.size()], NULL, handleClient, (void*)comInfo);
-		if (rc) {
-			cout << "Thread make fail." << endl;
-			delete(comInfo);
-			exit(-1);
-		}
 	}
+	cout << "delete in listen " << endl; //TODO delete
+	delete handler;
 	return (void*)NULL;
 }
 /*
@@ -116,7 +116,7 @@ void Server::start() {
 	if(serverSocket == -1) {
 		throw "Error opening socket";
 	}
-	//server socket innitialize
+	//server socket initialize
 	struct sockaddr_in serverAddress;
 	bzero((void *)&serverAddress, sizeof(serverAddress));
 	serverAddress.sin_family = AF_INET;
@@ -128,18 +128,20 @@ void Server::start() {
 	}
 	cout << "Server started" << endl;
 
-
+	//initialize a thread pool
+	ThreadPool *pool = new ThreadPool(THREAD_NUM);
+	//initialize listening socket
 	ServerInfo *info = new ServerInfo();
 	info->manager = manager;
 	info->serverLock = serverLock;
 	info->serverSocket = serverSocket;
+	info->pool = pool;
 	int rc = pthread_create(&listenThread, NULL, listenClients, (void*)info);
 	if (rc) {
 		cout << "Thread make fail." << endl;
-		delete(info);
+		delete info;
 		exit(-1);
 	}
-
 
 	//threaded server suicide
 	string s;
@@ -156,20 +158,84 @@ void Server::start() {
 				close(*it);
 			}
 			delete[] msg;
-			alive = false;
 			pthread_cancel(listenThread);
 			pthread_mutex_unlock(&(info->serverLock));
 			break;
 		}
 	}
-
-	cout << "server terminated " << endl;
+	pool->terminate();
+	delete pool;
 }
 /*
  * closes the server socket
  */
 void Server::stop() {
 	close(serverSocket);
+}
+
+void getInput(void* args) {
+	ClientInfo *info = (ClientInfo *) args;
+	SocketHandler *handle = new SocketHandler();
+	char* msg;
+	//get an input string from client
+	msg = handle->getString(info->clientSocket);
+	if(msg == NULL) {
+		//handling the extreme case of client shutting out unexpectedly
+		pthread_mutex_lock(&(info->serverLock));
+		cout << "Error reading from client" << endl;
+		Command *unexpected_exit = info->manager->getCommand("unexpected", info->clientSocket);
+		unexpected_exit -> execute();
+		//find dead link socket and delete it from array
+		vector<int>::iterator it;
+		for(it = clients.begin(); *it != info->clientSocket && it != clients.end(); it++) { }
+		it = clients.erase(it);
+		close(info->clientSocket);
+		pthread_mutex_unlock(&(info->serverLock));
+	}
+	//get appropriate command from the manager and add it execute as a new task
+	Command *command = info->manager->getCommand(msg, info->clientSocket);
+	//get params ready for command execution
+	ClientInfo *exeInfo = new ClientInfo();
+	//start struct for thread
+	exeInfo->manager = info->manager;
+	exeInfo->clientSocket = info->clientSocket;
+	exeInfo->pool = info->pool;
+	exeInfo->serverLock = info->serverLock;
+	exeInfo->command = command;
+	//add a new task to the queue
+	Task *task = new Task(executeCommand, (void*)exeInfo);
+	info->pool->addTask(task);
+	cout << "delete shit " << endl; //TODO delete
+	delete handle;
+	delete info;
+}
+
+void executeCommand(void* args) {
+	cout << "executing command " << endl; //TODO delete
+	bool clientDone = false;
+	ClientInfo *info = (ClientInfo *) args;
+	clientDone = info->command->execute();
+	cout << "command returned " << clientDone << endl; //TODO delete
+	if(!clientDone) {
+		//find the client and remove it from the vector
+		pthread_mutex_lock(&(info->serverLock));
+		vector<int>::iterator it;
+		for(it = clients.begin(); *it != info->clientSocket && it != clients.end(); it++) { }
+		it = clients.erase(it);
+		pthread_mutex_unlock(&(info->serverLock));
+		return;
+	}
+	//get ready for getting another input from client
+	ClientInfo *inputInfo = new ClientInfo();
+	inputInfo->clientSocket = info->clientSocket;
+	inputInfo->manager = info->manager;
+	inputInfo->pool = info->pool;
+	inputInfo->serverLock = info->serverLock;
+	//add a new task to the queue
+	Task *task = new Task(getInput, (void*) inputInfo);
+	info->pool->addTask(task);
+	cout << "delete info " << endl; //TODO delete
+	delete info;
 }
 
 

@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include "CommandManager.h"
 #include "Command.h"
+#include "ThreadPool.h"
 #define ERROR 0
 #define SUCCESS 1
 

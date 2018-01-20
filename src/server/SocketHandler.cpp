@@ -1,4 +1,6 @@
 #include "headersS/SocketHandler.h"
+#include <iostream>
+using namespace std;
 /*
  * Constructor and destructor, do nothing.
  */
@@ -26,6 +28,7 @@ int SocketHandler::passInt(int clientSocket, int num) {
  * @return = an int indicating success or fail
  */
 int SocketHandler::passString(int clientSocket, int stringSize, const char* message) {
+	cout << message << " client num: " << clientSocket << endl; //TODO delete
 	int size = stringSize+1;
 	int n = write(clientSocket, &size, sizeof(size));
 	if(n <= 0) {

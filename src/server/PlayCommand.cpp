@@ -26,6 +26,9 @@ void PlayCommand::setArgs(vector<string> args, int socket) {
  */
 bool PlayCommand::execute() {
 	int opponent = info->getOpponent(senderSocket);
+	if(opponent == 0) {
+		return true;
+	}
 	stringstream send;
 	send << "play " << move[0] << " " << move[1];
 	cout << send << endl; //TODO delete

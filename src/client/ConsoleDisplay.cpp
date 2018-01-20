@@ -169,8 +169,7 @@ void ConsoleDisplay::PrintMoves(int* moves) {
 	if (moves[0] == 0) {
 		//no possible moves, switch to other player
 		cout << "No possible moves. Play passes back to";
-		cout <<" the other player. Press any key to continue." << endl;
-		cin.ignore();
+		cout <<" the other player." << endl;
 	} else {
 		cout << "Your possible moves: ";
 		for (int i = 1; i < moves[0] ; i+= 2) {

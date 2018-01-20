@@ -89,6 +89,11 @@ int PlayerRemote::PrintActions() {
 void PlayerRemote::AcknowledgeMove(int x, int y) {
 	try {
 		client->SendMove(x, y);
+		if(x == 0 && y == 0) {
+			int *garbage = new int[1];
+			GetMove(garbage);
+			delete[] garbage;
+		}
 	} catch(const char *msg) {
 		cout << msg << endl;
 		exit(-1);

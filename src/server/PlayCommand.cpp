@@ -31,7 +31,6 @@ bool PlayCommand::execute() {
 	}
 	stringstream send;
 	send << "play " << move[0] << " " << move[1];
-	cout << send << endl; //TODO delete
 	int messageSize = send.str().size();
 	const char* sendc = send.str().c_str();
 	if(handler->passString(opponent, messageSize, sendc) == 0) {

@@ -59,7 +59,6 @@ void Game::RunGame(Display* d) {
 				free(state);
 				break;
 			}
-			GetPlayer(3 - turn)->AcknowledgeMove(0, 0);
 		} else {
 			no_move_flag = 0;
 			while (move == -1) {

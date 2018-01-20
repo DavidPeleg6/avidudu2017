@@ -8,7 +8,6 @@ pthread_mutex_t Server::serverLock;
 
 void getInput(void* args);
 void executeCommand(void* args);
-void getclients();
 
 struct ServerInfo {
 	CommandManager* manager;
@@ -35,40 +34,6 @@ Server::Server(int port, CommandManager* manager): port(port), serverSocket(0), 
 }
 
 /*
- * a method for handling all commands received from client - might become threaded later
- * @param clientSocket = the socket of the calling client
- */
-/*
- * static void *handleClient(void* info) {
-	ServerInfo *comInfo = (ServerInfo*) info;
-	bool shouldClose = false;
-	char* msg;
-	while(!shouldClose && alive) {
-		//get an input string from client
-		msg = comInfo->handler->getString(comInfo->clientSocket);
-		if(msg == NULL) {
-			cout << "Error reading from client" << endl;
-			Command *unexpected_exit = comInfo->manager->getCommand("unexpected", comInfo->clientSocket);
-			unexpected_exit -> execute();
-			pthread_mutex_lock(&(comInfo->serverLock));
-			//find dead link socket and delete it from array
-			vector<int>::iterator it;
-			for(it = clients.begin(); *it != comInfo->clientSocket; it++) { }
-			clients.erase(it);
-			close(comInfo->clientSocket);
-			pthread_mutex_unlock(&(comInfo->serverLock));
-			printflag = true;
-			break;
-		}
-		//get appropriate command from the manager and execute
-		Command *command = comInfo->manager->getCommand(msg, comInfo->clientSocket);
-		shouldClose = command -> execute();
-	}
-	return (void*)SUCCESS;
-}
-*/
-
-/*
  * a method for listening to all connections
  */
 void* listenClients(void* args) {
@@ -87,7 +52,6 @@ void* listenClients(void* args) {
 		if(clientSocket == -1) {
 			continue;
 		}
-		cout << "client accepted " << endl; //TODO delete
 		//add a new client to the vector
 		clients.push_back(clientSocket);
 		//confirm connection with client
@@ -98,13 +62,10 @@ void* listenClients(void* args) {
 		taskInfo->clientSocket = clientSocket;
 		taskInfo->pool = info->pool;
 		taskInfo->serverLock = info->serverLock;
-		cout << "client accepted and message was sent" << endl; //TODO delete
 		Task *task = new Task(getInput, (void*) taskInfo);
-		cout << "task initialized " << endl; //TODO delete
 		taskInfo->pool->addTask(task);
 		cout << "Client connected: " << clientSocket << endl;
 	}
-	cout << "delete in listen " << endl; //TODO delete
 	delete handler;
 	return (void*)NULL;
 }
@@ -164,6 +125,7 @@ void Server::start() {
 			break;
 		}
 	}
+	//close the thread pool
 	pool->terminate();
 	delete pool;
 }
@@ -175,18 +137,10 @@ void Server::stop() {
 }
 
 /*
- * help method TODO delete
+ * getInput task a task method to be added to the queue
+ * will get input and issue a commmand task accordingly
+ * @param args the struct with everything needed for getting input from user
  */
-
-void getclients() {
-	vector<int>::iterator it;
-	vector<int>::iterator temp;
-	for(it = clients.begin();it != clients.end(); ++it) {
-		cout << " client alive " << *it << endl;
-	}
-
-}
-
 void getInput(void* args) {
 	ClientInfo *info = (ClientInfo *) args;
 	SocketHandler *handle = new SocketHandler();
@@ -196,33 +150,17 @@ void getInput(void* args) {
 	if(msg == NULL) {
 		//handling the extreme case of client shutting out unexpectedly
 		pthread_mutex_lock(&(info->serverLock));
-		cout << "Error reading from client" << endl;
-		getclients();
 		vector<int>::iterator it;
 		for(it = clients.begin(); *it != info->clientSocket && it != clients.end(); it++) {
 			cout << " client num " << *it << endl;
 		}
 		clients.erase(it);
-		cout << " client dead " << *it << endl;
 		close(info->clientSocket);
-		//start an unexpected end message
+		//start an unexpected exit message
 		Command *unexpected_exit = info->manager->getCommand("unexpected", info->clientSocket);
 		unexpected_exit -> execute();
 		pthread_mutex_unlock(&(info->serverLock));
 		return;
-		/*
-		Command *unexpected_exit = info->manager->getCommand("unexpected", info->clientSocket);
-		unexpected_exit -> execute();
-		cout << "command sent" << endl; // TODO delete
-		//find dead link socket and delete it from array
-		vector<int>::iterator it;
-		for(it = clients.begin(); *it != info->clientSocket && it != clients.end(); ++it) {
-			cout << " deleting client num " << *it << endl;
-		}
-		it = clients.erase(it);
-		close(info->clientSocket);
-		*/
-
 	}
 
 	//get appropriate command from the manager and add it execute as a new task
@@ -238,30 +176,31 @@ void getInput(void* args) {
 	//add a new task to the queue
 	Task *task = new Task(executeCommand, (void*)exeInfo);
 	info->pool->addTask(task);
-	cout << "delete shit " << endl; //TODO delete
 	delete handle;
 	delete info;
 }
 
+/*
+ * executeCommand task a task method to be added to the queue
+ * will execute a command given in the struct and will add a new get input task according
+ * to the return value of command
+ * @param args the struct with everything needed for getting executing command
+ */
 void executeCommand(void* args) {
-	cout << "executing command " << endl; //TODO delete
 	bool clientDone = false;
 	ClientInfo *info = (ClientInfo *) args;
 	clientDone = info->command->execute();
-	cout << "command returned " << clientDone << endl; //TODO delete
 	if(!clientDone) {
 		//find the client and remove it from the vector
 		pthread_mutex_lock(&(info->serverLock));
 		vector<int>::iterator it;
 		for(it = clients.begin(); it != clients.end(); it++) {
 			if(*it == info->clientSocket) {
-				cout << " deleting client num " << *it << endl;
 				clients.erase(it);
 				break;
 			}
 		}
 		pthread_mutex_unlock(&(info->serverLock));
-		getclients();
 		return;
 	}
 	//get ready for getting another input from client
@@ -273,7 +212,6 @@ void executeCommand(void* args) {
 	//add a new task to the queue
 	Task *task = new Task(getInput, (void*) inputInfo);
 	info->pool->addTask(task);
-	cout << "delete info " << endl; //TODO delete
 	delete info;
 }
 

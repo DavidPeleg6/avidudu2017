@@ -28,7 +28,6 @@ int SocketHandler::passInt(int clientSocket, int num) {
  * @return = an int indicating success or fail
  */
 int SocketHandler::passString(int clientSocket, int stringSize, const char* message) {
-	cout << message << " message sent client num: " << clientSocket << endl; //TODO delete
 	int size = stringSize+1;
 	int n = write(clientSocket, &size, sizeof(size));
 	if(n <= 0) {
@@ -54,7 +53,6 @@ char* SocketHandler::getString(int clientSocket) {
 	//read a message in the given size
 	char* message = new char[stringSize];
 	n = read(clientSocket, message, stringSize);
-	cout << message << " message received client num: " << clientSocket << endl; //TODO delete
 	return message;
 }
 
